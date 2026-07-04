@@ -9,6 +9,97 @@
   var yearEl = document.getElementById("year");
   if (yearEl) yearEl.textContent = new Date().getFullYear();
 
+  /* =========================================================
+     PROJECTS  —  ★ EDIT THIS LIST TO ADD / REMOVE PROJECTS ★
+     Copy a { } block, change the fields, done.
+       title       : project name (required)
+       url         : link to open (website, repo, or mailto:)
+       description : one or two sentences
+       tags        : array of short labels
+       wip         : true  -> shows a "WIP" badge (optional)
+     ========================================================= */
+  var PROJECTS = [
+    {
+      title: "CT4 Construction",
+      url: "https://ct4construction.co.za",
+      description: "Freelance web development and SEO for a construction " +
+        "company — a real client project, live in production.",
+      tags: ["Freelance", "Web Dev", "SEO"]
+    },
+    {
+      title: "Personal Blog App",
+      url: "mailto:riekusgroblerps4@gmail.com",
+      description: "A Node.js / Express / EJS / MongoDB blog used to explore " +
+        "backend architecture and deployment properly, end-to-end.",
+      tags: ["Node.js", "Express", "MongoDB"]
+    },
+    {
+      title: "Forgeline",
+      url: "mailto:riekusgroblerps4@gmail.com",
+      description: "A personal product I'm actively building — part of " +
+        "shipping my own things, not just learning in isolation.",
+      tags: ["SaaS", "In progress"],
+      wip: true
+    }
+  ];
+
+  function renderProjects() {
+    var grid = document.getElementById("projects-grid");
+    if (!grid) return;
+
+    PROJECTS.forEach(function (p, i) {
+      var card = document.createElement("a");
+      card.className = "project reveal";
+      card.href = p.url || "#";
+      card.style.setProperty("--d", i % 3); // stagger the fade-in per row
+      if (/^https?:/i.test(p.url || "")) {
+        card.target = "_blank";
+        card.rel = "noopener noreferrer";
+      }
+
+      // Title row
+      var top = document.createElement("div");
+      top.className = "project__top";
+
+      var h3 = document.createElement("h3");
+      h3.textContent = p.title;
+      if (p.wip) {
+        var wip = document.createElement("span");
+        wip.className = "project__wip";
+        wip.textContent = "WIP";
+        h3.appendChild(document.createTextNode(" "));
+        h3.appendChild(wip);
+      }
+
+      var arrow = document.createElement("span");
+      arrow.className = "project__arrow";
+      arrow.setAttribute("aria-hidden", "true");
+      arrow.textContent = "↗";
+
+      top.appendChild(h3);
+      top.appendChild(arrow);
+
+      // Description
+      var desc = document.createElement("p");
+      desc.textContent = p.description || "";
+
+      // Tags
+      var tags = document.createElement("div");
+      tags.className = "project__tags";
+      (p.tags || []).forEach(function (t) {
+        var span = document.createElement("span");
+        span.textContent = t;
+        tags.appendChild(span);
+      });
+
+      card.appendChild(top);
+      card.appendChild(desc);
+      card.appendChild(tags);
+      grid.appendChild(card);
+    });
+  }
+  renderProjects();
+
   /* ---------- Theme toggle (persisted) ---------- */
   var STORAGE_KEY = "rg-theme";
   var root = document.documentElement;
@@ -17,8 +108,8 @@
   var meta = document.querySelector('meta[name="theme-color"]');
 
   var THEMES = {
-    light: { next: "dark",  color: "#ffffff", label: "Dark" },
-    dark:  { next: "light", color: "#0a0a0a", label: "Light" }
+    light: { next: "dark", color: "#ffffff", label: "Dark" },
+    dark: { next: "light", color: "#0a0a0a", label: "Light" }
   };
 
   function applyTheme(theme) {
@@ -31,7 +122,7 @@
 
   // Respect saved choice, else follow the OS colour scheme.
   var saved = null;
-  try { saved = localStorage.getItem(STORAGE_KEY); } catch (e) {}
+  try { saved = localStorage.getItem(STORAGE_KEY); } catch (e) { }
   if (saved) {
     applyTheme(saved);
   } else if (window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches) {
@@ -43,7 +134,7 @@
       var current = root.getAttribute("data-theme") || "light";
       var next = THEMES[current] ? THEMES[current].next : "dark";
       applyTheme(next);
-      try { localStorage.setItem(STORAGE_KEY, next); } catch (e) {}
+      try { localStorage.setItem(STORAGE_KEY, next); } catch (e) { }
     });
   }
 
