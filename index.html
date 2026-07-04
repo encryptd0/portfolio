@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Riekus Grobler — full-stack software developer in Johannesburg. Node.js, Linux, homelab, security-minded. Minimalist, perfectionist, builder." />
+  <meta name="author" content="Riekus Grobler" />
+  <meta name="theme-color" content="#ffffff" />
+
+  <title>Riekus Grobler — Full-Stack Developer</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' fill='%23000'/><text x='50' y='70' font-size='62' font-family='Inter,sans-serif' font-weight='700' fill='%23fff' text-anchor='middle'>R</text></svg>" />
+</head>
+<body>
+  <!-- ============ NAV ============ -->
+  <header class="nav" id="top">
+    <a href="#top" class="nav__brand" aria-label="Home">Riekus&nbsp;Grobler</a>
+
+    <nav class="nav__links" aria-label="Primary">
+      <a href="#about">About</a>
+      <a href="#work">Work</a>
+      <a href="#background">Background</a>
+      <a href="#projects">Projects</a>
+    </nav>
+
+    <button class="theme-toggle" id="themeToggle" type="button" aria-label="Toggle light and dark">
+      <span id="themeLabel">Dark</span>
+    </button>
+  </header>
+
+  <main>
+    <!-- ============ HERO ============ -->
+    <section class="hero">
+      <p class="hero__eyebrow reveal">Johannesburg, South Africa — available for freelance</p>
+
+      <h1 class="hero__title reveal" style="--d:1">
+        Software developer<br />who builds it right.
+      </h1>
+
+      <div class="hero__meta">
+        <p class="hero__lead reveal" style="--d:2">
+          Full-stack developer &amp; software-engineering student with a 5-year
+          infrastructure background. I build real projects for real clients —
+          minimal, secure, and done properly.
+        </p>
+        <div class="hero__cta reveal" style="--d:3">
+          <a href="#projects" class="btn btn--solid">View the work</a>
+          <a href="mailto:riekusgroblerps4@gmail.com" class="btn btn--ghost">Get in touch</a>
+        </div>
+      </div>
+
+      <ul class="hero__stack reveal" style="--d:4" aria-label="Primary stack">
+        <li>Node.js</li>
+        <li>Express</li>
+        <li>EJS</li>
+        <li>MongoDB</li>
+        <li>Linux</li>
+        <li>Security</li>
+      </ul>
+    </section>
+
+    <!-- ============ ABOUT ============ -->
+    <section class="section" id="about">
+      <div class="section__head reveal">
+        <span class="section__index">01</span>
+        <h2 class="section__title">Who I am</h2>
+      </div>
+
+      <div class="about">
+        <p class="about__lead reveal">
+          I'm a software developer based in Johannesburg, currently studying
+          software engineering at <strong>Belgium Campus iTversity</strong>,
+          with freelance development work on the side.
+        </p>
+        <p class="reveal">
+          I'm a minimalist and a perfectionist — I'd rather do fewer things
+          properly than many things half-finished. Self-motivated and curious,
+          I'm regularly exploring new ideas and technologies outside of what
+          I'm formally taught. Software development is both my current focus
+          and what I want to do full-time going forward.
+        </p>
+      </div>
+    </section>
+
+    <!-- ============ WHAT I DO ============ -->
+    <section class="section" id="work">
+      <div class="section__head reveal">
+        <span class="section__index">02</span>
+        <h2 class="section__title">What I do now</h2>
+      </div>
+
+      <div class="cards">
+        <article class="card reveal">
+          <h3>Full-stack development</h3>
+          <p>Primary stack is Node.js, Express, EJS and MongoDB. I build real
+             projects for real freelance clients — not just tutorials.</p>
+        </article>
+
+        <article class="card reveal">
+          <h3>Linux daily driver</h3>
+          <p>Fedora as my primary OS. Comfortable in the terminal — zsh, tiling
+             workflows and scripting are part of how I work every day.</p>
+        </article>
+
+        <article class="card reveal">
+          <h3>Self-hosting &amp; homelab</h3>
+          <p>I stand up my own infrastructure — local LLMs, servers and small
+             projects — rather than relying purely on the cloud.</p>
+        </article>
+
+        <article class="card reveal">
+          <h3>Hardware tinkering</h3>
+          <p>I build and maintain my own PCs, run home servers, and use
+             Raspberry Pi's to prototype and explore software ideas.</p>
+        </article>
+
+        <article class="card reveal">
+          <h3>Security-minded</h3>
+          <p>Interested in cybersecurity — CEH, AppSec, DevSecOps — and I build
+             with security in mind, not as an afterthought.</p>
+        </article>
+
+        <article class="card reveal">
+          <h3>SaaS &amp; entrepreneurship</h3>
+          <p>I want to build and ship my own products, not just work for
+             clients. Actively exploring ideas worth turning into a business.</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- ============ BACKGROUND / HOW I WORK ============ -->
+    <section class="section section--split" id="background">
+      <div class="split">
+        <div class="split__col">
+          <div class="section__head reveal">
+            <span class="section__index">03</span>
+            <h2 class="section__title">Background</h2>
+          </div>
+          <p class="reveal muted">
+            Before moving into software development, I spent
+            <strong>5 years as a freelance helpdesk technician</strong>. That
+            hands-on infrastructure background still shapes how I work today.
+          </p>
+          <ul class="timeline">
+            <li class="reveal"><span>WiFi</span> Set up &amp; configured client WiFi networks</li>
+            <li class="reveal"><span>Servers</span> Built, deployed &amp; maintained servers</li>
+            <li class="reveal"><span>VMs</span> Set up &amp; administered virtual machines</li>
+            <li class="reveal"><span>Hardware</span> Diagnosed, fixed &amp; upgraded infrastructure</li>
+          </ul>
+        </div>
+
+        <div class="split__col">
+          <div class="section__head reveal">
+            <span class="section__index">04</span>
+            <h2 class="section__title">How I work</h2>
+          </div>
+          <dl class="principles">
+            <div class="reveal">
+              <dt>Minimalist</dt>
+              <dd>Clean, uncluttered — no unnecessary bloat in code or design.</dd>
+            </div>
+            <div class="reveal">
+              <dt>Perfectionist</dt>
+              <dd>Correct architecture, clean code, thoughtful design — not just
+                  "make it work."</dd>
+            </div>
+            <div class="reveal">
+              <dt>Curious / self-taught</dt>
+              <dd>I explore new tools and languages regularly, and enjoy going
+                  down technical rabbit holes.</dd>
+            </div>
+            <div class="reveal">
+              <dt>Builder mindset</dt>
+              <dd>I like understanding systems end-to-end — from the hardware
+                  and OS up through the server to the UI.</dd>
+            </div>
+          </dl>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ PROJECTS ============ -->
+    <section class="section" id="projects">
+      <div class="section__head reveal">
+        <span class="section__index">05</span>
+        <h2 class="section__title">Selected projects</h2>
+      </div>
+
+      <div class="projects">
+        <a class="project reveal" href="https://ct4construction.co.za" target="_blank" rel="noopener noreferrer">
+          <div class="project__top">
+            <h3>CT4 Construction</h3>
+            <span class="project__arrow" aria-hidden="true">↗</span>
+          </div>
+          <p>Freelance web development and SEO for a construction company —
+             a real client project, live in production.</p>
+          <div class="project__tags">
+            <span>Freelance</span><span>Web Dev</span><span>SEO</span>
+          </div>
+        </a>
+
+        <a class="project reveal" href="mailto:riekusgroblerps4@gmail.com">
+          <div class="project__top">
+            <h3>Personal Blog App</h3>
+            <span class="project__arrow" aria-hidden="true">↗</span>
+          </div>
+          <p>A Node.js / Express / EJS / MongoDB blog used to explore backend
+             architecture and deployment properly, end-to-end.</p>
+          <div class="project__tags">
+            <span>Node.js</span><span>Express</span><span>MongoDB</span>
+          </div>
+        </a>
+
+        <a class="project reveal" href="mailto:riekusgroblerps4@gmail.com">
+          <div class="project__top">
+            <h3>Forgeline <span class="project__wip">WIP</span></h3>
+            <span class="project__arrow" aria-hidden="true">↗</span>
+          </div>
+          <p>A personal product I'm actively building — part of shipping my own
+             things, not just learning in isolation.</p>
+          <div class="project__tags">
+            <span>SaaS</span><span>In progress</span>
+          </div>
+        </a>
+      </div>
+    </section>
+
+    <!-- ============ CTA / CONTACT ============ -->
+    <section class="section contact" id="contact">
+      <p class="contact__eyebrow reveal">Let's build something</p>
+
+      <div class="copybox reveal" style="--d:1">
+        <span class="copybox__email" id="copyEmail">riekusgroblerps4@gmail.com</span>
+        <button class="copybox__btn" id="copyBtn" type="button"
+                aria-label="Copy email address" data-email="riekusgroblerps4@gmail.com">
+          <!-- copy icon -->
+          <svg class="copybox__icon copybox__icon--copy" viewBox="0 0 24 24" width="18" height="18"
+               fill="none" stroke="currentColor" stroke-width="2"
+               stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <rect x="9" y="9" width="11" height="11" rx="2" />
+            <path d="M5 15V5a2 2 0 0 1 2-2h10" />
+          </svg>
+          <!-- check icon (shown after copy) -->
+          <svg class="copybox__icon copybox__icon--check" viewBox="0 0 24 24" width="18" height="18"
+               fill="none" stroke="currentColor" stroke-width="2"
+               stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M20 6 9 17l-5-5" />
+          </svg>
+          <span class="copybox__label" id="copyLabel">Copy</span>
+        </button>
+      </div>
+
+      <p class="contact__note reveal">
+        Serious, capable full-stack developer with real client work — open to
+        freelance projects and collaboration.
+      </p>
+    </section>
+  </main>
+
+  <!-- ============ FOOTER ============ -->
+  <footer class="footer">
+    <span>© <span id="year"></span> Riekus Grobler</span>
+    <span class="footer__built">Built with plain HTML, CSS &amp; JS — no framework.</span>
+    <a href="#top" class="footer__top">Back to top ↑</a>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>
