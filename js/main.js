@@ -18,7 +18,7 @@
        tags        : array of short labels
        wip         : true  -> shows a "WIP" badge (optional)
      ========================================================= */
-  var PROJECTS = [
+  let PROJECTS = [
     {
       title: "CT4 Construction",
       url: "https://ct4construction.co.za",
@@ -44,7 +44,7 @@
   ];
 
   function renderProjects() {
-    var grid = document.getElementById("projects-grid");
+    const grid = document.getElementById("projects-grid");
     if (!grid) return;
 
     PROJECTS.forEach(function (p, i) {
