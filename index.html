@@ -25,9 +25,10 @@
       href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' fill='%23000'/><text x='50' y='70' font-size='62' font-family='Inter,sans-serif' font-weight='700' fill='%23fff' text-anchor='middle'>R</text></svg>"
     />
   </head>
+
   <body>
     <!-- ============ NAV ============ -->
-    <header class="nav" id="top">
+    <header class="nav">
       <a href="#top" class="nav__brand" aria-label="Home"
         >Riekus&nbsp;Grobler</a
       >
@@ -35,23 +36,33 @@
       <nav class="nav__links" aria-label="Primary">
         <a href="#about">About</a>
         <a href="#work">Work</a>
-        <a href="#background">Background</a>
         <a href="#projects">Projects</a>
+        <a href="#background">Background</a>
       </nav>
 
-      <button
-        class="theme-toggle"
-        id="themeToggle"
-        type="button"
-        aria-label="Toggle light and dark"
-      >
-        <span id="themeLabel">Dark</span>
-      </button>
+      <div>
+        <button
+          class="theme-toggle"
+          type="button"
+          aria-label="Go to DSA-learning platform"
+        >
+          DSA-learning platform
+        </button>
+
+        <button
+          class="theme-toggle"
+          id="themeToggle"
+          type="button"
+          aria-label="Toggle light and dark"
+        >
+          <span id="themeLabel">Dark</span>
+        </button>
+      </div>
     </header>
 
     <main>
       <!-- ============ HERO ============ -->
-      <section class="hero">
+      <section class="hero" id="top">
         <p class="hero__eyebrow reveal">
           Johannesburg, South Africa — available for freelance
         </p>
@@ -85,6 +96,7 @@
           <li>MongoDB</li>
           <li>Linux</li>
           <li>Security</li>
+          <li>JS</li>
         </ul>
       </section>
 
@@ -169,78 +181,10 @@
         </div>
       </section>
 
-      <!-- ============ BACKGROUND / HOW I WORK ============ -->
-      <section class="section section--split" id="background">
-        <div class="split">
-          <div class="split__col">
-            <div class="section__head reveal">
-              <span class="section__index">03</span>
-              <h2 class="section__title">Background</h2>
-            </div>
-            <p class="reveal muted">
-              Before moving into software development, I spent
-              <strong>5 years as a freelance helpdesk technician</strong>. That
-              hands-on infrastructure background still shapes how I work today.
-            </p>
-            <ul class="timeline">
-              <li class="reveal">
-                <span>WiFi</span> Set up &amp; configured client WiFi networks
-              </li>
-              <li class="reveal">
-                <span>Servers</span> Built, deployed &amp; maintained servers
-              </li>
-              <li class="reveal">
-                <span>VMs</span> Set up &amp; administered virtual machines
-              </li>
-              <li class="reveal">
-                <span>Hardware</span> Diagnosed, fixed &amp; upgraded
-                infrastructure
-              </li>
-            </ul>
-          </div>
-
-          <div class="split__col">
-            <div class="section__head reveal">
-              <span class="section__index">04</span>
-              <h2 class="section__title">How I work</h2>
-            </div>
-            <dl class="principles">
-              <div class="reveal">
-                <dt>Minimalist</dt>
-                <dd>
-                  Clean, uncluttered — no unnecessary bloat in code or design.
-                </dd>
-              </div>
-              <div class="reveal">
-                <dt>Perfectionist</dt>
-                <dd>
-                  Correct architecture, clean code, thoughtful design — not just
-                  "make it work."
-                </dd>
-              </div>
-              <div class="reveal">
-                <dt>Curious / self-taught</dt>
-                <dd>
-                  I explore new tools and languages regularly, and enjoy going
-                  down technical rabbit holes.
-                </dd>
-              </div>
-              <div class="reveal">
-                <dt>Builder mindset</dt>
-                <dd>
-                  I like understanding systems end-to-end — from the hardware
-                  and OS up through the server to the UI.
-                </dd>
-              </div>
-            </dl>
-          </div>
-        </div>
-      </section>
-
       <!-- ============ PROJECTS ============ -->
       <section class="section" id="projects">
         <div class="section__head reveal">
-          <span class="section__index">05</span>
+          <span class="section__index">06</span>
           <h2 class="section__title">Selected projects</h2>
         </div>
 
@@ -269,6 +213,131 @@
             </svg>
             See more on GitHub
           </a>
+        </div>
+      </section>
+
+      <!-- ============ HOW I WORK ============ -->
+      <section class="section" id="how-i-work">
+        <div class="section__head reveal">
+          <span class="section__index">04</span>
+          <h2 class="section__title">How I work</h2>
+        </div>
+        <p class="reveal muted">
+          Before moving into software development, I spent
+          <strong>5 years as a freelance helpdesk technician</strong>. That
+          hands-on infrastructure background still shapes how I work today.
+        </p>
+        <dl class="principles">
+          <div class="reveal">
+            <dt>Minimalist</dt>
+            <dd>
+              Clean, uncluttered — no unnecessary bloat in code or design.
+            </dd>
+          </div>
+          <div class="reveal">
+            <dt>Perfectionist</dt>
+            <dd>
+              Correct architecture, clean code, thoughtful design — not just
+              "make it work."
+            </dd>
+          </div>
+          <div class="reveal">
+            <dt>Curious / self-taught</dt>
+            <dd>
+              I explore new tools and languages regularly, and enjoy going down
+              technical rabbit holes.
+            </dd>
+          </div>
+          <div class="reveal">
+            <dt>Builder mindset</dt>
+            <dd>
+              I like understanding systems end-to-end — from the hardware and OS
+              up through the server to the UI.
+            </dd>
+          </div>
+        </dl>
+      </section>
+
+      <!-- ============ BACKGROUND ============ -->
+      <section class="section" id="background">
+        <div class="section__head reveal">
+          <span class="section__index">03</span>
+          <h2 class="section__title">Background</h2>
+        </div>
+        <p class="reveal muted">
+          Before moving into software development, I spent
+          <strong>5 years as a freelance helpdesk technician</strong>. That
+          hands-on infrastructure background still shapes how I work today.
+        </p>
+        <ul class="timeline">
+          <li class="reveal">
+            <span>WiFi</span> Set up &amp; configured client WiFi networks
+          </li>
+          <li class="reveal">
+            <span>Servers</span> Built, deployed &amp; maintained servers
+          </li>
+          <li class="reveal">
+            <span>VMs</span> Set up &amp; administered virtual machines
+          </li>
+          <li class="reveal">
+            <span>Hardware</span> Diagnosed, fixed &amp; upgraded infrastructure
+          </li>
+        </ul>
+      </section>
+
+      <!-- ============ TESTIMONIALS ============ -->
+      <section class="section">
+        <!-- Testimonials from freelance work -->
+        <div class="testimonials">
+          <div class="section__head reveal">
+            <span class="section__index">05</span>
+            <h2 class="section__title">What clients say</h2>
+          </div>
+          <div class="testimonials__grid">
+            <figure class="testimonial reveal">
+              <blockquote>
+                Riekus set up our entire office network and kept it running for
+                years — reliable, thorough and always reachable when something
+                needed fixing.
+              </blockquote>
+              <figcaption>
+                <span class="testimonial__avatar" aria-hidden="true">CN</span>
+                <span class="testimonial__who">
+                  <span class="testimonial__name">Client name</span>
+                  <span class="testimonial__role">Role / Company</span>
+                </span>
+              </figcaption>
+            </figure>
+
+            <figure class="testimonial reveal">
+              <blockquote>
+                He built exactly what we asked for — clean, fast and without any
+                unnecessary extras. Communication was clear from start to
+                finish.
+              </blockquote>
+              <figcaption>
+                <span class="testimonial__avatar" aria-hidden="true">CN</span>
+                <span class="testimonial__who">
+                  <span class="testimonial__name">Client name</span>
+                  <span class="testimonial__role">Role / Company</span>
+                </span>
+              </figcaption>
+            </figure>
+
+            <figure class="testimonial reveal">
+              <blockquote>
+                Professional, honest about timelines, and the end result worked
+                flawlessly. I'd hire him again without hesitation.
+              </blockquote>
+              <figcaption>
+                <span class="testimonial__avatar" aria-hidden="true">CN</span>
+                <span class="testimonial__who">
+                  <span class="testimonial__name">Client name</span>
+                  <span class="testimonial__role">Role / Company</span>
+                </span>
+              </figcaption>
+            </figure>
+          </div>
         </div>
       </section>
 
