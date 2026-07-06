@@ -163,6 +163,42 @@
     });
   }
 
+  /* ---------- Stack marquee ---------- */
+  // The CSS loop slides the track by half its width, so the first half must
+  // be at least as wide as the viewport. Clone the source row until it is
+  // (the static duplicate in the HTML only covers the no-JS case).
+  var marqueeTrack = document.querySelector(".stack-marquee__track");
+
+  function buildMarquee() {
+    var row = marqueeTrack.firstElementChild;
+    while (row.nextElementSibling) marqueeTrack.removeChild(row.nextElementSibling);
+
+    var rowWidth = row.getBoundingClientRect().width;
+    if (!rowWidth) return;
+
+    var perHalf = Math.max(2, Math.ceil(window.innerWidth / rowWidth) + 1);
+    for (var k = 0; k < perHalf * 2 - 1; k++) {
+      var clone = row.cloneNode(true);
+      clone.setAttribute("aria-hidden", "true");
+      marqueeTrack.appendChild(clone);
+    }
+    // Fixed speed regardless of how wide the loop ended up (~55 px/s).
+    marqueeTrack.style.animationDuration = Math.round(perHalf * rowWidth / 55) + "s";
+  }
+
+  if (marqueeTrack && marqueeTrack.firstElementChild) {
+    buildMarquee();
+    // Row widths shift when the Inter webfont swaps in; rebuild then.
+    if (document.fonts && document.fonts.ready && document.fonts.ready.then) {
+      document.fonts.ready.then(buildMarquee);
+    }
+    var marqueeResizeTimer;
+    window.addEventListener("resize", function () {
+      clearTimeout(marqueeResizeTimer);
+      marqueeResizeTimer = setTimeout(buildMarquee, 200);
+    });
+  }
+
   /* ---------- Reveal on scroll ---------- */
   var revealEls = document.querySelectorAll(".reveal");
 

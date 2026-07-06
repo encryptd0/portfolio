@@ -107,21 +107,37 @@
           </div>
         </div>
 
-        <ul
-          class="hero__stack reveal"
-          style="--d: 4"
-          aria-label="Primary stack"
-        >
-          <li>Node.js</li>
-          <li>Express</li>
-          <li>EJS</li>
-          <li>MongoDB</li>
-          <li>Linux</li>
-          <li>Docker</li>
-          <li>Virtual Machines</li>
-          <li>JavaScript</li>
-          <li>Python</li>
-        </ul>
+        <!-- Tech-stack marquee: js/main.js clones the row until the loop is
+             wider than the viewport, then slides the track by half its width.
+             The one duplicate here is only the no-JS fallback. -->
+        <div class="stack-marquee reveal" style="--d: 4" aria-label="Primary stack">
+          <div class="stack-marquee__viewport">
+            <div class="stack-marquee__track">
+              <ul class="hero__stack">
+                <li>Node.js</li>
+                <li>Express</li>
+                <li>EJS</li>
+                <li>MongoDB</li>
+                <li>Linux</li>
+                <li>Docker</li>
+                <li>Virtual Machines</li>
+                <li>JavaScript</li>
+                <li>Python</li>
+              </ul>
+              <ul class="hero__stack" aria-hidden="true">
+                <li>Node.js</li>
+                <li>Express</li>
+                <li>EJS</li>
+                <li>MongoDB</li>
+                <li>Linux</li>
+                <li>Docker</li>
+                <li>Virtual Machines</li>
+                <li>JavaScript</li>
+                <li>Python</li>
+              </ul>
+            </div>
+          </div>
+        </div>
       </section>
 
       <!-- ============ ABOUT ============ -->
