@@ -5,7 +5,9 @@
 (function () {
   'use strict';
 
-  var KEY = 'dsa-roadmap:theme';
+  /* Shared with the portfolio (js/main.js) so the choice follows the user
+     across both projects. */
+  var KEY = 'rg-theme';
   var root = document.documentElement;
   var meta = document.querySelector('meta[name="theme-color"]');
   var toggle = document.querySelector('[data-theme-toggle]');
