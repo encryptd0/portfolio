@@ -46,7 +46,7 @@
     missing.appendChild(el('p', 'muted',
       'There is no topic at this address. Head back to the roadmap to pick one.'));
     var homeLink = el('a', 'btn btn-solid', 'Back to the roadmap');
-    homeLink.href = 'index.html';
+    homeLink.href = 'dsaindex.html';
     missing.appendChild(homeLink);
     rootEl.appendChild(missing);
     if (window.Reveal) window.Reveal.scan(rootEl);
@@ -63,7 +63,7 @@
 
   /* ---- Topic header ---- */
   var back = el('a', 'back-link', '← Roadmap');
-  back.href = 'index.html';
+  back.href = 'dsaindex.html';
   rootEl.appendChild(back);
 
   var header = el('header', 'topic-header reveal');
