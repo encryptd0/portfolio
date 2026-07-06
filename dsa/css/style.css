@@ -135,6 +135,12 @@ a {
   white-space: nowrap;
 }
 
+/* On desktop the menu wrapper is invisible to layout: brand, links and
+   actions sit directly in the nav row. On mobile it becomes a dropdown. */
+.nav-menu {
+  display: contents;
+}
+
 .nav-links {
   display: flex;
   gap: 2rem;
@@ -173,6 +179,47 @@ a {
   display: flex;
   align-items: center;
   gap: 0.6rem;
+}
+
+/* Hamburger — hidden on desktop, shown in the mobile media query */
+.nav-burger {
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  width: 42px;
+  height: 42px;
+  padding: 0;
+  flex: none;
+  background: transparent;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-pill);
+  cursor: pointer;
+  transition: border-color 0.2s;
+}
+
+.nav-burger:hover {
+  border-color: var(--fg);
+}
+
+.nav-burger-line {
+  width: 16px;
+  height: 2px;
+  border-radius: 1px;
+  background: var(--fg);
+  transition: transform 0.25s ease, opacity 0.2s ease;
+}
+
+/* Lines fold into an X while the menu is open */
+.site-header.is-open .nav-burger-line:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+}
+.site-header.is-open .nav-burger-line:nth-child(2) {
+  opacity: 0;
+}
+.site-header.is-open .nav-burger-line:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
 }
 
 /* ---------- 4. Pills & buttons ---------- */
@@ -784,7 +831,9 @@ a {
     transition: none;
   }
   .node,
-  .check::before {
+  .check::before,
+  .nav-menu,
+  .nav-burger-line {
     transition: none;
   }
   .node:hover {
@@ -812,11 +861,53 @@ a {
 }
 
 @media (max-width: 620px) {
-  .nav-links {
-    display: none; /* About stays reachable from the footer */
+  .nav-burger {
+    display: inline-flex;
   }
-  .nav .pill {
-    display: none;
+
+  /* The menu becomes a dropdown panel under the sticky header */
+  .nav-menu {
+    display: flex;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    flex-direction: column;
+    gap: 1.5rem;
+    padding: 1.4rem clamp(1.5rem, 4vw, 3rem) 1.7rem;
+    background: var(--bg); /* solid, so page content can't bleed through */
+    border-bottom: 1px solid var(--line);
+    visibility: hidden;
+    opacity: 0;
+    transform: translateY(-8px);
+    transition: opacity 0.25s ease, transform 0.25s ease, visibility 0.25s;
+  }
+
+  .site-header.is-open .nav-menu {
+    visibility: visible;
+    opacity: 1;
+    transform: none;
+  }
+
+  .nav-links {
+    flex-direction: column;
+    gap: 1.1rem;
+    font-size: 1rem;
+  }
+
+  .nav-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .nav-actions .pill {
+    text-align: center;
+    padding: 0.45rem 0.9rem;
+  }
+
+  .nav-actions .pill-btn {
+    justify-content: center;
+    padding: 0.7rem 0.9rem;
   }
 }
 

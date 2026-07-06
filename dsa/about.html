@@ -29,15 +29,22 @@
   <header class="site-header">
     <nav class="nav container" aria-label="Main">
       <a class="brand" href="index.html">DSA Roadmap</a>
-      <div class="nav-links">
-        <a class="nav-link" href="index.html">Roadmap</a>
-        <a class="nav-link" href="about.html" aria-current="page">About</a>
-      </div>
-      <div class="nav-actions">
-        <span class="pill" data-global-count hidden>0 / 0 solved</span>
-        <button class="pill-btn" type="button" data-reset-progress>Reset progress</button>
-        <button class="pill-btn" type="button" data-theme-toggle>Dark</button>
-        <a class="pill-btn" href="../index.html">Portfolio</a>
+      <button class="nav-burger" type="button" data-nav-toggle aria-expanded="false" aria-controls="navMenu" aria-label="Open menu">
+        <span class="nav-burger-line" aria-hidden="true"></span>
+        <span class="nav-burger-line" aria-hidden="true"></span>
+        <span class="nav-burger-line" aria-hidden="true"></span>
+      </button>
+      <div class="nav-menu" id="navMenu">
+        <div class="nav-links">
+          <a class="nav-link" href="index.html">Roadmap</a>
+          <a class="nav-link" href="about.html" aria-current="page">About</a>
+        </div>
+        <div class="nav-actions">
+          <span class="pill" data-global-count hidden>0 / 0 solved</span>
+          <button class="pill-btn" type="button" data-reset-progress>Reset progress</button>
+          <button class="pill-btn" type="button" data-theme-toggle>Dark</button>
+          <a class="pill-btn" href="../index.html">Portfolio</a>
+        </div>
       </div>
     </nav>
   </header>

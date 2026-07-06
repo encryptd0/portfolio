@@ -46,32 +46,40 @@
         >Riekus&nbsp;Grobler</a
       >
 
-      <nav class="nav__links" aria-label="Primary">
-        <a href="#about">About</a>
-        <a href="#work">Work</a>
-        <a href="#projects">Projects</a>
-        <a href="#background">Background</a>
+      <button
+        class="nav__burger"
+        id="navToggle"
+        type="button"
+        aria-expanded="false"
+        aria-controls="navMenu"
+        aria-label="Open menu"
+      >
+        <span class="nav__burger-line" aria-hidden="true"></span>
+        <span class="nav__burger-line" aria-hidden="true"></span>
+        <span class="nav__burger-line" aria-hidden="true"></span>
+      </button>
+
+      <nav class="nav__menu" id="navMenu" aria-label="Primary">
+        <div class="nav__links">
+          <a href="#about">About</a>
+          <a href="#work">Work</a>
+          <a href="#projects">Projects</a>
+          <a href="#background">Background</a>
+        </div>
+
+        <div class="nav__actions">
+          <a class="theme-toggle" href="dsa/index.html">DSA-learning platform</a>
+
+          <button
+            class="theme-toggle"
+            id="themeToggle"
+            type="button"
+            aria-label="Toggle light and dark"
+          >
+            <span id="themeLabel">Dark</span>
+          </button>
+        </div>
       </nav>
-
-      <div>
-        <button
-          class="theme-toggle"
-          type="button"
-          aria-label="Go to DSA-learning platform"
-        >
-          
-        <a href="dsa/index.html">DSA-learning platform</a>
-        </button>
-
-        <button
-          class="theme-toggle"
-          id="themeToggle"
-          type="button"
-          aria-label="Toggle light and dark"
-        >
-          <span id="themeLabel">Dark</span>
-        </button>
-      </div>
     </header>
 
     <main>

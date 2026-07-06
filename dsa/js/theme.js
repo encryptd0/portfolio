@@ -1,5 +1,5 @@
 /* DSA Roadmap — theme chrome behaviors from theme.md, loaded on every page:
-   the light/dark toggle and the fade-in-on-scroll reveal.
+   the light/dark toggle, the mobile nav menu and the fade-in-on-scroll reveal.
    (An inline <head> script sets data-theme before first paint; this file
    syncs the toggle label / meta theme-color and handles clicks.) */
 (function () {
@@ -37,6 +37,32 @@
       } catch (err) {
         /* choice just won't persist */
       }
+    });
+  }
+
+  /* Mobile nav: the burger toggles the dropdown menu. */
+  var header = document.querySelector('.site-header');
+  var burger = document.querySelector('[data-nav-toggle]');
+
+  function setMenuOpen(open) {
+    header.classList.toggle('is-open', open);
+    burger.setAttribute('aria-expanded', open ? 'true' : 'false');
+    burger.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+  }
+
+  if (header && burger) {
+    burger.addEventListener('click', function () {
+      setMenuOpen(!header.classList.contains('is-open'));
+    });
+
+    /* Tapping a link in the menu closes it. */
+    var menuLinks = header.querySelectorAll('.nav-menu a');
+    for (var j = 0; j < menuLinks.length; j++) {
+      menuLinks[j].addEventListener('click', function () { setMenuOpen(false); });
+    }
+
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape') setMenuOpen(false);
     });
   }
 

@@ -138,6 +138,31 @@
     });
   }
 
+  /* ---------- Mobile nav (hamburger) ---------- */
+  var nav = document.querySelector(".nav");
+  var navToggle = document.getElementById("navToggle");
+
+  function setNavOpen(open) {
+    nav.classList.toggle("is-open", open);
+    navToggle.setAttribute("aria-expanded", open ? "true" : "false");
+    navToggle.setAttribute("aria-label", open ? "Close menu" : "Open menu");
+  }
+
+  if (nav && navToggle) {
+    navToggle.addEventListener("click", function () {
+      setNavOpen(!nav.classList.contains("is-open"));
+    });
+
+    // Tapping a link in the menu (e.g. jumping to a section) closes it.
+    nav.querySelectorAll(".nav__menu a").forEach(function (a) {
+      a.addEventListener("click", function () { setNavOpen(false); });
+    });
+
+    document.addEventListener("keydown", function (e) {
+      if (e.key === "Escape") setNavOpen(false);
+    });
+  }
+
   /* ---------- Reveal on scroll ---------- */
   var revealEls = document.querySelectorAll(".reveal");
 
