@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>DSA Roadmap — learn data structures &amp; algorithms in order</title>
+  <meta name="description" content="A free, non-commercial roadmap through 150 classic LeetCode problems across 18 topics, ordered so you always know what to study next.">
+  <meta name="theme-color" content="#ffffff">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%230a0a0a'/%3E%3Ctext x='32' y='44' font-family='Inter,sans-serif' font-size='34' font-weight='700' fill='%23ffffff' text-anchor='middle'%3ED%3C/text%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap">
+  <link rel="stylesheet" href="css/dsastyles.css">
+  <script>
+    /* Set the theme before first paint to avoid a flash of the wrong mode. */
+    (function () {
+      'use strict';
+      var theme;
+      try { theme = localStorage.getItem('dsa-roadmap:theme'); } catch (err) {}
+      if (theme !== 'light' && theme !== 'dark') {
+        theme = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+      }
+      document.documentElement.setAttribute('data-theme', theme);
+    })();
+  </script>
+</head>
+<body>
+
+  <header class="site-header">
+    <nav class="nav container" aria-label="Main">
+      <a class="brand" href="dsaindex.html">DSA Roadmap</a>
+      <div class="nav-links">
+        <a class="nav-link" href="dsaindex.html" aria-current="page">Roadmap</a>
+        <a class="nav-link" href="about.html">About</a>
+      </div>
+      <div class="nav-actions">
+        <span class="pill" data-global-count hidden>0 / 0 solved</span>
+        <button class="pill-btn" type="button" data-reset-progress>Reset progress</button>
+        <button class="pill-btn" type="button" data-theme-toggle>Dark</button>
+      </div>
+    </nav>
+  </header>
+
+  <main id="main">
+    <section class="hero container">
+      <p class="eyebrow reveal" style="--d:0">Free · non-commercial · no accounts</p>
+      <h1 class="reveal" style="--d:1">A clear path through&nbsp;DSA.</h1>
+      <p class="hero-sub reveal" style="--d:2">
+        150 classic LeetCode problems across 18 topics, arranged as a dependency
+        roadmap — so you always know what to study next. Your progress stays in
+        this browser; nothing is tracked, nothing is sent anywhere.
+      </p>
+      <div class="hero-actions reveal" style="--d:3">
+        <a class="btn btn-solid" href="topic.html?id=arrays-hashing">Start with Arrays &amp; Hashing</a>
+        <a class="btn btn-ghost" href="about.html">How it works</a>
+      </div>
+    </section>
+
+    <section class="section container reveal">
+      <header class="section-header">
+        <span class="section-index">01</span>
+        <h2>The roadmap</h2>
+      </header>
+      <div class="graph" data-graph>
+        <svg data-graph-lines aria-hidden="true" focusable="false"></svg>
+        <!-- Topic nodes are rendered here by js/home.js -->
+      </div>
+    </section>
+
+    <section class="section container reveal">
+      <header class="section-header">
+        <span class="section-index">02</span>
+        <h2>All topics, in order</h2>
+      </header>
+      <ol class="topic-list" data-topic-list>
+        <!-- Topic rows are rendered here by js/home.js -->
+      </ol>
+      <noscript><p class="muted">This site needs JavaScript to render the roadmap and track your progress.</p></noscript>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <p>DSA Roadmap is free and non-commercial. No ads, no accounts — progress lives only in your browser.</p>
+      <p>Roadmap idea by <a href="https://neetcode.io" target="_blank" rel="noopener">NeetCode</a> · problems live on <a href="https://leetcode.com" target="_blank" rel="noopener">LeetCode</a>. This site only links out. <a href="about.html">About</a></p>
+    </div>
+  </footer>
+
+  <script src="js/theme.js"></script>
+  <script src="js/progress.js"></script>
+  <script src="js/data.js"></script>
+  <script src="js/home.js"></script>
+</body>
+</html>

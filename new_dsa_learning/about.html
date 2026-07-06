@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>About — DSA Roadmap</title>
+  <meta name="description" content="What DSA Roadmap is: a free, non-commercial study guide that organizes classic LeetCode problems into a dependency roadmap.">
+  <meta name="theme-color" content="#ffffff">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%230a0a0a'/%3E%3Ctext x='32' y='44' font-family='Inter,sans-serif' font-size='34' font-weight='700' fill='%23ffffff' text-anchor='middle'%3ED%3C/text%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap">
+  <link rel="stylesheet" href="css/styles.css">
+  <script>
+    /* Set the theme before first paint to avoid a flash of the wrong mode. */
+    (function () {
+      'use strict';
+      var theme;
+      try { theme = localStorage.getItem('dsa-roadmap:theme'); } catch (err) {}
+      if (theme !== 'light' && theme !== 'dark') {
+        theme = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+      }
+      document.documentElement.setAttribute('data-theme', theme);
+    })();
+  </script>
+</head>
+<body>
+
+  <header class="site-header">
+    <nav class="nav container" aria-label="Main">
+      <a class="brand" href="dsaindex.html">DSA Roadmap</a>
+      <div class="nav-links">
+        <a class="nav-link" href="dsaindex.html">Roadmap</a>
+        <a class="nav-link" href="about.html" aria-current="page">About</a>
+      </div>
+      <div class="nav-actions">
+        <span class="pill" data-global-count hidden>0 / 0 solved</span>
+        <button class="pill-btn" type="button" data-reset-progress>Reset progress</button>
+        <button class="pill-btn" type="button" data-theme-toggle>Dark</button>
+      </div>
+    </nav>
+  </header>
+
+  <main id="main" class="page container">
+    <div class="prose reveal">
+      <p class="eyebrow">About</p>
+      <h1>A study guide, not a platform.</h1>
+
+      <p>
+        DSA Roadmap organizes 150 well-known LeetCode practice problems into
+        18 topics, arranged as a dependency roadmap: each topic unlocks the
+        ones that build on it, so you always know what to study next instead
+        of grinding a random list.
+      </p>
+      <p>
+        It is <strong>free and non-commercial</strong>. There are no ads, no
+        accounts, no sign-ups and no tracking of any kind.
+      </p>
+
+      <h2>Your progress stays with you</h2>
+      <p>
+        Ticking a problem as done saves it to <strong>your browser's local
+        storage</strong> — it never leaves your machine and is never sent
+        anywhere. That also means progress is per-browser and per-device, and
+        the “Reset progress” button in the header clears it for good.
+      </p>
+
+      <h2>Credit where it's due</h2>
+      <p>
+        The topic ordering and problem selection follow the excellent roadmap
+        by <a href="https://neetcode.io" target="_blank" rel="noopener">NeetCode</a>,
+        and every problem lives on
+        <a href="https://leetcode.com" target="_blank" rel="noopener">LeetCode</a>.
+        This site hosts no problem content — every problem simply links out to
+        LeetCode, where you actually solve it. A few problems require LeetCode
+        Premium; they are hidden by default and clearly badged when shown.
+      </p>
+
+      <h2>Found a dead link?</h2>
+      <p>
+        LeetCode occasionally renames or removes problems. Each problem row has
+        a small “broken?” link that takes you to a LeetCode search for the
+        title, so you can find where it moved.
+      </p>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <p>DSA Roadmap is free and non-commercial. No ads, no accounts — progress lives only in your browser.</p>
+      <p>Roadmap idea by <a href="https://neetcode.io" target="_blank" rel="noopener">NeetCode</a> · problems live on <a href="https://leetcode.com" target="_blank" rel="noopener">LeetCode</a>. This site only links out. <a href="about.html">About</a></p>
+    </div>
+  </footer>
+
+  <script src="js/theme.js"></script>
+  <script src="js/progress.js"></script>
+</body>
+</html>
