@@ -1,44 +1,7 @@
-/* DSA Roadmap — theme chrome behaviors from theme.md, loaded on every page:
-   the light/dark toggle, the mobile nav menu and the fade-in-on-scroll reveal.
-   (An inline <head> script sets data-theme before first paint; this file
-   syncs the toggle label / meta theme-color and handles clicks.) */
+/* DSA Roadmap — chrome behaviors from theme.md, loaded on every page:
+   the mobile nav menu and the fade-in-on-scroll reveal. */
 (function () {
   'use strict';
-
-  /* Shared with the portfolio (js/main.js) so the choice follows the user
-     across both projects. */
-  var KEY = 'rg-theme';
-  var root = document.documentElement;
-  var meta = document.querySelector('meta[name="theme-color"]');
-  var toggle = document.querySelector('[data-theme-toggle]');
-
-  function current() {
-    return root.getAttribute('data-theme') === 'dark' ? 'dark' : 'light';
-  }
-
-  function apply(theme) {
-    root.setAttribute('data-theme', theme);
-    if (meta) meta.setAttribute('content', theme === 'dark' ? '#0a0a0a' : '#ffffff');
-    if (toggle) {
-      /* Label shows the mode it will switch TO (theme.md). */
-      toggle.textContent = theme === 'dark' ? 'Light' : 'Dark';
-      toggle.setAttribute('aria-label', 'Switch to ' + (theme === 'dark' ? 'light' : 'dark') + ' theme');
-    }
-  }
-
-  apply(current());
-
-  if (toggle) {
-    toggle.addEventListener('click', function () {
-      var next = current() === 'dark' ? 'light' : 'dark';
-      apply(next);
-      try {
-        localStorage.setItem(KEY, next);
-      } catch (err) {
-        /* choice just won't persist */
-      }
-    });
-  }
 
   /* Mobile nav: the burger toggles the dropdown menu. */
   var header = document.querySelector('.site-header');

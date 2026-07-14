@@ -1,26 +1,65 @@
 /* =========================================================
    Riekus Grobler — Portfolio
-   Theme: MODERN MINIMAL · monochrome black & white
+   Theme: CATPPUCCIN MOCHA · catppuccin.com-style
+          gradient-text headings, gradient pill buttons,
+          rainbow accent bar, full 14-hue palette
    Type:  Inter (single typeface)
    Motion: fade-in on scroll
    ========================================================= */
 
-/* ---------- Tokens ---------- */
-:root,
-[data-theme="light"] {
-  --bg: #ffffff;
-  --fg: #0a0a0a; /* near-black */
-  --muted: #6b6b6b; /* grey text */
-  --line: #e6e6e6; /* hairline */
-  --glass: rgba(255, 255, 255, 0.7);
-}
+/* ---------- Tokens (Catppuccin Mocha — full palette) ---------- */
+:root {
+  --rosewater: #f5e0dc;
+  --flamingo: #f2cdcd;
+  --pink: #f5c2e7;
+  --mauve: #cba6f7;
+  --red: #f38ba8;
+  --maroon: #eba0ac;
+  --peach: #fab387;
+  --yellow: #f9e2af;
+  --green: #a6e3a1;
+  --teal: #94e2d5;
+  --sky: #89dceb;
+  --sapphire: #74c7ec;
+  --blue: #89b4fa;
+  --lavender: #b4befe;
+  --text: #cdd6f4;
+  --subtext1: #bac2de;
+  --subtext0: #a6adc8;
+  --overlay1: #7f849c;
+  --surface2: #585b70;
+  --surface1: #45475a;
+  --surface0: #313244;
+  --base: #1e1e2e;
+  --mantle: #181825;
+  --crust: #11111b;
 
-[data-theme="dark"] {
-  --bg: #0a0a0a;
-  --fg: #f5f5f5;
-  --muted: #9a9a9a;
-  --line: #232323;
-  --glass: rgba(10, 10, 10, 0.7);
+  /* Semantic aliases used by components */
+  --bg: var(--base);
+  --fg: var(--text);
+  --muted: var(--subtext0);
+  --line: var(--surface0);
+  --glass: rgba(30, 30, 46, 0.7);
+  --accent: var(--mauve);
+
+  /* The signature 14-hue rainbow (accent bar) */
+  --rainbow: linear-gradient(
+    90deg,
+    var(--rosewater),
+    var(--flamingo),
+    var(--pink),
+    var(--mauve),
+    var(--red),
+    var(--maroon),
+    var(--peach),
+    var(--yellow),
+    var(--green),
+    var(--teal),
+    var(--sky),
+    var(--sapphire),
+    var(--blue),
+    var(--lavender)
+  );
 }
 
 /* ---------- Reset ---------- */
@@ -37,6 +76,7 @@ html {
 }
 
 body {
+  position: relative;
   background: var(--bg);
   color: var(--fg);
   font-family:
@@ -49,14 +89,31 @@ body {
   letter-spacing: -0.011em;
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
-  transition:
-    background 0.4s ease,
-    color 0.4s ease;
+}
+
+/* Soft peach→mauve tint over the hero area, fading into base
+   (catppuccin.com does the same on its hero) */
+body::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: min(100vh, 56rem);
+  background: linear-gradient(
+    120deg,
+    color-mix(in srgb, var(--base), var(--peach) 6%),
+    color-mix(in srgb, var(--base), var(--mauve) 10%)
+  );
+  -webkit-mask-image: linear-gradient(#000 40%, transparent);
+  mask-image: linear-gradient(#000 40%, transparent);
+  pointer-events: none;
+  z-index: -1;
 }
 
 ::selection {
-  background: var(--fg);
-  color: var(--bg);
+  background: var(--mauve);
+  color: var(--crust);
 }
 a {
   color: inherit;
@@ -66,9 +123,57 @@ a {
 /* ---------- Container ---------- */
 .section,
 .hero,
-.footer {
+.footer__inner {
   width: min(1080px, 100% - 3rem);
   margin-inline: auto;
+}
+
+/* ---------- Gradient text (catppuccin.com headline style) ----------
+   Components set --g1/--g2; the element clips a 120° gradient to text. */
+.hero__title,
+.section__title,
+.contact__eyebrow {
+  background-image: linear-gradient(120deg, var(--g1, var(--peach)), var(--g2, var(--mauve)));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Per-section hue pairs — every Mocha hue gets a home */
+#about {
+  --g1: var(--pink);
+  --g2: var(--mauve);
+}
+#work {
+  --g1: var(--teal);
+  --g2: var(--green);
+}
+#projects {
+  --g1: var(--blue);
+  --g2: var(--sky);
+}
+#how-i-work {
+  --g1: var(--peach);
+  --g2: var(--red);
+}
+#background {
+  --g1: var(--yellow);
+  --g2: var(--peach);
+}
+.testimonials {
+  --g1: var(--rosewater);
+  --g2: var(--flamingo);
+}
+.contact {
+  --g1: var(--pink);
+  --g2: var(--lavender);
+}
+
+/* ---------- Rainbow accent bar ---------- */
+.accent-bar {
+  height: 8px;
+  width: 100%;
+  background-image: var(--rainbow);
 }
 
 /* =========================================================
@@ -90,8 +195,12 @@ a {
   border-bottom: 1px solid var(--line);
 }
 .nav__brand {
-  font-weight: 600;
+  font-weight: 700;
   letter-spacing: -0.02em;
+  background-image: linear-gradient(120deg, var(--peach), var(--mauve));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
 }
 
 /* On desktop the menu wrapper is invisible to layout: brand, links and
@@ -121,8 +230,9 @@ a {
   left: 0;
   bottom: -3px;
   width: 0;
-  height: 1px;
-  background: var(--fg);
+  height: 2px;
+  border-radius: 1px;
+  background: linear-gradient(90deg, var(--pink), var(--mauve));
   transition: width 0.28s ease;
 }
 .nav__links a:hover {
@@ -132,28 +242,26 @@ a {
   width: 100%;
 }
 
-.theme-toggle {
+.nav-pill {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  background: transparent;
-  border: 1px solid var(--line);
-  color: var(--fg);
+  border: none;
+  color: var(--crust);
+  background-color: var(--blue);
+  background-image: linear-gradient(120deg, var(--blue), var(--sky));
+  background-size: 150% 100%;
+  background-position: top left;
   padding: 0.45rem 0.9rem;
   font: inherit;
   font-size: 0.82rem;
-  font-weight: 500;
+  font-weight: 600;
   border-radius: 999px;
   cursor: pointer;
-  transition:
-    background 0.2s,
-    color 0.2s,
-    border-color 0.2s;
+  transition: background-position 0.35s ease-in-out;
 }
-.theme-toggle:hover {
-  background: var(--fg);
-  color: var(--bg);
-  border-color: var(--fg);
+.nav-pill:hover {
+  background-position: top right;
 }
 
 /* Hamburger — hidden on desktop, shown in the mobile media query */
@@ -174,7 +282,7 @@ a {
   transition: border-color 0.2s;
 }
 .nav__burger:hover {
-  border-color: var(--fg);
+  border-color: var(--mauve);
 }
 .nav__burger-line {
   width: 16px;
@@ -200,7 +308,15 @@ a {
    HERO
    ========================================================= */
 .hero {
-  padding: clamp(4rem, 14vh, 9rem) 0 clamp(3rem, 8vh, 5rem);
+  padding: clamp(3.5rem, 10vh, 7rem) 0 clamp(3rem, 8vh, 5rem);
+}
+
+/* Two columns like catppuccin.com's hero: copy left, illustration right */
+.hero__grid {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: clamp(2rem, 5vw, 4.5rem);
+  align-items: center;
 }
 
 .hero__eyebrow {
@@ -210,59 +326,77 @@ a {
   margin-bottom: 1.8rem;
 }
 .hero__title {
-  font-size: clamp(2.6rem, 8vw, 6rem);
-  line-height: 1.02;
-  font-weight: 600;
+  font-size: clamp(2.4rem, 4.8vw, 4.4rem);
+  line-height: 1.08;
+  font-weight: 800;
   letter-spacing: -0.04em;
+  /* --g1/--g2 default to peach→mauve — the catppuccin.com hero gradient */
+  padding-bottom: 0.08em; /* keep descenders inside the clipped box */
 }
 
-.hero__meta {
-  display: grid;
-  grid-template-columns: 1.3fr 1fr;
-  gap: 2.5rem;
-  align-items: end;
-  margin-top: 3rem;
-  padding-top: 2rem;
-  border-top: 1px solid var(--line);
-}
 .hero__lead {
-  color: var(--muted);
+  color: var(--subtext1);
   max-width: 48ch;
   font-size: 1.08rem;
+  margin-top: 1.5rem;
 }
 .hero__cta {
   display: flex;
   gap: 0.8rem;
   flex-wrap: wrap;
+  margin-top: 1.9rem;
 }
 
+.hero__art svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+/* The outlined diamonds drift gently */
+.hero__art-float {
+  animation: art-float 7s ease-in-out infinite alternate;
+}
+@keyframes art-float {
+  to {
+    transform: translateY(-9px);
+  }
+}
+
+/* ---------- Buttons — gradient pills, crust text ---------- */
 .btn {
   display: inline-flex;
   align-items: center;
   padding: 0.8rem 1.5rem;
-  font-weight: 500;
+  font-weight: 600;
   font-size: 0.95rem;
-  border: 1px solid var(--fg);
+  border: none;
   border-radius: 999px;
+  color: var(--crust);
+  background-color: var(--surface0);
+  background-size: 150% 100%;
+  background-position: top left;
   transition:
-    opacity 0.2s,
-    background 0.2s,
-    color 0.2s;
+    background-position 0.35s ease-in-out,
+    transform 0.2s ease;
 }
-.btn--solid {
-  background: var(--fg);
-  color: var(--bg);
+.btn:hover {
+  background-position: top right;
 }
-.btn--solid:hover {
-  opacity: 0.82;
+.btn--peach {
+  background-color: var(--peach);
+  background-image: linear-gradient(120deg, var(--peach), var(--red));
 }
-.btn--ghost {
-  background: transparent;
-  color: var(--fg);
+.btn--teal {
+  background-color: var(--teal);
+  background-image: linear-gradient(120deg, var(--teal), var(--green));
 }
-.btn--ghost:hover {
-  background: var(--fg);
-  color: var(--bg);
+.btn--blue {
+  background-color: var(--blue);
+  background-image: linear-gradient(120deg, var(--blue), var(--sky));
+}
+.btn--mauve {
+  background-color: var(--mauve);
+  background-image: linear-gradient(120deg, var(--pink), var(--mauve));
 }
 
 .hero__stack {
@@ -278,6 +412,22 @@ a {
   border: 1px solid var(--line);
   border-radius: 999px;
   white-space: nowrap;
+}
+/* Every stack pill wears its own Mocha hue (11 items per row) */
+.hero__stack li:nth-child(11n + 1) { --c: var(--rosewater); }
+.hero__stack li:nth-child(11n + 2) { --c: var(--flamingo); }
+.hero__stack li:nth-child(11n + 3) { --c: var(--pink); }
+.hero__stack li:nth-child(11n + 4) { --c: var(--mauve); }
+.hero__stack li:nth-child(11n + 5) { --c: var(--red); }
+.hero__stack li:nth-child(11n + 6) { --c: var(--peach); }
+.hero__stack li:nth-child(11n + 7) { --c: var(--yellow); }
+.hero__stack li:nth-child(11n + 8) { --c: var(--green); }
+.hero__stack li:nth-child(11n + 9) { --c: var(--teal); }
+.hero__stack li:nth-child(11n + 10) { --c: var(--sky); }
+.hero__stack li:nth-child(11n + 11) { --c: var(--blue); }
+.hero__stack li {
+  color: var(--c, var(--muted));
+  border-color: color-mix(in srgb, var(--c, var(--line)) 35%, transparent);
 }
 
 /* ---------- Stack marquee ---------- */
@@ -344,14 +494,14 @@ a {
   border-bottom: 1px solid var(--line);
 }
 .section__index {
-  color: var(--muted);
+  color: var(--g1, var(--muted));
   font-size: 0.85rem;
-  font-weight: 500;
+  font-weight: 600;
   font-variant-numeric: tabular-nums;
 }
 .section__title {
   font-size: clamp(1.7rem, 4vw, 2.6rem);
-  font-weight: 600;
+  font-weight: 800;
   letter-spacing: -0.03em;
 }
 
@@ -383,20 +533,30 @@ a {
   gap: 1.4rem;
 }
 .card {
+  --c: var(--mauve);
   padding: 1.8rem 1.6rem 2rem;
+  background: var(--mantle);
   border: 1px solid var(--line);
   border-radius: 14px;
   transition:
     transform 0.25s ease,
     border-color 0.25s ease;
 }
+/* Each card gets its own Mocha hue */
+.card:nth-child(6n + 1) { --c: var(--red); }
+.card:nth-child(6n + 2) { --c: var(--peach); }
+.card:nth-child(6n + 3) { --c: var(--yellow); }
+.card:nth-child(6n + 4) { --c: var(--green); }
+.card:nth-child(6n + 5) { --c: var(--sapphire); }
+.card:nth-child(6n + 6) { --c: var(--mauve); }
 .card:hover {
   transform: translateY(-4px);
-  border-color: var(--fg);
+  border-color: var(--c);
 }
 .card h3 {
   font-size: 1.2rem;
-  font-weight: 600;
+  font-weight: 700;
+  color: var(--c);
   margin-bottom: 0.6rem;
   letter-spacing: -0.02em;
 }
@@ -424,21 +584,28 @@ a {
   color: var(--muted);
 }
 .timeline li span {
-  color: var(--fg);
   font-weight: 600;
   font-size: 0.82rem;
 }
+.timeline li:nth-child(4n + 1) span { color: var(--blue); }
+.timeline li:nth-child(4n + 2) span { color: var(--green); }
+.timeline li:nth-child(4n + 3) span { color: var(--yellow); }
+.timeline li:nth-child(4n + 4) span { color: var(--red); }
 
 .principles > div {
   padding: 1.2rem 0;
   border-top: 1px solid var(--line);
 }
 .principles dt {
-  font-weight: 600;
+  font-weight: 700;
   font-size: 1.1rem;
   margin-bottom: 0.3rem;
   letter-spacing: -0.02em;
 }
+.principles > div:nth-child(4n + 1) dt { color: var(--mauve); }
+.principles > div:nth-child(4n + 2) dt { color: var(--teal); }
+.principles > div:nth-child(4n + 3) dt { color: var(--peach); }
+.principles > div:nth-child(4n + 4) dt { color: var(--pink); }
 .principles dd {
   color: var(--muted);
   font-size: 0.95rem;
@@ -447,14 +614,6 @@ a {
 /* ---------- Testimonials ---------- */
 .testimonials {
   margin-top: 4rem;
-}
-.testimonials__title {
-  font-size: 1.2rem;
-  font-weight: 600;
-  letter-spacing: -0.02em;
-  margin-bottom: 1.8rem;
-  padding-bottom: 1rem;
-  border-bottom: 1px solid var(--line);
 }
 .testimonials__grid {
   display: grid;
@@ -468,6 +627,7 @@ a {
   flex-direction: column;
   gap: 1.6rem;
   padding: 2.4rem 1.8rem 1.7rem;
+  background: var(--mantle);
   border: 1px solid var(--line);
   border-radius: 16px;
   transition:
@@ -476,7 +636,7 @@ a {
 }
 .testimonial:hover {
   transform: translateY(-4px);
-  border-color: var(--fg);
+  border-color: var(--lavender);
 }
 
 /* oversized decorative quote mark */
@@ -489,8 +649,8 @@ a {
   font-size: 4.5rem;
   line-height: 1;
   font-weight: 700;
-  color: var(--fg);
-  opacity: 0.1;
+  color: var(--lavender);
+  opacity: 0.22;
   pointer-events: none;
 }
 
@@ -517,11 +677,19 @@ a {
   width: 2.5rem;
   height: 2.5rem;
   border-radius: 999px;
-  background: var(--fg);
-  color: var(--bg);
+  color: var(--crust);
   font-size: 0.78rem;
-  font-weight: 600;
+  font-weight: 700;
   letter-spacing: 0.03em;
+}
+.testimonial:nth-child(3n + 1) .testimonial__avatar {
+  background-image: linear-gradient(120deg, var(--pink), var(--mauve));
+}
+.testimonial:nth-child(3n + 2) .testimonial__avatar {
+  background-image: linear-gradient(120deg, var(--teal), var(--green));
+}
+.testimonial:nth-child(3n + 3) .testimonial__avatar {
+  background-image: linear-gradient(120deg, var(--peach), var(--red));
 }
 .testimonial__who {
   display: flex;
@@ -546,19 +714,24 @@ a {
   gap: 1.4rem;
 }
 .project {
+  --c: var(--blue);
   display: flex;
   flex-direction: column;
   gap: 1rem;
   padding: 1.9rem 1.6rem 1.6rem;
+  background: var(--mantle);
   border: 1px solid var(--line);
   border-radius: 14px;
   transition:
     transform 0.25s ease,
     border-color 0.25s ease;
 }
+.project:nth-child(3n + 1) { --c: var(--blue); }
+.project:nth-child(3n + 2) { --c: var(--green); }
+.project:nth-child(3n + 3) { --c: var(--peach); }
 .project:hover {
   transform: translateY(-4px);
-  border-color: var(--fg);
+  border-color: var(--c);
 }
 .project__top {
   display: flex;
@@ -568,7 +741,8 @@ a {
 }
 .project h3 {
   font-size: 1.25rem;
-  font-weight: 600;
+  font-weight: 700;
+  color: var(--c);
   letter-spacing: -0.02em;
 }
 .project__wip {
@@ -576,8 +750,8 @@ a {
   font-weight: 600;
   vertical-align: middle;
   letter-spacing: 0.06em;
-  color: var(--muted);
-  border: 1px solid var(--line);
+  color: var(--yellow);
+  border: 1px solid color-mix(in srgb, var(--yellow) 40%, transparent);
   border-radius: 999px;
   padding: 0.15rem 0.45rem;
 }
@@ -590,7 +764,7 @@ a {
 }
 .project:hover .project__arrow {
   transform: translate(3px, -3px);
-  color: var(--fg);
+  color: var(--c);
 }
 .project p {
   color: var(--muted);
@@ -604,9 +778,9 @@ a {
 }
 .project__tags span {
   font-size: 0.72rem;
-  color: var(--muted);
+  color: var(--subtext1);
+  background: var(--surface0);
   padding: 0.25rem 0.65rem;
-  border: 1px solid var(--line);
   border-radius: 999px;
 }
 
@@ -625,9 +799,10 @@ a {
   border-top: 1px solid var(--line);
 }
 .contact__eyebrow {
-  color: var(--muted);
-  font-weight: 500;
-  margin-bottom: 1.4rem;
+  font-size: clamp(1.7rem, 4vw, 2.6rem);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  margin-bottom: 1.6rem;
 }
 /* Copy-to-clipboard box */
 .copybox {
@@ -636,12 +811,13 @@ a {
   gap: 0.5rem;
   max-width: 100%;
   padding: 0.4rem 0.4rem 0.4rem 1.2rem;
+  background: var(--mantle);
   border: 1px solid var(--line);
   border-radius: 999px;
   transition: border-color 0.2s ease;
 }
 .copybox:hover {
-  border-color: var(--fg);
+  border-color: var(--mauve);
 }
 .copybox__email {
   display: inline-flex;
@@ -660,16 +836,19 @@ a {
   padding: 0.6rem 1.1rem;
   font: inherit;
   font-size: 0.9rem;
-  font-weight: 500;
-  color: var(--bg);
-  background: var(--fg);
-  border: 1px solid var(--fg);
+  font-weight: 600;
+  color: var(--crust);
+  background-color: var(--mauve);
+  background-image: linear-gradient(120deg, var(--pink), var(--mauve));
+  background-size: 150% 100%;
+  background-position: top left;
+  border: none;
   border-radius: 999px;
   cursor: pointer;
-  transition: opacity 0.2s ease;
+  transition: background-position 0.35s ease-in-out;
 }
 .copybox__btn:hover {
-  opacity: 0.82;
+  background-position: top right;
 }
 .copybox__icon {
   flex: none;
@@ -695,22 +874,31 @@ a {
    FOOTER
    ========================================================= */
 .footer {
+  background: var(--mantle);
+  margin-top: 2rem;
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+.footer__inner {
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 1rem;
   flex-wrap: wrap;
   padding: 2.5rem 0 3rem;
-  margin-top: 2rem;
-  border-top: 1px solid var(--line);
-  font-size: 0.85rem;
-  color: var(--muted);
 }
 .footer__top {
   transition: color 0.2s;
 }
 .footer__top:hover {
-  color: var(--fg);
+  color: var(--lavender);
+}
+/* The rainbow bar sits flush on top of the footer */
+.accent-bar + .footer {
+  margin-top: 0;
+}
+.accent-bar {
+  margin-top: 2rem;
 }
 
 /* =========================================================
@@ -733,9 +921,14 @@ a {
    RESPONSIVE
    ========================================================= */
 @media (max-width: 900px) {
-  .hero__meta {
+  .hero__grid {
     grid-template-columns: 1fr;
-    align-items: start;
+    gap: 2.5rem;
+  }
+  .hero__art {
+    width: 100%;
+    max-width: 24rem;
+    margin-inline: auto;
   }
   .cards {
     grid-template-columns: repeat(2, 1fr);
@@ -791,7 +984,7 @@ a {
     flex-direction: column;
     align-items: stretch;
   }
-  .nav__actions .theme-toggle {
+  .nav__actions .nav-pill {
     padding: 0.7rem 0.9rem;
   }
 
@@ -832,8 +1025,14 @@ a {
     transition: none;
   }
   .nav__menu,
-  .nav__burger-line {
+  .nav__burger-line,
+  .btn,
+  .nav-pill,
+  .copybox__btn {
     transition: none;
+  }
+  .hero__art-float {
+    animation: none;
   }
   /* Marquee falls back to the static wrapped pill row */
   .stack-marquee {

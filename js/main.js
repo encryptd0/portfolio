@@ -1,6 +1,6 @@
 /* =========================================================
    Riekus Grobler — Portfolio
-   Vanilla JS: reveal-on-scroll, theme toggle, year stamp
+   Vanilla JS: reveal-on-scroll, mobile nav, year stamp
    ========================================================= */
 (function () {
   "use strict";
@@ -100,44 +100,6 @@
   }
   renderProjects();
 
-  /* ---------- Theme toggle (persisted) ---------- */
-  var STORAGE_KEY = "rg-theme";
-  var root = document.documentElement;
-  var toggle = document.getElementById("themeToggle");
-  var label = document.getElementById("themeLabel");
-  var meta = document.querySelector('meta[name="theme-color"]');
-
-  var THEMES = {
-    light: { next: "dark", color: "#ffffff", label: "Dark" },
-    dark: { next: "light", color: "#0a0a0a", label: "Light" }
-  };
-
-  function applyTheme(theme) {
-    if (!THEMES[theme]) theme = "light";
-    root.setAttribute("data-theme", theme);
-    // Label shows the theme you'll switch TO.
-    if (label) label.textContent = THEMES[theme].label;
-    if (meta) meta.setAttribute("content", THEMES[theme].color);
-  }
-
-  // Respect saved choice, else follow the OS colour scheme.
-  var saved = null;
-  try { saved = localStorage.getItem(STORAGE_KEY); } catch (e) { }
-  if (saved) {
-    applyTheme(saved);
-  } else if (window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches) {
-    applyTheme("dark");
-  }
-
-  if (toggle) {
-    toggle.addEventListener("click", function () {
-      var current = root.getAttribute("data-theme") || "light";
-      var next = THEMES[current] ? THEMES[current].next : "dark";
-      applyTheme(next);
-      try { localStorage.setItem(STORAGE_KEY, next); } catch (e) { }
-    });
-  }
-
   /* ---------- Mobile nav (hamburger) ---------- */
   var nav = document.querySelector(".nav");
   var navToggle = document.getElementById("navToggle");
@@ -232,7 +194,7 @@
         if (!entry.isIntersecting) return;
         var id = "#" + entry.target.id;
         navLinks.forEach(function (a) {
-          a.style.color = a.getAttribute("href") === id ? "var(--ink)" : "";
+          a.style.color = a.getAttribute("href") === id ? "var(--accent)" : "";
         });
       });
     }, { rootMargin: "-40% 0px -55% 0px" });

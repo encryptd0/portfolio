@@ -9,7 +9,7 @@ the root with any static file server.
 ```
 ├── index.html      Portfolio landing page
 ├── css/style.css   Portfolio styles
-├── js/main.js      Portfolio behaviour (projects list, theme, reveal, copy email)
+├── js/main.js      Portfolio behaviour (projects list, reveal, copy email)
 ├── dsa/            DSA Roadmap sub-site
 │   ├── index.html      Roadmap home
 │   ├── topic.html      One topic (rendered from ?id=<slug> by js/topic.js)
@@ -21,5 +21,5 @@ the root with any static file server.
 └── docs/           Notes (about-me copy, theme design)
 ```
 
-The two sites share the `rg-theme` localStorage key so light/dark mode carries
-across; DSA progress is stored in the browser only.
+Both sites use a fixed Catppuccin Mocha theme (see `docs/theme.md`); DSA
+progress is stored in the browser only.

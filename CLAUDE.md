@@ -17,23 +17,15 @@ python3 -m http.server 8123
 
 To visually verify changes, headless screenshots work with the installed Brave:
 `brave-browser --headless --disable-gpu --window-size=390,700 --screenshot=out.png <url>`
-(chromium/firefox/ffmpeg/gifsicle are NOT installed). Headless defaults to dark theme via `prefers-color-scheme`.
+(chromium/firefox/ffmpeg/gifsicle are NOT installed).
 
 ## Design system — read `docs/theme.md` before styling anything
 
-`docs/theme.md` is the authoritative spec ("Monochrome Minimal") and both sites follow it strictly: black/white/grey only, Inter as the only typeface, hairline `--line` dividers instead of boxes/shadows, pill-shaped controls, exactly one glass (`backdrop-filter`) element per page — the sticky nav, and `.reveal` fade-in-on-scroll as the signature motion. Every colour must reference the tokens (`--bg`, `--fg`, `--muted`, `--line`, `--glass`) defined for both `[data-theme]` values; never hardcode a hex. Every animation needs a `prefers-reduced-motion` fallback (each stylesheet has one consolidated block for this).
-
-## Theming (shared across both sites)
-
-Light/dark is stored under the localStorage key **`rg-theme`**, shared by both sites so the choice follows the user. Three cooperating pieces:
-
-1. An inline `<head>` script in **every** HTML file sets `data-theme` before first paint (saved value, else `prefers-color-scheme`).
-2. `js/main.js` (portfolio) and `dsa/js/theme.js` (DSA) wire the toggle button, sync `<meta name="theme-color">`, and persist the choice.
-3. Toggle labels show the mode you'd switch TO ("Dark" while light).
+`docs/theme.md` is the authoritative spec ("Catppuccin Mocha", catppuccin.com-style) and **both sites** follow it: a single fixed dark theme (no light mode, no theme toggle), Inter as the only typeface, exactly one glass (`backdrop-filter`) element per page — the sticky nav, and `.reveal` fade-in-on-scroll as the signature motion. Every colour must reference a token on `:root`; never hardcode a hex. Both stylesheets define the full 14-hue palette and use it the way catppuccin.com does: 120° gradient-text headings with per-block `--g1`/`--g2` hue pairs, borderless gradient pill buttons (`--crust` text, hover slides `background-position`), `--mantle` cards/nodes that each own a hue (`--c`), a soft peach→mauve `body::before` tint over the top of every page, and an 8px `--rainbow` accent bar flush above the `--mantle` footer. On the DSA site green/yellow/red additionally carry semantic meaning (difficulty badges). Every animation needs a `prefers-reduced-motion` fallback (each stylesheet has one consolidated block for this).
 
 ## Architecture notes
 
-- **DSA pages are shells rendered client-side.** `dsa/js/data.js` holds all topic/problem data; `home.js` renders the roadmap graph and topic list on `index.html`; `topic.js` renders `topic.html` from the `?id=<slug>` query param (unknown ids render an inline 404 state). Solved-problem state lives in localStorage via `progress.js`. Every DSA page loads `theme.js` + `progress.js` before its page script.
+- **DSA pages are shells rendered client-side.** `dsa/js/data.js` holds all topic/problem data; `home.js` renders the roadmap graph and topic list on `index.html`; `topic.js` renders `topic.html` from the `?id=<slug>` query param (unknown ids render an inline 404 state). Solved-problem state lives in localStorage via `progress.js`. Every DSA page loads `theme.js` (mobile nav + reveal-on-scroll chrome) + `progress.js` before its page script.
 - **The DSA header/nav is duplicated in all five HTML files** (`index`, `topic`, `about`, `404`, `gone`) — a nav change must be applied to each one.
 - **Portfolio projects are data, not markup**: edit the `PROJECTS` array at the top of `js/main.js`; cards render into `#projects-grid`.
 - **Mobile nav (both sites)**: desktop keeps the nav row via `display: contents` on the menu wrapper; ≤620px shows a hamburger that toggles a dropdown (class `is-open` on the header, wired in `js/main.js` / `dsa/js/theme.js`). The stack marquee in the hero is cloned/measured by `js/main.js` to stay seamless at any viewport width.

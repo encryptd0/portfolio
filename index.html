@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" data-theme="light">
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -8,34 +8,21 @@
       content="Riekus Grobler — full-stack software developer in Johannesburg. Node.js, Linux, homelab, security-minded. Minimalist, perfectionist, builder."
     />
     <meta name="author" content="Riekus Grobler" />
-    <meta name="theme-color" content="#ffffff" />
+    <meta name="theme-color" content="#1e1e2e" />
 
     <title>Riekus Grobler — Full-Stack Developer</title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
       rel="stylesheet"
     />
 
     <link rel="stylesheet" href="css/style.css" />
-    <script>
-      /* Set the theme before first paint to avoid a flash of the wrong mode.
-         "rg-theme" is shared with the DSA Roadmap project. */
-      (function () {
-        "use strict";
-        var theme;
-        try { theme = localStorage.getItem("rg-theme"); } catch (e) {}
-        if (theme !== "light" && theme !== "dark") {
-          theme = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
-        }
-        document.documentElement.setAttribute("data-theme", theme);
-      })();
-    </script>
     <link
       rel="icon"
-      href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' fill='%23000'/><text x='50' y='70' font-size='62' font-family='Inter,sans-serif' font-weight='700' fill='%23fff' text-anchor='middle'>R</text></svg>"
+      href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><defs><linearGradient id='g' x1='0' y1='0' x2='1' y2='1'><stop offset='0' stop-color='%23fab387'/><stop offset='1' stop-color='%23cba6f7'/></linearGradient></defs><rect width='100' height='100' rx='22' fill='%231e1e2e'/><text x='50' y='70' font-size='62' font-family='Inter,sans-serif' font-weight='800' fill='url(%23g)' text-anchor='middle'>R</text></svg>"
     />
   </head>
 
@@ -68,16 +55,7 @@
         </div>
 
         <div class="nav__actions">
-          <a class="theme-toggle" href="dsa/index.html">DSA-learning platform</a>
-
-          <button
-            class="theme-toggle"
-            id="themeToggle"
-            type="button"
-            aria-label="Toggle light and dark"
-          >
-            <span id="themeLabel">Dark</span>
-          </button>
+          <a class="nav-pill" href="dsa/index.html">DSA-learning platform</a>
         </div>
       </nav>
     </header>
@@ -85,25 +63,41 @@
     <main>
       <!-- ============ HERO ============ -->
       <section class="hero" id="top">
-        <p class="hero__eyebrow reveal">
-          Johannesburg, South Africa — available for freelance
-        </p>
+        <div class="hero__grid">
+          <div class="hero__content">
+            <p class="hero__eyebrow reveal">
+              Johannesburg, South Africa — available for freelance
+            </p>
 
-        <h1 class="hero__title reveal" style="--d: 1">
-          Software developer<br />who builds it right.
-        </h1>
+            <h1 class="hero__title reveal" style="--d: 1">
+              Software developer<br />who builds it right.
+            </h1>
 
-        <div class="hero__meta">
-          <p class="hero__lead reveal" style="--d: 2">
-            Full-stack developer &amp; software-engineering student with a
-            5-year infrastructure background. I build real projects for real
-            clients — minimal, secure, and done properly.
-          </p>
-          <div class="hero__cta reveal" style="--d: 3">
-            <a href="#projects" class="btn btn--solid">View the work</a>
-            <a href="mailto:riekusgroblerps4@gmail.com" class="btn btn--ghost"
-              >Get in touch</a
-            >
+            <p class="hero__lead reveal" style="--d: 2">
+              Full-stack developer &amp; software-engineering student with a
+              5-year infrastructure background. I build real projects for real
+              clients — minimal, secure, and done properly.
+            </p>
+            <div class="hero__cta reveal" style="--d: 3">
+              <a href="#projects" class="btn btn--peach">View the work</a>
+              <a href="mailto:riekusgroblerps4@gmail.com" class="btn btn--teal"
+                >Get in touch</a
+              >
+            </div>
+          </div>
+
+          <!-- Portrait in the catppuccin.com hero style: the black line art
+               sits on a pastel gradient disc (mix-blend-mode: multiply makes
+               the image's white background disappear). -->
+          <div class="hero__art reveal" style="--d: 2">
+            <div class="hero__portrait">
+              <img
+                src="img/pfp.png"
+                alt="Cartoon portrait of Riekus Grobler"
+                width="1024"
+                height="1024"
+              />
+            </div>
           </div>
         </div>
 
@@ -224,7 +218,7 @@
 
         <div class="projects__more reveal">
           <a
-            class="btn btn--solid"
+            class="btn btn--blue"
             id="githubBtn"
             href="https://github.com/rickydell"
             target="_blank"
@@ -430,12 +424,16 @@
     </main>
 
     <!-- ============ FOOTER ============ -->
+    <!-- Rainbow accent bar — all 14 Mocha hues, à la catppuccin.com -->
+    <div class="accent-bar" aria-hidden="true"></div>
     <footer class="footer">
-      <span>© <span id="year"></span> Riekus Grobler</span>
-      <span class="footer__built"
-        >Built with plain HTML, CSS &amp; JS — no framework.</span
-      >
-      <a href="#top" class="footer__top">Back to top ↑</a>
+      <div class="footer__inner">
+        <span>© <span id="year"></span> Riekus Grobler</span>
+        <span class="footer__built"
+          >Built with plain HTML, CSS &amp; JS — no framework.</span
+        >
+        <a href="#top" class="footer__top">Back to top ↑</a>
+      </div>
     </footer>
 
     <script src="js/main.js"></script>
