@@ -30,22 +30,29 @@
       meta: "Freelance · live"
     },
     {
-      title: "Personal Blog App",
-      url: "mailto:riekusgroblerps4@gmail.com",
+      title: "More on their way...",
+      url: "https://github.com/encryptd0",
       description:
-        "Node.js, Express, EJS and MongoDB — built to get backend " +
-        "architecture and deployment right, end to end.",
-      meta: "Node · Mongo"
+        "Click link for my GitHub :)",
+      meta: "Tinkering · live"
     },
-    {
-      title: "Forgeline",
-      url: "mailto:riekusgroblerps4@gmail.com",
-      description:
-        "A product of my own, actively in progress. Shipping my own things, " +
-        "not just learning in isolation.",
-      meta: "SaaS · in progress",
-      wip: true
-    }
+    // {
+    //   title: "Personal Blog App",
+    //   url: "mailto:riekusgroblerps4@gmail.com",
+    //   description:
+    //     "Node.js, Express, EJS and MongoDB — built to get backend " +
+    //     "architecture and deployment right, end to end.",
+    //   meta: "Node · Mongo"
+    // },
+    // {
+    //   title: "Forgeline",
+    //   url: "mailto:riekusgroblerps4@gmail.com",
+    //   description:
+    //     "A product of my own, actively in progress. Shipping my own things, " +
+    //     "not just learning in isolation.",
+    //   meta: "SaaS · in progress",
+    //   wip: true
+    // }
   ];
 
   const rail = document.querySelector(".rail");
