@@ -436,6 +436,7 @@
    ========================================================= */
 .section--contact {
   padding-bottom: var(--sp-6);
+  text-align: center;
 }
 
 .contact__title {
@@ -444,6 +445,7 @@
   line-height: 0.9;
   letter-spacing: -0.035em;
   max-width: 10ch;
+  margin-inline: auto;
 }
 
 /* .contact__grid {
@@ -458,6 +460,7 @@
   color: var(--fg-dim);
   max-width: 42ch;
   margin-top: var(--sp-3);
+  margin-inline: auto;
 }
 
 /* Copy-to-clipboard: a hairline row, not a pill */
@@ -465,8 +468,10 @@
   display: flex;
   align-items: stretch;
   border-bottom: 1px solid var(--line-strong);
+  width: fit-content;
   max-width: 32rem;
   margin-top: var(--sp-4);
+  margin-inline: auto;
   transition: border-color var(--dur-2) var(--ease);
 }
 
