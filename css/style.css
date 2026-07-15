@@ -160,13 +160,14 @@
   transform: scale(1.09);
 }
 
-/* The disc irises open on load */
+/* The disc irises open on load. The fill mode holds the end state, so the
+   radius must clear the disc (50%) plus the mobile hairline ring outside it. */
 @keyframes mask-open {
   from {
     clip-path: circle(0% at 50% 50%);
   }
   to {
-    clip-path: circle(56% at 50% 50%);
+    clip-path: circle(65% at 50% 50%);
   }
 }
 
@@ -575,6 +576,8 @@
     order: -1;
     width: clamp(8rem, 34vw, 12rem);
     margin-inline: 0 auto; /* the disc leads the mobile composition, offset left */
+    outline: 1px solid var(--green-mid);
+    outline-offset: 0.55rem;
   }
   /* .hero__facts {
     margin-top: var(--sp-2);
@@ -585,9 +588,11 @@
   .hero__geo-bar {
     display: none;
   }
+  /* The bleeding ring is concentric with the portrait only in the two-column
+     composition. Stacked, it would cut across the headline, so the ring
+     becomes a hairline around the disc itself. */
   .hero__geo-ring {
-    right: -40vw;
-    width: 34rem;
+    display: none;
   }
 
   .caps {
