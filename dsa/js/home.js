@@ -104,7 +104,7 @@
     link.textContent = c.title;
 
     var count = document.createElement('span');
-    count.className = 'topic-list__count pill';
+    count.className = 'topic-list__count';
     count.setAttribute('data-row-count', c.id);
     count.textContent = '0/' + c.problems.length;
 
@@ -194,6 +194,4 @@
   refreshProgress();
   Progress.onChange(refreshProgress);
 
-  /* Fade in the freshly rendered blocks. */
-  if (window.Reveal) window.Reveal.scan(document);
 })();

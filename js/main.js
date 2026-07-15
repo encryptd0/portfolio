@@ -1,8 +1,8 @@
 /* =========================================================
    Riekus Grobler — Portfolio
-   Page-specific JS: project cards, stack marquee, scroll spy,
-   copy-to-clipboard, year stamp. The mobile nav and the reveal
-   are shared with the DSA site — see js/site.js, loaded first.
+   Page-specific JS: the work grid, the nav scroll-spy, copy-to-
+   clipboard, and the year stamp. The mobile nav is shared with the
+   DSA site — see js/site.js, loaded first.
    ========================================================= */
 (function () {
   "use strict";
@@ -12,154 +12,129 @@
   if (yearEl) yearEl.textContent = new Date().getFullYear();
 
   /* =========================================================
-     PROJECTS  —  ★ EDIT THIS LIST TO ADD / REMOVE PROJECTS ★
+     WORK  —  ★ EDIT THIS LIST TO ADD / REMOVE PROJECTS ★
      Copy a { } block, change the fields, done.
        title       : project name (required)
        url         : link to open (website, repo, or mailto:)
        description : one or two sentences
-       tags        : array of short labels
-       wip         : true  -> shows a "WIP" badge (optional)
+       meta        : the mono line at the foot of the column
+       wip         : true -> shows a "WIP" outline (optional)
      ========================================================= */
-  let PROJECTS = [
+  var PROJECTS = [
     {
       title: "CT4 Construction",
       url: "https://ct4construction.co.za",
-      description: "Freelance web development and SEO for a construction " +
-        "company — a real client project, live in production.",
-      tags: ["Freelance", "Web Dev", "SEO"]
+      description:
+        "Web development and SEO for a construction company. A real client " +
+        "project, live in production.",
+      meta: "Freelance · live"
     },
     {
       title: "Personal Blog App",
       url: "mailto:riekusgroblerps4@gmail.com",
-      description: "A Node.js / Express / EJS / MongoDB blog used to explore " +
-        "backend architecture and deployment properly, end-to-end.",
-      tags: ["Node.js", "Express", "MongoDB"]
+      description:
+        "Node.js, Express, EJS and MongoDB — built to get backend " +
+        "architecture and deployment right, end to end.",
+      meta: "Node · Mongo"
     },
     {
       title: "Forgeline",
       url: "mailto:riekusgroblerps4@gmail.com",
-      description: "A personal product I'm actively building — part of " +
-        "shipping my own things, not just learning in isolation.",
-      tags: ["SaaS", "In progress"],
+      description:
+        "A product of my own, actively in progress. Shipping my own things, " +
+        "not just learning in isolation.",
+      meta: "SaaS · in progress",
       wip: true
     }
   ];
 
-  function renderProjects() {
-    const grid = document.getElementById("projects-grid");
+  function renderWork() {
+    var grid = document.getElementById("work-grid");
     if (!grid) return;
 
     PROJECTS.forEach(function (p, i) {
-      var card = document.createElement("a");
-      card.className = "project reveal";
-      card.href = p.url || "#";
-      card.style.setProperty("--d", i % 3); // stagger the fade-in per row
+      var item = document.createElement("a");
+      item.className = "work__item";
+      item.href = p.url || "#";
       if (/^https?:/i.test(p.url || "")) {
-        card.target = "_blank";
-        card.rel = "noopener noreferrer";
+        item.target = "_blank";
+        item.rel = "noopener noreferrer";
       }
 
-      // Title row
+      /* Rows reveal in sequence as the section arrives. site.js observes
+         [data-reveal] on DOMContentLoaded, which is after this runs. */
+      item.setAttribute("data-reveal", "");
+      item.style.setProperty("--reveal-delay", i * 0.09 + "s");
+
       var top = document.createElement("div");
-      top.className = "project__top";
+      top.className = "work__top";
 
-      var h3 = document.createElement("h3");
-      h3.textContent = p.title;
-      if (p.wip) {
-        var wip = document.createElement("span");
-        wip.className = "project__wip";
-        wip.textContent = "WIP";
-        h3.appendChild(document.createTextNode(" "));
-        h3.appendChild(wip);
-      }
+      var index = document.createElement("span");
+      index.className = "work__index";
+      index.textContent = String(i + 1).padStart(2, "0");
 
       var arrow = document.createElement("span");
-      arrow.className = "project__arrow";
+      arrow.className = "work__arrow";
       arrow.setAttribute("aria-hidden", "true");
       arrow.textContent = "↗";
 
-      top.appendChild(h3);
+      top.appendChild(index);
       top.appendChild(arrow);
 
-      // Description
+      var title = document.createElement("span");
+      title.className = "work__title";
+      title.textContent = p.title;
+      if (p.wip) {
+        var wip = document.createElement("span");
+        wip.className = "work__wip label";
+        wip.textContent = "WIP";
+        title.appendChild(wip);
+      }
+
       var desc = document.createElement("p");
+      desc.className = "work__desc";
       desc.textContent = p.description || "";
 
-      // Tags
-      var tags = document.createElement("div");
-      tags.className = "project__tags";
-      (p.tags || []).forEach(function (t) {
-        var span = document.createElement("span");
-        span.textContent = t;
-        tags.appendChild(span);
-      });
+      var meta = document.createElement("span");
+      meta.className = "work__meta";
+      meta.textContent = p.meta || "";
 
-      card.appendChild(top);
-      card.appendChild(desc);
-      card.appendChild(tags);
-      grid.appendChild(card);
-    });
-
-    if (window.Reveal) window.Reveal.scan(grid);
-  }
-  renderProjects();
-
-  /* ---------- Stack marquee ---------- */
-  // The CSS loop slides the track by half its width, so the first half must
-  // be at least as wide as the viewport. Clone the source row until it is
-  // (the static duplicate in the HTML only covers the no-JS case).
-  var marqueeTrack = document.querySelector(".stack-marquee__track");
-
-  function buildMarquee() {
-    var row = marqueeTrack.firstElementChild;
-    while (row.nextElementSibling) marqueeTrack.removeChild(row.nextElementSibling);
-
-    var rowWidth = row.getBoundingClientRect().width;
-    if (!rowWidth) return;
-
-    var perHalf = Math.max(2, Math.ceil(window.innerWidth / rowWidth) + 1);
-    for (var k = 0; k < perHalf * 2 - 1; k++) {
-      var clone = row.cloneNode(true);
-      clone.setAttribute("aria-hidden", "true");
-      marqueeTrack.appendChild(clone);
-    }
-    // Fixed speed regardless of how wide the loop ended up (~55 px/s).
-    marqueeTrack.style.animationDuration = Math.round(perHalf * rowWidth / 55) + "s";
-  }
-
-  if (marqueeTrack && marqueeTrack.firstElementChild) {
-    buildMarquee();
-    // Row widths shift when the Inter webfont swaps in; rebuild then.
-    if (document.fonts && document.fonts.ready && document.fonts.ready.then) {
-      document.fonts.ready.then(buildMarquee);
-    }
-    var marqueeResizeTimer;
-    window.addEventListener("resize", function () {
-      clearTimeout(marqueeResizeTimer);
-      marqueeResizeTimer = setTimeout(buildMarquee, 200);
+      item.appendChild(top);
+      item.appendChild(title);
+      item.appendChild(desc);
+      item.appendChild(meta);
+      grid.appendChild(item);
     });
   }
+  renderWork();
 
   /* ---------- Active nav link on scroll ---------- */
   var navLinks = Array.prototype.slice.call(
     document.querySelectorAll(".nav__links a")
   );
   var sections = navLinks
-    .map(function (a) { return document.querySelector(a.getAttribute("href")); })
+    .map(function (a) {
+      return document.querySelector(a.getAttribute("href"));
+    })
     .filter(Boolean);
 
   if ("IntersectionObserver" in window && sections.length) {
-    var spy = new IntersectionObserver(function (entries) {
-      entries.forEach(function (entry) {
-        if (!entry.isIntersecting) return;
-        var id = "#" + entry.target.id;
-        navLinks.forEach(function (a) {
-          a.style.color = a.getAttribute("href") === id ? "var(--accent)" : "";
+    var spy = new IntersectionObserver(
+      function (entries) {
+        entries.forEach(function (entry) {
+          if (!entry.isIntersecting) return;
+          var id = "#" + entry.target.id;
+          navLinks.forEach(function (a) {
+            a.classList.toggle("is-active", a.getAttribute("href") === id);
+          });
         });
-      });
-    }, { rootMargin: "-40% 0px -55% 0px" });
+      },
+      { rootMargin: "-40% 0px -55% 0px" }
+    );
 
-    sections.forEach(function (s) { spy.observe(s); });
+    sections.forEach(function (s) {
+      spy.observe(s);
+    });
   }
 
   /* ---------- Copy email to clipboard ---------- */
@@ -184,24 +159,28 @@
         var ok = document.execCommand("copy");
         document.body.removeChild(ta);
         ok ? resolve() : reject();
-      } catch (e) { reject(e); }
+      } catch (e) {
+        reject(e);
+      }
     });
   }
 
   if (copyBtn) {
     copyBtn.addEventListener("click", function () {
       var email = copyBtn.getAttribute("data-email") || "";
-      copyText(email).then(function () {
-        copyBtn.classList.add("is-copied");
-        if (copyLabel) copyLabel.textContent = "Copied";
-        clearTimeout(copyResetTimer);
-        copyResetTimer = setTimeout(function () {
-          copyBtn.classList.remove("is-copied");
-          if (copyLabel) copyLabel.textContent = "Copy";
-        }, 2000);
-      }).catch(function () {
-        if (copyLabel) copyLabel.textContent = "Press ⌘/Ctrl+C";
-      });
+      copyText(email)
+        .then(function () {
+          copyBtn.classList.add("is-copied");
+          if (copyLabel) copyLabel.textContent = "Copied";
+          clearTimeout(copyResetTimer);
+          copyResetTimer = setTimeout(function () {
+            copyBtn.classList.remove("is-copied");
+            if (copyLabel) copyLabel.textContent = "Copy";
+          }, 2000);
+        })
+        .catch(function () {
+          if (copyLabel) copyLabel.textContent = "Press ⌘/Ctrl+C";
+        });
     });
   }
 })();

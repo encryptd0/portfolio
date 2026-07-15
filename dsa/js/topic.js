@@ -40,16 +40,15 @@
   /* ---- Unknown or missing id: not-found state, same content as 404.html ---- */
   if (!category) {
     document.title = 'Topic not found — DSA Roadmap';
-    var missing = el('div', 'notfound reveal');
+    var missing = el('div', 'notfound');
     missing.appendChild(el('p', 'notfound__code', '404'));
-    missing.appendChild(el('h1', 'notfound__title grad-text', 'Topic not found'));
+    missing.appendChild(el('h1', 'notfound__title', 'Topic not found'));
     missing.appendChild(el('p', 'muted',
       'There is no topic at this address. Head back to the roadmap to pick one.'));
-    var homeLink = el('a', 'btn btn--peach', 'Back to the roadmap');
+    var homeLink = el('a', 'btn', 'Back to the roadmap');
     homeLink.href = 'index.html';
     missing.appendChild(homeLink);
     rootEl.appendChild(missing);
-    if (window.Reveal) window.Reveal.scan(rootEl);
     return;
   }
 
@@ -66,14 +65,14 @@
   back.href = 'index.html';
   rootEl.appendChild(back);
 
-  var header = el('header', 'topic__header reveal');
-  header.appendChild(el('p', 'eyebrow',
+  var header = el('header', 'topic__header');
+  header.appendChild(el('p', 'label',
     'Topic ' + String(position).padStart(2, '0') + ' of ' + categories.length));
-  header.appendChild(el('h1', 'topic__title grad-text', category.title));
+  header.appendChild(el('h1', 'topic__title', category.title));
   header.appendChild(el('p', 'topic__blurb muted', category.blurb));
 
   var meta = el('p', 'topic__meta');
-  var solvedPill = el('span', 'pill');
+  var solvedPill = el('span', 'is-count');
   var solvedCount = el('span', '', '0');
   solvedCount.setAttribute('data-topic-count', '');
   solvedPill.appendChild(solvedCount);
@@ -81,12 +80,12 @@
   meta.appendChild(solvedPill);
   var mix = freeCount + ' free' +
     (premiumCount > 0 ? ' · ' + premiumCount + ' premium' : '');
-  meta.appendChild(el('span', 'topic__mix muted', mix));
+  meta.appendChild(el('span', '', mix));
   header.appendChild(meta);
   rootEl.appendChild(header);
 
   /* ---- Controls ---- */
-  var controls = el('div', 'controls reveal');
+  var controls = el('div', 'controls');
 
   var search = document.createElement('input');
   search.type = 'search';
@@ -120,7 +119,7 @@
   rootEl.appendChild(controls);
 
   /* ---- Problem list ---- */
-  var list = el('ol', 'problem-list reveal');
+  var list = el('ol', 'problem-list');
   list.setAttribute('data-problem-list', '');
 
   category.problems.forEach(function (problem) {
@@ -245,5 +244,4 @@
 
   applyFilters(); /* premium rows are hidden by default */
 
-  if (window.Reveal) window.Reveal.scan(rootEl);
 })();
