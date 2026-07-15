@@ -48,6 +48,37 @@
     }
   ];
 
+  const rail = document.querySelector(".rail");
+  const track = document.querySelector(".rail__track");
+  const originalGroup = document.querySelector(".rail__group");
+
+  function buildMarquee() {
+    const clones = track.querySelectorAll(
+      ".rail__group:not(:first-child)"
+    );
+
+    clones.forEach((clone) => clone.remove());
+
+    const groupWidth = originalGroup.offsetWidth;
+
+    track.style.setProperty(
+      "--marquee-distance",
+      groupWidth
+    );
+
+    while (track.scrollWidth < rail.offsetWidth + groupWidth) {
+      const clone = originalGroup.cloneNode(true);
+
+      clone.setAttribute("aria-hidden", "true");
+
+      track.appendChild(clone);
+    }
+  }
+
+  buildMarquee();
+
+  window.addEventListener("resize", buildMarquee);
+
   function renderWork() {
     var grid = document.getElementById("work-grid");
     if (!grid) return;

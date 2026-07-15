@@ -634,39 +634,58 @@ p {
 /* =========================================================
    10. Rail — the full-bleed band, used as punctuation
    ========================================================= */
+
 .rail {
   width: 100%;
+  overflow: hidden;
   background: var(--green);
   color: var(--cream);
-  --fg: var(--cream);
-  --fg-mute: rgba(246, 244, 238, 0.5);
-  --line: rgba(246, 244, 238, 0.2);
   border-block: 1px solid var(--green-mid);
 }
 
-.rail__inner {
+.rail__track {
+  display: flex;
+  width: max-content;
+
+  animation: marquee 25s linear infinite;
+}
+
+.rail__group {
   display: flex;
   align-items: center;
-  gap: 0.8rem 2rem;
-  flex-wrap: wrap;
-  padding: var(--sp-3) 0;
+  flex-shrink: 0;
+
+  gap: 1.5rem;
+  padding: var(--sp-3) 1.5rem  var(--sp-3) 0;
 }
 
-.rail__label {
-  font-size: 0.6rem;
-  font-weight: 500;
-  text-transform: uppercase;
-  letter-spacing: 0.22em;
-  color: rgba(246, 244, 238, 0.5);
-  white-space: nowrap;
-  margin-right: var(--sp-2);
-}
-
-.rail__item {
+.rail__group span {
   font-family: var(--font-display);
   font-size: 1.05rem;
+  font-weight: 500;
+
   color: var(--cream);
   white-space: nowrap;
+}
+
+.rail__group i {
+  font-style: normal;
+  font-size: 0.65rem;
+
+  color: rgba(246, 244, 238, 0.45);
+  flex-shrink: 0;
+}
+
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(
+      calc(var(--marquee-distance) * -0.7px)
+    );
+  }
 }
 
 /* =========================================================

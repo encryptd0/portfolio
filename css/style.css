@@ -75,8 +75,8 @@
   display: inline-block;
   overflow: hidden;
   vertical-align: bottom;
-  padding: 0.14em 0.04em 0.2em;
-  margin: -0.14em -0.04em -0.2em;
+  padding: 0.14em 0.04em 0.05em;
+  margin: -0.14em -0.04em -0.05em;
 }
 
 .hero__title--words .word > span {
@@ -446,13 +446,13 @@
   max-width: 10ch;
 }
 
-.contact__grid {
+/* .contact__grid {
   display: grid;
   grid-template-columns: minmax(0, 1.4fr) minmax(0, 0.8fr);
   gap: clamp(2rem, 6vw, 6rem);
   align-items: end;
   margin-top: var(--sp-4);
-}
+} */
 
 .contact__note {
   color: var(--fg-dim);
@@ -571,9 +571,9 @@
     width: clamp(8rem, 34vw, 12rem);
     margin-inline: 0 auto; /* the disc leads the mobile composition, offset left */
   }
-  .hero__facts {
+  /* .hero__facts {
     margin-top: var(--sp-2);
-  }
+  } */
   .hero__title {
     max-width: 100%;
   }
