@@ -20,40 +20,23 @@
        meta        : the mono line at the foot of the column
        wip         : true -> shows a "WIP" outline (optional)
      ========================================================= */
-  var PROJECTS = [
-    {
-      title: "CT4 Construction",
-      url: "https://ct4construction.co.za",
-      description:
-        "Web development and SEO for a construction company. A real client " +
-        "project, live in production.",
-      meta: "Freelance · live"
-    },
-    {
-      title: "More on their way...",
-      url: "https://github.com/encryptd0",
-      description:
-        "Click link for my GitHub :)",
-      meta: "Tinkering · live"
-    },
-    // {
-    //   title: "Personal Blog App",
-    //   url: "mailto:riekusgroblerps4@gmail.com",
-    //   description:
-    //     "Node.js, Express, EJS and MongoDB — built to get backend " +
-    //     "architecture and deployment right, end to end.",
-    //   meta: "Node · Mongo"
-    // },
-    // {
-    //   title: "Forgeline",
-    //   url: "mailto:riekusgroblerps4@gmail.com",
-    //   description:
-    //     "A product of my own, actively in progress. Shipping my own things, " +
-    //     "not just learning in isolation.",
-    //   meta: "SaaS · in progress",
-    //   wip: true
-    // }
-  ];
+  // var PROJECTS = [
+  //   {
+  //     title: "CT4 Construction",
+  //     url: "https://ct4construction.co.za",
+  //     description:
+  //       "Web development and SEO for a construction company. A real client " +
+  //       "project, live in production.",
+  //     meta: "Freelance · live"
+  //   },
+  //   {
+  //     title: "More on their way...",
+  //     url: "https://github.com/encryptd0",
+  //     description:
+  //       "Click link for my GitHub :)",
+  //     meta: "Tinkering · live"
+  //   },
+  // ];
 
   const rail = document.querySelector(".rail");
   const track = document.querySelector(".rail__track");
