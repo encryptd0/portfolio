@@ -1,145 +1,11 @@
 /* =========================================================
    Riekus Grobler — Portfolio
-   Theme: CATPPUCCIN MOCHA · catppuccin.com-style
-          gradient-text headings, gradient pill buttons,
-          rainbow accent bar, full 14-hue palette
-   Type:  Inter (single typeface)
-   Motion: fade-in on scroll
+   Site-specific components only. The design system (tokens, nav,
+   buttons, sections, hero, footer, reveal) lives in css/base.css,
+   which every page of both sites loads first.
    ========================================================= */
 
-/* ---------- Tokens (Catppuccin Mocha — full palette) ---------- */
-:root {
-  --rosewater: #f5e0dc;
-  --flamingo: #f2cdcd;
-  --pink: #f5c2e7;
-  --mauve: #cba6f7;
-  --red: #f38ba8;
-  --maroon: #eba0ac;
-  --peach: #fab387;
-  --yellow: #f9e2af;
-  --green: #a6e3a1;
-  --teal: #94e2d5;
-  --sky: #89dceb;
-  --sapphire: #74c7ec;
-  --blue: #89b4fa;
-  --lavender: #b4befe;
-  --text: #cdd6f4;
-  --subtext1: #bac2de;
-  --subtext0: #a6adc8;
-  --overlay1: #7f849c;
-  --surface2: #585b70;
-  --surface1: #45475a;
-  --surface0: #313244;
-  --base: #1e1e2e;
-  --mantle: #181825;
-  --crust: #11111b;
-
-  /* Semantic aliases used by components */
-  --bg: var(--base);
-  --fg: var(--text);
-  --muted: var(--subtext0);
-  --line: var(--surface0);
-  --glass: rgba(30, 30, 46, 0.7);
-  --accent: var(--mauve);
-
-  /* The signature 14-hue rainbow (accent bar) */
-  --rainbow: linear-gradient(
-    90deg,
-    var(--rosewater),
-    var(--flamingo),
-    var(--pink),
-    var(--mauve),
-    var(--red),
-    var(--maroon),
-    var(--peach),
-    var(--yellow),
-    var(--green),
-    var(--teal),
-    var(--sky),
-    var(--sapphire),
-    var(--blue),
-    var(--lavender)
-  );
-}
-
-/* ---------- Reset ---------- */
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
-html {
-  scroll-behavior: smooth;
-  -webkit-text-size-adjust: 100%;
-}
-
-body {
-  position: relative;
-  background: var(--bg);
-  color: var(--fg);
-  font-family:
-    "Inter",
-    system-ui,
-    -apple-system,
-    sans-serif;
-  font-size: clamp(1rem, 0.96rem + 0.25vw, 1.1rem);
-  line-height: 1.65;
-  letter-spacing: -0.011em;
-  overflow-x: hidden;
-  -webkit-font-smoothing: antialiased;
-}
-
-/* Soft peach→mauve tint over the hero area, fading into base
-   (catppuccin.com does the same on its hero) */
-body::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: min(100vh, 56rem);
-  background: linear-gradient(
-    120deg,
-    color-mix(in srgb, var(--base), var(--peach) 6%),
-    color-mix(in srgb, var(--base), var(--mauve) 10%)
-  );
-  -webkit-mask-image: linear-gradient(#000 40%, transparent);
-  mask-image: linear-gradient(#000 40%, transparent);
-  pointer-events: none;
-  z-index: -1;
-}
-
-::selection {
-  background: var(--mauve);
-  color: var(--crust);
-}
-a {
-  color: inherit;
-  text-decoration: none;
-}
-
-/* ---------- Container ---------- */
-.section,
-.hero,
-.footer__inner {
-  width: min(1080px, 100% - 3rem);
-  margin-inline: auto;
-}
-
-/* ---------- Gradient text (catppuccin.com headline style) ----------
-   Components set --g1/--g2; the element clips a 120° gradient to text. */
-.hero__title,
-.section__title,
-.contact__eyebrow {
-  background-image: linear-gradient(120deg, var(--g1, var(--peach)), var(--g2, var(--mauve)));
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-}
-
-/* Per-section hue pairs — every Mocha hue gets a home */
+/* ---------- Per-section hue pairs — every Mocha hue gets a home ---------- */
 #about {
   --g1: var(--pink);
   --g2: var(--mauve);
@@ -169,148 +35,15 @@ a {
   --g2: var(--lavender);
 }
 
-/* ---------- Rainbow accent bar ---------- */
-.accent-bar {
-  height: 8px;
-  width: 100%;
-  background-image: var(--rainbow);
-}
-
-/* =========================================================
-   NAV — the single, subtle glass element
-   ========================================================= */
-.nav {
-  position: sticky;
-  top: 0;
-  z-index: 50;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 1rem;
-  width: 100%;
-  padding: 1.1rem clamp(1.5rem, 4vw, 3rem);
-  background: var(--glass);
-  backdrop-filter: saturate(140%) blur(14px);
-  /* -webkit-backdrop-filter: saturate(140%) blur(14px); */
-  border-bottom: 1px solid var(--line);
-}
-.nav__brand {
-  font-weight: 700;
-  letter-spacing: -0.02em;
-  background-image: linear-gradient(120deg, var(--peach), var(--mauve));
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-}
-
-/* On desktop the menu wrapper is invisible to layout: brand, links and
-   actions sit directly in the nav row. On mobile it becomes a dropdown. */
-.nav__menu {
-  display: contents;
-}
-.nav__actions {
-  display: flex;
-  align-items: center;
-  gap: 0.6rem;
-}
-
-.nav__links {
-  display: flex;
-  gap: 2rem;
-  font-size: 0.9rem;
-}
-.nav__links a {
-  color: var(--muted);
-  position: relative;
-  transition: color 0.2s;
-}
-.nav__links a::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  bottom: -3px;
-  width: 0;
-  height: 2px;
-  border-radius: 1px;
-  background: linear-gradient(90deg, var(--pink), var(--mauve));
-  transition: width 0.28s ease;
-}
-.nav__links a:hover {
-  color: var(--fg);
-}
-.nav__links a:hover::after {
-  width: 100%;
-}
-
-.nav-pill {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  border: none;
-  color: var(--crust);
-  background-color: var(--blue);
-  background-image: linear-gradient(120deg, var(--blue), var(--sky));
-  background-size: 150% 100%;
-  background-position: top left;
-  padding: 0.45rem 0.9rem;
-  font: inherit;
-  font-size: 0.82rem;
-  font-weight: 600;
-  border-radius: 999px;
-  cursor: pointer;
-  transition: background-position 0.35s ease-in-out;
-}
-.nav-pill:hover {
-  background-position: top right;
-}
-
-/* Hamburger — hidden on desktop, shown in the mobile media query */
-.nav__burger {
-  display: none;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 5px;
-  width: 42px;
-  height: 42px;
-  padding: 0;
-  flex: none;
-  background: transparent;
-  border: 1px solid var(--line);
-  border-radius: 999px;
-  cursor: pointer;
-  transition: border-color 0.2s;
-}
-.nav__burger:hover {
-  border-color: var(--mauve);
-}
-.nav__burger-line {
-  width: 16px;
-  height: 2px;
-  border-radius: 1px;
-  background: var(--fg);
-  transition:
-    transform 0.25s ease,
-    opacity 0.2s ease;
-}
-/* Lines fold into an X while the menu is open */
-.nav.is-open .nav__burger-line:nth-child(1) {
-  transform: translateY(7px) rotate(45deg);
-}
-.nav.is-open .nav__burger-line:nth-child(2) {
-  opacity: 0;
-}
-.nav.is-open .nav__burger-line:nth-child(3) {
-  transform: translateY(-7px) rotate(-45deg);
+/* Section lead paragraphs */
+.section > .muted {
+  margin-bottom: 1.8rem;
+  max-width: 42ch;
 }
 
 /* =========================================================
    HERO
    ========================================================= */
-.hero {
-  padding: clamp(3.5rem, 10vh, 7rem) 0 clamp(3rem, 8vh, 5rem);
-}
-
 /* Two columns like catppuccin.com's hero: copy left, illustration right */
 .hero__grid {
   display: grid;
@@ -319,39 +52,62 @@ a {
   align-items: center;
 }
 
-.hero__eyebrow {
-  font-size: 0.9rem;
-  color: var(--muted);
-  font-weight: 500;
-  margin-bottom: 1.8rem;
-}
-.hero__title {
-  font-size: clamp(2.4rem, 4.8vw, 4.4rem);
-  line-height: 1.08;
-  font-weight: 800;
-  letter-spacing: -0.04em;
-  /* --g1/--g2 default to peach→mauve — the catppuccin.com hero gradient */
-  padding-bottom: 0.08em; /* keep descenders inside the clipped box */
-}
-
-.hero__lead {
-  color: var(--subtext1);
-  max-width: 48ch;
-  font-size: 1.08rem;
-  margin-top: 1.5rem;
-}
-.hero__cta {
-  display: flex;
-  gap: 0.8rem;
-  flex-wrap: wrap;
-  margin-top: 1.9rem;
-}
-
 .hero__art svg {
   display: block;
   width: 100%;
   height: auto;
 }
+
+/* ---------- Hero portrait — a pastel disc the line art sits on ---------- */
+.hero__portrait {
+  --g1: var(white);
+  --g2: var(--mauve);
+  position: relative;
+  width: min(100%, 22rem);
+  margin-inline: auto;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  /* isolate keeps the img's multiply blending inside the disc rather than
+     letting it reach the dark page behind it */
+  isolation: isolate;
+  background-image: linear-gradient(120deg, var(--g1), var(--g2));
+  box-shadow:
+    0 0 0 1px color-mix(in srgb, var(--mauve) 35%, transparent),
+    0 1.6rem 3.5rem color-mix(in srgb, var(--crust) 55%, transparent);
+  animation: portrait-float 7s ease-in-out infinite alternate;
+}
+
+/* The soft halo bleeding out from behind the disc */
+.hero__portrait::before {
+  content: "";
+  position: absolute;
+  inset: -12%;
+  border-radius: 50%;
+  background-image: radial-gradient(
+    circle at 50% 50%,
+    color-mix(in srgb, var(--peach) 28%, transparent),
+    color-mix(in srgb, var(--mauve) 16%, transparent) 55%,
+    transparent 72%
+  );
+  z-index: -1;
+}
+
+/* multiply drops the image's white background so only the line art remains */
+.hero__portrait img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+  mix-blend-mode: multiply;
+}
+
+@keyframes portrait-float {
+  to {
+    transform: translateY(-14px);
+  }
+}
+
 /* The outlined diamonds drift gently */
 .hero__art-float {
   animation: art-float 7s ease-in-out infinite alternate;
@@ -362,43 +118,7 @@ a {
   }
 }
 
-/* ---------- Buttons — gradient pills, crust text ---------- */
-.btn {
-  display: inline-flex;
-  align-items: center;
-  padding: 0.8rem 1.5rem;
-  font-weight: 600;
-  font-size: 0.95rem;
-  border: none;
-  border-radius: 999px;
-  color: var(--crust);
-  background-color: var(--surface0);
-  background-size: 150% 100%;
-  background-position: top left;
-  transition:
-    background-position 0.35s ease-in-out,
-    transform 0.2s ease;
-}
-.btn:hover {
-  background-position: top right;
-}
-.btn--peach {
-  background-color: var(--peach);
-  background-image: linear-gradient(120deg, var(--peach), var(--red));
-}
-.btn--teal {
-  background-color: var(--teal);
-  background-image: linear-gradient(120deg, var(--teal), var(--green));
-}
-.btn--blue {
-  background-color: var(--blue);
-  background-image: linear-gradient(120deg, var(--blue), var(--sky));
-}
-.btn--mauve {
-  background-color: var(--mauve);
-  background-image: linear-gradient(120deg, var(--pink), var(--mauve));
-}
-
+/* ---------- Tech-stack pills ---------- */
 .hero__stack {
   list-style: none;
   display: flex;
@@ -407,10 +127,9 @@ a {
 }
 .hero__stack li {
   font-size: 0.82rem;
-  color: var(--muted);
   padding: 0.35rem 0.85rem;
   border: 1px solid var(--line);
-  border-radius: 999px;
+  border-radius: var(--radius-pill);
   white-space: nowrap;
 }
 /* Every stack pill wears its own Mocha hue (11 items per row) */
@@ -479,33 +198,8 @@ a {
 }
 
 /* =========================================================
-   SECTIONS
+   ABOUT
    ========================================================= */
-.section {
-  padding: clamp(3.5rem, 9vh, 6rem) 0;
-}
-
-.section__head {
-  display: flex;
-  align-items: baseline;
-  gap: 1rem;
-  margin-bottom: 3rem;
-  padding-bottom: 1.1rem;
-  border-bottom: 1px solid var(--line);
-}
-.section__index {
-  color: var(--g1, var(--muted));
-  font-size: 0.85rem;
-  font-weight: 600;
-  font-variant-numeric: tabular-nums;
-}
-.section__title {
-  font-size: clamp(1.7rem, 4vw, 2.6rem);
-  font-weight: 800;
-  letter-spacing: -0.03em;
-}
-
-/* ---------- About ---------- */
 .about {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -520,13 +214,10 @@ a {
 .about p:last-child {
   color: var(--muted);
 }
-.about strong,
-.muted strong {
-  color: var(--fg);
-  font-weight: 600;
-}
 
-/* ---------- Cards ---------- */
+/* =========================================================
+   CARDS
+   ========================================================= */
 .cards {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -537,10 +228,10 @@ a {
   padding: 1.8rem 1.6rem 2rem;
   background: var(--mantle);
   border: 1px solid var(--line);
-  border-radius: 14px;
+  border-radius: var(--radius-card);
   transition:
-    transform 0.25s ease,
-    border-color 0.25s ease;
+    transform var(--hover-ease),
+    border-color var(--hover-ease);
 }
 /* Each card gets its own Mocha hue */
 .card:nth-child(6n + 1) { --c: var(--red); }
@@ -554,23 +245,18 @@ a {
   border-color: var(--c);
 }
 .card h3 {
-  font-size: 1.2rem;
   font-weight: 700;
   color: var(--c);
   margin-bottom: 0.6rem;
-  letter-spacing: -0.02em;
 }
 .card p {
   color: var(--muted);
   font-size: 0.95rem;
 }
 
-.muted {
-  color: var(--muted);
-  margin-bottom: 1.8rem;
-  max-width: 42ch;
-}
-
+/* =========================================================
+   BACKGROUND — timeline & principles
+   ========================================================= */
 .timeline {
   list-style: none;
 }
@@ -611,7 +297,9 @@ a {
   font-size: 0.95rem;
 }
 
-/* ---------- Testimonials ---------- */
+/* =========================================================
+   TESTIMONIALS
+   ========================================================= */
 .testimonials {
   margin-top: 4rem;
 }
@@ -629,10 +317,10 @@ a {
   padding: 2.4rem 1.8rem 1.7rem;
   background: var(--mantle);
   border: 1px solid var(--line);
-  border-radius: 16px;
+  border-radius: var(--radius-card);
   transition:
-    transform 0.25s ease,
-    border-color 0.25s ease;
+    transform var(--hover-ease),
+    border-color var(--hover-ease);
 }
 .testimonial:hover {
   transform: translateY(-4px);
@@ -676,7 +364,7 @@ a {
   justify-content: center;
   width: 2.5rem;
   height: 2.5rem;
-  border-radius: 999px;
+  border-radius: var(--radius-pill);
   color: var(--crust);
   font-size: 0.78rem;
   font-weight: 700;
@@ -707,7 +395,9 @@ a {
   font-size: 0.8rem;
 }
 
-/* ---------- Projects ---------- */
+/* =========================================================
+   PROJECTS
+   ========================================================= */
 .projects {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -721,10 +411,10 @@ a {
   padding: 1.9rem 1.6rem 1.6rem;
   background: var(--mantle);
   border: 1px solid var(--line);
-  border-radius: 14px;
+  border-radius: var(--radius-card);
   transition:
-    transform 0.25s ease,
-    border-color 0.25s ease;
+    transform var(--hover-ease),
+    border-color var(--hover-ease);
 }
 .project:nth-child(3n + 1) { --c: var(--blue); }
 .project:nth-child(3n + 2) { --c: var(--green); }
@@ -743,7 +433,6 @@ a {
   font-size: 1.25rem;
   font-weight: 700;
   color: var(--c);
-  letter-spacing: -0.02em;
 }
 .project__wip {
   font-size: 0.6rem;
@@ -752,7 +441,7 @@ a {
   letter-spacing: 0.06em;
   color: var(--yellow);
   border: 1px solid color-mix(in srgb, var(--yellow) 40%, transparent);
-  border-radius: 999px;
+  border-radius: var(--radius-pill);
   padding: 0.15rem 0.45rem;
 }
 .project__arrow {
@@ -781,7 +470,7 @@ a {
   color: var(--subtext1);
   background: var(--surface0);
   padding: 0.25rem 0.65rem;
-  border-radius: 999px;
+  border-radius: var(--radius-pill);
 }
 
 .projects__more {
@@ -789,14 +478,12 @@ a {
   justify-content: center;
   margin-top: 2.6rem;
 }
-.projects__more .btn {
-  align-items: center;
-}
 
-/* ---------- Contact ---------- */
+/* =========================================================
+   CONTACT
+   ========================================================= */
 .contact {
   text-align: center;
-  border-top: 1px solid var(--line);
 }
 .contact__eyebrow {
   font-size: clamp(1.7rem, 4vw, 2.6rem);
@@ -813,11 +500,11 @@ a {
   padding: 0.4rem 0.4rem 0.4rem 1.2rem;
   background: var(--mantle);
   border: 1px solid var(--line);
-  border-radius: 999px;
-  transition: border-color 0.2s ease;
+  border-radius: var(--radius-pill);
+  transition: border-color var(--hover-ease);
 }
 .copybox:hover {
-  border-color: var(--mauve);
+  border-color: var(--accent);
 }
 .copybox__email {
   display: inline-flex;
@@ -829,26 +516,10 @@ a {
   user-select: all;
 }
 .copybox__btn {
-  display: inline-flex;
-  align-items: center;
   gap: 0.5rem;
   flex: none;
   padding: 0.6rem 1.1rem;
-  font: inherit;
   font-size: 0.9rem;
-  font-weight: 600;
-  color: var(--crust);
-  background-color: var(--mauve);
-  background-image: linear-gradient(120deg, var(--pink), var(--mauve));
-  background-size: 150% 100%;
-  background-position: top left;
-  border: none;
-  border-radius: 999px;
-  cursor: pointer;
-  transition: background-position 0.35s ease-in-out;
-}
-.copybox__btn:hover {
-  background-position: top right;
 }
 .copybox__icon {
   flex: none;
@@ -868,53 +539,6 @@ a {
   color: var(--muted);
   max-width: 44ch;
   margin: 1.8rem auto 0;
-}
-
-/* =========================================================
-   FOOTER
-   ========================================================= */
-.footer {
-  background: var(--mantle);
-  margin-top: 2rem;
-  font-size: 0.85rem;
-  color: var(--muted);
-}
-.footer__inner {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 1rem;
-  flex-wrap: wrap;
-  padding: 2.5rem 0 3rem;
-}
-.footer__top {
-  transition: color 0.2s;
-}
-.footer__top:hover {
-  color: var(--lavender);
-}
-/* The rainbow bar sits flush on top of the footer */
-.accent-bar + .footer {
-  margin-top: 0;
-}
-.accent-bar {
-  margin-top: 2rem;
-}
-
-/* =========================================================
-   FADE-IN ON SCROLL
-   ========================================================= */
-.reveal {
-  opacity: 0;
-  transform: translateY(22px);
-  transition:
-    opacity 0.8s cubic-bezier(0.22, 0.61, 0.36, 1),
-    transform 0.8s cubic-bezier(0.22, 0.61, 0.36, 1);
-  transition-delay: calc(var(--d, 0) * 90ms);
-}
-.reveal.is-visible {
-  opacity: 1;
-  transform: none;
 }
 
 /* =========================================================
@@ -944,50 +568,11 @@ a {
     grid-template-columns: 1fr;
   }
 }
+
 @media (max-width: 620px) {
-  .nav__burger {
-    display: inline-flex;
+  .hero__art {
+    max-width: 17rem;
   }
-
-  /* The menu becomes a dropdown panel under the sticky header */
-  .nav__menu {
-    display: flex;
-    position: absolute;
-    top: 100%;
-    left: 0;
-    right: 0;
-    flex-direction: column;
-    gap: 1.5rem;
-    padding: 1.4rem clamp(1.5rem, 4vw, 3rem) 1.7rem;
-    background: var(--bg); /* solid, so page content can't bleed through */
-    border-bottom: 1px solid var(--line);
-    visibility: hidden;
-    opacity: 0;
-    transform: translateY(-8px);
-    transition:
-      opacity 0.25s ease,
-      transform 0.25s ease,
-      visibility 0.25s;
-  }
-  .nav.is-open .nav__menu {
-    visibility: visible;
-    opacity: 1;
-    transform: none;
-  }
-
-  .nav__links {
-    flex-direction: column;
-    gap: 1.1rem;
-    font-size: 1rem;
-  }
-  .nav__actions {
-    flex-direction: column;
-    align-items: stretch;
-  }
-  .nav__actions .nav-pill {
-    padding: 0.7rem 0.9rem;
-  }
-
   .cards {
     grid-template-columns: 1fr;
   }
@@ -1003,7 +588,7 @@ a {
     align-items: stretch;
     gap: 0.6rem;
     padding: 1rem;
-    border-radius: 16px;
+    border-radius: var(--radius-card);
   }
   .copybox__email {
     justify-content: center;
@@ -1014,24 +599,22 @@ a {
   }
 }
 
-/* ---------- Reduced motion ---------- */
+/* ---------- Reduced motion (portfolio animations) ---------- */
 @media (prefers-reduced-motion: reduce) {
-  * {
-    scroll-behavior: auto;
+  .card,
+  .project,
+  .project__arrow,
+  .testimonial,
+  .copybox {
+    transition: none;
   }
-  .reveal {
-    opacity: 1;
+  .card:hover,
+  .project:hover,
+  .testimonial:hover {
     transform: none;
-    transition: none;
   }
-  .nav__menu,
-  .nav__burger-line,
-  .btn,
-  .nav-pill,
-  .copybox__btn {
-    transition: none;
-  }
-  .hero__art-float {
+  .hero__art-float,
+  .hero__portrait {
     animation: none;
   }
   /* Marquee falls back to the static wrapped pill row */

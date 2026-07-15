@@ -1,0 +1,624 @@
+/* =========================================================
+   SHARED DESIGN SYSTEM — one system, both sites
+   Riekus Grobler · Portfolio + DSA Roadmap
+   Theme: CATPPUCCIN MOCHA · catppuccin.com-style
+          gradient-text headings, gradient pill buttons,
+          rainbow accent bar, full 14-hue palette
+   Type:  Inter (single typeface)
+   Motion: fade-in on scroll
+
+   Loaded by every page of both sites, ahead of that site's own
+   stylesheet. Anything a page of either site could use lives here;
+   site-specific components (the portfolio's project cards, the DSA
+   roadmap graph) live in the site stylesheet that follows.
+   See docs/theme.md — it is the spec this file implements.
+   ========================================================= */
+
+/* ---------- 1. Tokens (Catppuccin Mocha — full palette) ---------- */
+:root {
+  --rosewater: #f5e0dc;
+  --flamingo: #f2cdcd;
+  --pink: #f5c2e7;
+  --mauve: #cba6f7;
+  --red: #f38ba8;
+  --maroon: #eba0ac;
+  --peach: #fab387;
+  --yellow: #f9e2af;
+  --green: #a6e3a1;
+  --teal: #94e2d5;
+  --sky: #89dceb;
+  --sapphire: #74c7ec;
+  --blue: #89b4fa;
+  --lavender: #b4befe;
+  --text: #cdd6f4;
+  --subtext1: #bac2de;
+  --subtext0: #a6adc8;
+  --overlay1: #7f849c;
+  --surface2: #585b70;
+  --surface1: #45475a;
+  --surface0: #313244;
+  --base: #1e1e2e;
+  --mantle: #181825;
+  --crust: #11111b; /* text on accent fills */
+
+  /* Semantic aliases used by components */
+  --bg: var(--base); /* page background */
+  --fg: var(--text);
+  --muted: var(--subtext0); /* secondary text */
+  --line: var(--surface0); /* hairline dividers & borders */
+  --glass: rgba(30, 30, 46, 0.7); /* nav backdrop only */
+  --accent: var(--mauve);
+
+  /* The signature 14-hue rainbow (accent bar) */
+  --rainbow: linear-gradient(
+    90deg,
+    var(--rosewater),
+    var(--flamingo),
+    var(--pink),
+    var(--mauve),
+    var(--red),
+    var(--maroon),
+    var(--peach),
+    var(--yellow),
+    var(--green),
+    var(--teal),
+    var(--sky),
+    var(--sapphire),
+    var(--blue),
+    var(--lavender)
+  );
+
+  --font-body: "Inter", system-ui, -apple-system, sans-serif;
+  --radius-card: 14px;
+  --radius-pill: 999px;
+  --hover-ease: 0.22s ease;
+}
+
+/* ---------- 2. Base ---------- */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+/* Flex column + main{flex:1} keeps the footer at the bottom of short pages */
+body {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--font-body);
+  font-size: clamp(1rem, 0.96rem + 0.25vw, 1.1rem);
+  line-height: 1.65;
+  letter-spacing: -0.011em;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+main {
+  flex: 1;
+}
+
+/* Soft peach→mauve tint over the top of the page, fading into base
+   (catppuccin.com does the same on its hero) */
+body::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: min(100vh, 56rem);
+  background: linear-gradient(
+    120deg,
+    color-mix(in srgb, var(--base), var(--peach) 6%),
+    color-mix(in srgb, var(--base), var(--mauve) 10%)
+  );
+  -webkit-mask-image: linear-gradient(#000 40%, transparent);
+  mask-image: linear-gradient(#000 40%, transparent);
+  pointer-events: none;
+  z-index: -1;
+}
+
+::selection {
+  background: var(--accent);
+  color: var(--crust);
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* JS filtering hides rows via the hidden attribute; this must beat the
+   display values components set (e.g. .problem__row { display: flex }). */
+[hidden] {
+  display: none !important;
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+h1,
+h2,
+h3 {
+  font-weight: 800;
+}
+
+h2 {
+  font-size: clamp(1.7rem, 4vw, 2.6rem);
+  letter-spacing: -0.03em;
+}
+
+h3 {
+  font-size: 1.2rem;
+  letter-spacing: -0.02em;
+}
+
+strong {
+  color: var(--fg);
+  font-weight: 600;
+}
+
+.muted {
+  color: var(--muted);
+}
+
+.eyebrow {
+  font-size: 0.82rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--muted);
+}
+
+/* ---------- 3. Container ---------- */
+.container {
+  width: min(1080px, 100% - 3rem);
+  margin-inline: auto;
+}
+
+/* ---------- 4. Gradient text (catppuccin.com headline style) ----------
+   Components set --g1/--g2; the element clips a 120° gradient to the
+   glyphs. Any one-off heading can opt in with the .grad-text class. */
+.grad-text,
+.hero__title,
+.section__title {
+  background-image: linear-gradient(
+    120deg,
+    var(--g1, var(--peach)),
+    var(--g2, var(--mauve))
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  padding-bottom: 0.08em; /* keep descenders inside the clipped box */
+}
+
+/* ---------- 5. Rainbow accent bar ---------- */
+/* Sits flush on top of the mantle footer */
+.accent-bar {
+  height: 8px;
+  width: 100%;
+  flex: none;
+  margin-top: clamp(3rem, 9vh, 5rem);
+  background-image: var(--rainbow);
+}
+
+/* =========================================================
+   6. NAV — the single, subtle glass element per page
+   ========================================================= */
+.nav {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  width: 100%;
+  padding: 1.1rem clamp(1.5rem, 4vw, 3rem);
+  background: var(--glass);
+  -webkit-backdrop-filter: saturate(140%) blur(14px);
+  backdrop-filter: saturate(140%) blur(14px);
+  border-bottom: 1px solid var(--line);
+}
+
+.nav__brand {
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  white-space: nowrap;
+  background-image: linear-gradient(120deg, var(--peach), var(--mauve));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* On desktop the menu wrapper is invisible to layout: brand, links and
+   actions sit directly in the nav row. On mobile it becomes a dropdown. */
+.nav__menu {
+  display: contents;
+}
+
+.nav__links {
+  display: flex;
+  gap: 2rem;
+  font-size: 0.9rem;
+}
+
+.nav__links a {
+  position: relative;
+  color: var(--muted);
+  transition: color 0.2s;
+}
+
+.nav__links a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -3px;
+  width: 0;
+  height: 2px;
+  border-radius: 1px;
+  background: linear-gradient(90deg, var(--pink), var(--mauve));
+  transition: width 0.28s ease;
+}
+
+.nav__links a:hover,
+.nav__links a[aria-current="page"] {
+  color: var(--fg);
+}
+
+.nav__links a:hover::after,
+.nav__links a[aria-current="page"]::after {
+  width: 100%;
+}
+
+.nav__actions {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+/* Hamburger — hidden on desktop, shown in the mobile media query */
+.nav__burger {
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  width: 42px;
+  height: 42px;
+  padding: 0;
+  flex: none;
+  background: transparent;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-pill);
+  cursor: pointer;
+  transition: border-color 0.2s;
+}
+
+.nav__burger:hover {
+  border-color: var(--accent);
+}
+
+.nav__burger-line {
+  width: 16px;
+  height: 2px;
+  border-radius: 1px;
+  background: var(--fg);
+  transition:
+    transform 0.25s ease,
+    opacity 0.2s ease;
+}
+
+/* Lines fold into an X while the menu is open */
+.nav.is-open .nav__burger-line:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+}
+.nav.is-open .nav__burger-line:nth-child(2) {
+  opacity: 0;
+}
+.nav.is-open .nav__burger-line:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
+}
+
+/* =========================================================
+   7. Pills & buttons
+   ========================================================= */
+/* Static label pill (counts, tags) */
+.pill {
+  display: inline-block;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-pill);
+  color: var(--muted);
+  font-size: 0.78rem;
+  font-weight: 500;
+  padding: 0.15rem 0.7rem;
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+}
+
+/* Buttons — catppuccin.com-style gradient pills: no border, crust text,
+   a 120° gradient that slides on hover. */
+.btn,
+.pill-btn {
+  display: inline-flex;
+  align-items: center;
+  font: inherit;
+  font-size: 0.95rem;
+  font-weight: 600;
+  border: none;
+  border-radius: var(--radius-pill);
+  padding: 0.8rem 1.5rem;
+  cursor: pointer;
+  color: var(--crust);
+  background-color: var(--surface0);
+  background-size: 150% 100%;
+  background-position: top left;
+  transition:
+    background-position 0.35s ease-in-out,
+    background-color 0.2s,
+    color 0.2s;
+}
+
+.btn:hover,
+.pill-btn:hover {
+  background-position: top right;
+}
+
+.btn--peach {
+  background-color: var(--peach);
+  background-image: linear-gradient(120deg, var(--peach), var(--red));
+}
+.btn--teal {
+  background-color: var(--teal);
+  background-image: linear-gradient(120deg, var(--teal), var(--green));
+}
+.btn--blue {
+  background-color: var(--blue);
+  background-image: linear-gradient(120deg, var(--blue), var(--sky));
+}
+.btn--mauve {
+  background-color: var(--mauve);
+  background-image: linear-gradient(120deg, var(--pink), var(--mauve));
+}
+
+/* Nav-sized ghost button */
+.pill-btn {
+  color: var(--fg);
+  background-color: transparent;
+  border: 1px solid var(--line);
+  padding: 0.45rem 0.9rem;
+  font-size: 0.82rem;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.pill-btn:hover {
+  background-color: var(--surface0);
+  border-color: var(--surface1);
+}
+
+/* The cross-site link pill: DSA on the portfolio, Portfolio on DSA */
+.pill-btn--blue {
+  border: none;
+  color: var(--crust);
+  font-weight: 600;
+  background-color: var(--blue);
+  background-image: linear-gradient(120deg, var(--blue), var(--sky));
+}
+
+.pill-btn--blue:hover {
+  background-color: var(--blue);
+  background-position: top right;
+}
+
+/* =========================================================
+   8. Sections
+   ========================================================= */
+.section {
+  padding: clamp(3.5rem, 9vh, 6rem) 0;
+}
+
+.section + .section {
+  border-top: 1px solid var(--line);
+}
+
+.section__head {
+  display: flex;
+  align-items: baseline;
+  gap: 1rem;
+  border-bottom: 1px solid var(--line);
+  padding-bottom: 1rem;
+  margin-bottom: 3rem;
+}
+
+.section__index {
+  color: var(--g1, var(--muted));
+  font-size: 0.85rem;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+
+.section__title {
+  font-size: clamp(1.7rem, 4vw, 2.6rem);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+}
+
+/* =========================================================
+   9. Hero
+   ========================================================= */
+.hero {
+  padding: clamp(3.5rem, 10vh, 7rem) 0 clamp(3rem, 8vh, 5rem);
+}
+
+.hero__title {
+  font-size: clamp(2.4rem, 4.8vw, 4.4rem);
+  line-height: 1.08;
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  /* --g1/--g2 default to peach→mauve — the catppuccin.com hero gradient */
+  margin: 0.6rem 0 0;
+}
+
+/* A hero with no art beside it can afford a bigger headline */
+.hero__title--xl {
+  font-size: clamp(2.6rem, 8vw, 6rem);
+  line-height: 1.02;
+}
+
+.hero__lead {
+  color: var(--subtext1);
+  max-width: 48ch;
+  font-size: 1.08rem;
+  margin-top: 1.5rem;
+}
+
+.hero__cta {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  flex-wrap: wrap;
+  margin-top: 1.9rem;
+}
+
+/* =========================================================
+   10. Footer
+   ========================================================= */
+.footer {
+  background: var(--mantle);
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+
+.footer__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+  padding: 2.5rem 0 3rem;
+}
+
+/* Footers with sentences rather than short items stack instead */
+.footer__inner--stack {
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.4rem;
+}
+
+.footer__inner a {
+  text-underline-offset: 3px;
+  transition: color var(--hover-ease);
+}
+
+.footer__inner a:hover {
+  color: var(--lavender);
+}
+
+/* =========================================================
+   11. Motion — fade-in on scroll (the signature interaction)
+   ========================================================= */
+.reveal {
+  opacity: 0;
+  transform: translateY(22px);
+  transition:
+    opacity 0.8s cubic-bezier(0.22, 0.61, 0.36, 1),
+    transform 0.8s cubic-bezier(0.22, 0.61, 0.36, 1);
+  transition-delay: calc(var(--d, 0) * 90ms);
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* Shared reduced-motion fallbacks. Each site's stylesheet has one more
+   block for its own animations. */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    scroll-behavior: auto;
+  }
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+  .nav__menu,
+  .nav__burger-line,
+  .nav__links a::after,
+  .btn,
+  .pill-btn {
+    transition: none;
+  }
+}
+
+/* =========================================================
+   12. Responsive — the mobile nav
+   ========================================================= */
+@media (max-width: 620px) {
+  .nav__burger {
+    display: inline-flex;
+  }
+
+  /* The menu becomes a dropdown panel under the sticky header */
+  .nav__menu {
+    display: flex;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    flex-direction: column;
+    gap: 1.5rem;
+    padding: 1.4rem clamp(1.5rem, 4vw, 3rem) 1.7rem;
+    background: var(--bg); /* solid, so page content can't bleed through */
+    border-bottom: 1px solid var(--line);
+    visibility: hidden;
+    opacity: 0;
+    transform: translateY(-8px);
+    transition:
+      opacity 0.25s ease,
+      transform 0.25s ease,
+      visibility 0.25s;
+  }
+
+  .nav.is-open .nav__menu {
+    visibility: visible;
+    opacity: 1;
+    transform: none;
+  }
+
+  .nav__links {
+    flex-direction: column;
+    gap: 1.1rem;
+    font-size: 1rem;
+  }
+
+  .nav__actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .nav__actions .pill {
+    text-align: center;
+    padding: 0.45rem 0.9rem;
+  }
+
+  .nav__actions .pill-btn {
+    justify-content: center;
+    padding: 0.7rem 0.9rem;
+  }
+}

@@ -65,7 +65,7 @@
   /* ---- Render the graph bands ---- */
   bands.forEach(function (band) {
     var row = document.createElement('div');
-    row.className = 'graph-band';
+    row.className = 'graph__band';
     band.forEach(function (c) {
       var node = document.createElement('a');
       node.className = 'node';
@@ -73,11 +73,11 @@
       node.setAttribute('data-node', c.id);
 
       var title = document.createElement('span');
-      title.className = 'node-title';
+      title.className = 'node__title';
       title.textContent = c.title;
 
       var count = document.createElement('span');
-      count.className = 'node-count';
+      count.className = 'node__count';
       count.setAttribute('data-node-count', c.id);
       count.textContent = '0/' + c.problems.length;
 
@@ -91,20 +91,20 @@
   /* ---- Render the ordered topic list ---- */
   categories.forEach(function (c, i) {
     var row = document.createElement('li');
-    row.className = 'topic-row';
+    row.className = 'topic-list__row';
     row.setAttribute('data-topic-row', c.id);
 
     var index = document.createElement('span');
-    index.className = 'topic-index';
+    index.className = 'topic-list__index';
     index.textContent = String(i + 1).padStart(2, '0');
 
     var link = document.createElement('a');
-    link.className = 'topic-row-link';
+    link.className = 'topic-list__link';
     link.href = 'topic.html?id=' + encodeURIComponent(c.id);
     link.textContent = c.title;
 
     var count = document.createElement('span');
-    count.className = 'topic-row-count pill';
+    count.className = 'topic-list__count pill';
     count.setAttribute('data-row-count', c.id);
     count.textContent = '0/' + c.problems.length;
 

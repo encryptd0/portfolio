@@ -41,11 +41,11 @@
   if (!category) {
     document.title = 'Topic not found — DSA Roadmap';
     var missing = el('div', 'notfound reveal');
-    missing.appendChild(el('p', 'notfound-code', '404'));
-    missing.appendChild(el('h1', 'notfound-title', 'Topic not found'));
+    missing.appendChild(el('p', 'notfound__code', '404'));
+    missing.appendChild(el('h1', 'notfound__title grad-text', 'Topic not found'));
     missing.appendChild(el('p', 'muted',
       'There is no topic at this address. Head back to the roadmap to pick one.'));
-    var homeLink = el('a', 'btn btn-solid', 'Back to the roadmap');
+    var homeLink = el('a', 'btn btn--peach', 'Back to the roadmap');
     homeLink.href = 'index.html';
     missing.appendChild(homeLink);
     rootEl.appendChild(missing);
@@ -66,13 +66,13 @@
   back.href = 'index.html';
   rootEl.appendChild(back);
 
-  var header = el('header', 'topic-header reveal');
+  var header = el('header', 'topic__header reveal');
   header.appendChild(el('p', 'eyebrow',
     'Topic ' + String(position).padStart(2, '0') + ' of ' + categories.length));
-  header.appendChild(el('h1', 'topic-title', category.title));
-  header.appendChild(el('p', 'topic-blurb muted', category.blurb));
+  header.appendChild(el('h1', 'topic__title grad-text', category.title));
+  header.appendChild(el('p', 'topic__blurb muted', category.blurb));
 
-  var meta = el('p', 'topic-meta');
+  var meta = el('p', 'topic__meta');
   var solvedPill = el('span', 'pill');
   var solvedCount = el('span', '', '0');
   solvedCount.setAttribute('data-topic-count', '');
@@ -81,7 +81,7 @@
   meta.appendChild(solvedPill);
   var mix = freeCount + ' free' +
     (premiumCount > 0 ? ' · ' + premiumCount + ' premium' : '');
-  meta.appendChild(el('span', 'topic-mix muted', mix));
+  meta.appendChild(el('span', 'topic__mix muted', mix));
   header.appendChild(meta);
   rootEl.appendChild(header);
 
@@ -125,7 +125,7 @@
 
   category.problems.forEach(function (problem) {
     var key = category.id + '::' + problem.slug;
-    var row = el('li', 'problem-row');
+    var row = el('li', 'problem');
     row.setAttribute('data-problem', '');
     row.setAttribute('data-key', key);
     row.setAttribute('data-difficulty', problem.difficulty);
@@ -139,8 +139,8 @@
     done.setAttribute('aria-label', 'Mark “' + problem.title + '” as done');
     row.appendChild(done);
 
-    var main = el('div', 'problem-main');
-    var title = el('a', 'problem-title', problem.title);
+    var main = el('div', 'problem__main');
+    var title = el('a', 'problem__title', problem.title);
     title.href = problem.url;
     title.target = '_blank';
     title.rel = 'noopener';
@@ -152,9 +152,9 @@
 
     var badges = el('span', 'badges');
     badges.appendChild(el('span',
-      'badge badge-' + problem.difficulty.toLowerCase(), problem.difficulty));
+      'badge badge--' + problem.difficulty.toLowerCase(), problem.difficulty));
     if (problem.isPremium) {
-      badges.appendChild(el('span', 'badge badge-premium', 'Premium'));
+      badges.appendChild(el('span', 'badge badge--premium', 'Premium'));
     }
     row.appendChild(badges);
 

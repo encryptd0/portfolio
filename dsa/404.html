@@ -10,50 +10,51 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap">
+  <link rel="stylesheet" href="../css/base.css">
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
-  <header class="site-header">
-    <nav class="nav container" aria-label="Main">
-      <a class="brand" href="index.html">DSA Roadmap</a>
-      <button class="nav-burger" type="button" data-nav-toggle aria-expanded="false" aria-controls="navMenu" aria-label="Open menu">
-        <span class="nav-burger-line" aria-hidden="true"></span>
-        <span class="nav-burger-line" aria-hidden="true"></span>
-        <span class="nav-burger-line" aria-hidden="true"></span>
-      </button>
-      <div class="nav-menu" id="navMenu">
-        <div class="nav-links">
-          <a class="nav-link" href="index.html">Roadmap</a>
-          <a class="nav-link" href="about.html">About</a>
-        </div>
-        <div class="nav-actions">
-          <span class="pill" data-global-count hidden>0 / 0 solved</span>
-          <button class="pill-btn" type="button" data-reset-progress>Reset progress</button>
-          <a class="pill-btn pill-btn--blue" href="../index.html">Portfolio</a>
-        </div>
+  <header class="nav">
+    <a class="nav__brand" href="index.html">DSA Roadmap</a>
+
+    <button class="nav__burger" type="button" data-nav-toggle aria-expanded="false" aria-controls="navMenu" aria-label="Open menu">
+      <span class="nav__burger-line" aria-hidden="true"></span>
+      <span class="nav__burger-line" aria-hidden="true"></span>
+      <span class="nav__burger-line" aria-hidden="true"></span>
+    </button>
+
+    <nav class="nav__menu" id="navMenu" aria-label="Primary">
+      <div class="nav__links">
+        <a href="index.html">Roadmap</a>
+        <a href="about.html">About</a>
+      </div>
+      <div class="nav__actions">
+        <span class="pill" data-global-count hidden>0 / 0 solved</span>
+        <button class="pill-btn" type="button" data-reset-progress>Reset progress</button>
+        <a class="pill-btn pill-btn--blue" href="../index.html">Portfolio</a>
       </div>
     </nav>
   </header>
 
   <main id="main" class="page container">
     <div class="notfound reveal">
-      <p class="notfound-code">404</p>
-      <h1 class="notfound-title">Page not found</h1>
+      <p class="notfound__code">404</p>
+      <h1 class="notfound__title grad-text">Page not found</h1>
       <p class="muted">There's nothing at this address. Head back to the roadmap to pick a topic.</p>
-      <a class="btn btn-solid" href="index.html">Back to the roadmap</a>
+      <a class="btn btn--peach" href="index.html">Back to the roadmap</a>
     </div>
   </main>
 
   <div class="accent-bar" aria-hidden="true"></div>
-  <footer class="site-footer">
-    <div class="container footer-inner">
+  <footer class="footer">
+    <div class="footer__inner footer__inner--stack container">
       <p>DSA Roadmap is free and non-commercial. No ads, no accounts — progress lives only in your browser.</p>
       <p>Roadmap idea by <a href="https://neetcode.io" target="_blank" rel="noopener">NeetCode</a> · problems live on <a href="https://leetcode.com" target="_blank" rel="noopener">LeetCode</a>. This site only links out. <a href="about.html">About</a></p>
     </div>
   </footer>
 
-  <script src="js/theme.js"></script>
+  <script src="../js/site.js"></script>
   <script src="js/progress.js"></script>
 </body>
 </html>

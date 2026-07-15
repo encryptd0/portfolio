@@ -1,6 +1,8 @@
 /* =========================================================
    Riekus Grobler — Portfolio
-   Vanilla JS: reveal-on-scroll, mobile nav, year stamp
+   Page-specific JS: project cards, stack marquee, scroll spy,
+   copy-to-clipboard, year stamp. The mobile nav and the reveal
+   are shared with the DSA site — see js/site.js, loaded first.
    ========================================================= */
 (function () {
   "use strict";
@@ -97,33 +99,10 @@
       card.appendChild(tags);
       grid.appendChild(card);
     });
+
+    if (window.Reveal) window.Reveal.scan(grid);
   }
   renderProjects();
-
-  /* ---------- Mobile nav (hamburger) ---------- */
-  var nav = document.querySelector(".nav");
-  var navToggle = document.getElementById("navToggle");
-
-  function setNavOpen(open) {
-    nav.classList.toggle("is-open", open);
-    navToggle.setAttribute("aria-expanded", open ? "true" : "false");
-    navToggle.setAttribute("aria-label", open ? "Close menu" : "Open menu");
-  }
-
-  if (nav && navToggle) {
-    navToggle.addEventListener("click", function () {
-      setNavOpen(!nav.classList.contains("is-open"));
-    });
-
-    // Tapping a link in the menu (e.g. jumping to a section) closes it.
-    nav.querySelectorAll(".nav__menu a").forEach(function (a) {
-      a.addEventListener("click", function () { setNavOpen(false); });
-    });
-
-    document.addEventListener("keydown", function (e) {
-      if (e.key === "Escape") setNavOpen(false);
-    });
-  }
 
   /* ---------- Stack marquee ---------- */
   // The CSS loop slides the track by half its width, so the first half must
@@ -159,25 +138,6 @@
       clearTimeout(marqueeResizeTimer);
       marqueeResizeTimer = setTimeout(buildMarquee, 200);
     });
-  }
-
-  /* ---------- Reveal on scroll ---------- */
-  var revealEls = document.querySelectorAll(".reveal");
-
-  if ("IntersectionObserver" in window) {
-    var io = new IntersectionObserver(function (entries) {
-      entries.forEach(function (entry) {
-        if (entry.isIntersecting) {
-          entry.target.classList.add("is-visible");
-          io.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.12, rootMargin: "0px 0px -8% 0px" });
-
-    revealEls.forEach(function (el) { io.observe(el); });
-  } else {
-    // Fallback: no observer support, just show everything.
-    revealEls.forEach(function (el) { el.classList.add("is-visible"); });
   }
 
   /* ---------- Active nav link on scroll ---------- */

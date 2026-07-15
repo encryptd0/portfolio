@@ -10,28 +10,29 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap">
+  <link rel="stylesheet" href="../css/base.css">
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
-  <header class="site-header">
-    <nav class="nav container" aria-label="Main">
-      <a class="brand" href="index.html">DSA Roadmap</a>
-      <button class="nav-burger" type="button" data-nav-toggle aria-expanded="false" aria-controls="navMenu" aria-label="Open menu">
-        <span class="nav-burger-line" aria-hidden="true"></span>
-        <span class="nav-burger-line" aria-hidden="true"></span>
-        <span class="nav-burger-line" aria-hidden="true"></span>
-      </button>
-      <div class="nav-menu" id="navMenu">
-        <div class="nav-links">
-          <a class="nav-link" href="index.html" aria-current="page">Roadmap</a>
-          <a class="nav-link" href="about.html">About</a>
-        </div>
-        <div class="nav-actions">
-          <span class="pill" data-global-count hidden>0 / 0 solved</span>
-          <button class="pill-btn" type="button" data-reset-progress>Reset progress</button>
-          <a class="pill-btn pill-btn--blue" href="../index.html">Portfolio</a>
-        </div>
+  <header class="nav">
+    <a class="nav__brand" href="index.html">DSA Roadmap</a>
+
+    <button class="nav__burger" type="button" data-nav-toggle aria-expanded="false" aria-controls="navMenu" aria-label="Open menu">
+      <span class="nav__burger-line" aria-hidden="true"></span>
+      <span class="nav__burger-line" aria-hidden="true"></span>
+      <span class="nav__burger-line" aria-hidden="true"></span>
+    </button>
+
+    <nav class="nav__menu" id="navMenu" aria-label="Primary">
+      <div class="nav__links">
+        <a href="index.html" aria-current="page">Roadmap</a>
+        <a href="about.html">About</a>
+      </div>
+      <div class="nav__actions">
+        <span class="pill" data-global-count hidden>0 / 0 solved</span>
+        <button class="pill-btn" type="button" data-reset-progress>Reset progress</button>
+        <a class="pill-btn pill-btn--blue" href="../index.html">Portfolio</a>
       </div>
     </nav>
   </header>
@@ -39,50 +40,56 @@
   <main id="main">
     <section class="hero container">
       <p class="eyebrow reveal" style="--d:0">Free · non-commercial · no accounts</p>
-      <h1 class="reveal" style="--d:1">A clear path through&nbsp;DSA.</h1>
-      <p class="hero-sub reveal" style="--d:2">
+      <h1 class="hero__title hero__title--xl reveal" style="--d:1">A clear path through&nbsp;DSA.</h1>
+      <p class="hero__lead reveal" style="--d:2">
         150 classic LeetCode problems across 18 topics, arranged as a dependency
         roadmap — so you always know what to study next. Your progress stays in
         this browser; nothing is tracked, nothing is sent anywhere.
       </p>
-      <div class="hero-actions reveal" style="--d:3">
-        <a class="btn btn-solid" href="topic.html?id=arrays-hashing">Start with Arrays &amp; Hashing</a>
-        <a class="btn btn-ghost" href="about.html">How it works</a>
+      <div class="hero__cta reveal" style="--d:3">
+        <a class="btn btn--peach" href="topic.html?id=arrays-hashing">Start with Arrays &amp; Hashing</a>
+        <a class="btn btn--teal" href="about.html">How it works</a>
       </div>
     </section>
 
+    <!-- Roadmap and topic list sit side by side above 960px, and stack
+         (graph first) below it. -->
     <section class="section container reveal">
-      <header class="section-header">
-        <span class="section-index">01</span>
-        <h2>The roadmap</h2>
-      </header>
-      <div class="graph" data-graph>
-        <svg data-graph-lines aria-hidden="true" focusable="false"></svg>
-        <!-- Topic nodes are rendered here by js/home.js -->
-      </div>
-    </section>
+      <div class="roadmap-split">
+        <div class="roadmap-split__graph">
+          <header class="section__head">
+            <span class="section__index">01</span>
+            <h2 class="section__title">The roadmap</h2>
+          </header>
+          <div class="graph" data-graph>
+            <svg data-graph-lines aria-hidden="true" focusable="false"></svg>
+            <!-- Topic nodes are rendered here by js/home.js -->
+          </div>
+        </div>
 
-    <section class="section container reveal">
-      <header class="section-header">
-        <span class="section-index">02</span>
-        <h2>All topics, in order</h2>
-      </header>
-      <ol class="topic-list" data-topic-list>
-        <!-- Topic rows are rendered here by js/home.js -->
-      </ol>
-      <noscript><p class="muted">This site needs JavaScript to render the roadmap and track your progress.</p></noscript>
+        <aside class="roadmap-split__list">
+          <header class="section__head">
+            <span class="section__index">02</span>
+            <h2 class="section__title">All topics, in order</h2>
+          </header>
+          <ol class="topic-list" data-topic-list>
+            <!-- Topic rows are rendered here by js/home.js -->
+          </ol>
+          <noscript><p class="muted">This site needs JavaScript to render the roadmap and track your progress.</p></noscript>
+        </aside>
+      </div>
     </section>
   </main>
 
   <div class="accent-bar" aria-hidden="true"></div>
-  <footer class="site-footer">
-    <div class="container footer-inner">
+  <footer class="footer">
+    <div class="footer__inner footer__inner--stack container">
       <p>DSA Roadmap is free and non-commercial. No ads, no accounts — progress lives only in your browser.</p>
       <p>Roadmap idea by <a href="https://neetcode.io" target="_blank" rel="noopener">NeetCode</a> · problems live on <a href="https://leetcode.com" target="_blank" rel="noopener">LeetCode</a>. This site only links out. <a href="about.html">About</a></p>
     </div>
   </footer>
 
-  <script src="js/theme.js"></script>
+  <script src="../js/site.js"></script>
   <script src="js/progress.js"></script>
   <script src="js/data.js"></script>
   <script src="js/home.js"></script>

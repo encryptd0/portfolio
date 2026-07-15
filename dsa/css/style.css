@@ -1,151 +1,11 @@
-/* DSA Roadmap — the entire design system, derived from theme.md
-   (“Catppuccin Mocha”, catppuccin.com-style). Every colour references
-   a token. */
+/* =========================================================
+   DSA Roadmap
+   Site-specific components only. The design system (tokens, nav,
+   buttons, sections, hero, footer, reveal) lives in ../css/base.css,
+   which every page of both sites loads first.
+   ========================================================= */
 
-/* ---------- 1. Tokens (Catppuccin Mocha — full palette) ---------- */
-:root {
-  --rosewater: #f5e0dc;
-  --flamingo: #f2cdcd;
-  --pink: #f5c2e7;
-  --mauve: #cba6f7;
-  --red: #f38ba8;
-  --maroon: #eba0ac;
-  --peach: #fab387;
-  --yellow: #f9e2af;
-  --green: #a6e3a1;
-  --teal: #94e2d5;
-  --sky: #89dceb;
-  --sapphire: #74c7ec;
-  --blue: #89b4fa;
-  --lavender: #b4befe;
-  --text: #cdd6f4;
-  --subtext1: #bac2de;
-  --subtext0: #a6adc8;
-  --surface2: #585b70;
-  --surface1: #45475a;
-  --surface0: #313244;
-  --base: #1e1e2e;
-  --mantle: #181825;
-  --crust: #11111b;            /* text on accent fills */
-
-  /* Semantic aliases used by components */
-  --bg: var(--base);           /* page background */
-  --fg: var(--text);
-  --muted: var(--subtext0);    /* secondary text */
-  --line: var(--surface0);     /* hairline dividers & borders */
-  --glass: rgba(30, 30, 46, 0.7); /* nav backdrop only */
-  --accent: var(--mauve);
-
-  /* The signature 14-hue rainbow (accent bar) */
-  --rainbow: linear-gradient(
-    90deg,
-    var(--rosewater),
-    var(--flamingo),
-    var(--pink),
-    var(--mauve),
-    var(--red),
-    var(--maroon),
-    var(--peach),
-    var(--yellow),
-    var(--green),
-    var(--teal),
-    var(--sky),
-    var(--sapphire),
-    var(--blue),
-    var(--lavender)
-  );
-
-  --font-body: "Inter", system-ui, -apple-system, sans-serif;
-  --radius-card: 14px;
-  --radius-pill: 999px;
-  --hover-ease: 0.22s ease;
-}
-
-/* ---------- 2. Base ---------- */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-html {
-  scroll-behavior: smooth;
-}
-
-body {
-  position: relative;
-  background: var(--bg);
-  color: var(--fg);
-  font-family: var(--font-body);
-  font-size: clamp(1rem, 0.96rem + 0.25vw, 1.1rem);
-  line-height: 1.65;
-  letter-spacing: -0.011em;
-  -webkit-font-smoothing: antialiased;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-}
-
-/* Soft peach→mauve tint over the top of the page, fading into base
-   (catppuccin.com does the same on its hero) */
-body::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: min(100vh, 56rem);
-  background: linear-gradient(
-    120deg,
-    color-mix(in srgb, var(--base), var(--peach) 6%),
-    color-mix(in srgb, var(--base), var(--mauve) 10%)
-  );
-  -webkit-mask-image: linear-gradient(#000 40%, transparent);
-  mask-image: linear-gradient(#000 40%, transparent);
-  pointer-events: none;
-  z-index: -1;
-}
-
-::selection {
-  background: var(--accent);
-  color: var(--crust);
-}
-
-/* JS filtering hides rows via the hidden attribute; this must beat the
-   display values components set (e.g. .problem-row { display: flex }). */
-[hidden] {
-  display: none !important;
-}
-
-.container {
-  width: min(1080px, 100% - 3rem);
-  margin-inline: auto;
-}
-
-main {
-  flex: 1;
-}
-
-h1, h2, h3 {
-  font-weight: 800;
-}
-
-/* Gradient text (catppuccin.com headline style) — components set
-   --g1/--g2; the element clips a 120° gradient to the glyphs. */
-.grad-text,
-.hero h1,
-.section-header h2,
-.topic-title,
-.prose h1,
-.notfound-title {
-  background-image: linear-gradient(120deg, var(--g1, var(--peach)), var(--g2, var(--mauve)));
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-  padding-bottom: 0.08em; /* keep descenders inside the clipped box */
-}
-
-/* Per-block hue pairs — walk the palette down the page */
+/* ---------- Per-block hue pairs — walk the palette down the page ---------- */
 .section:nth-of-type(odd) {
   --g1: var(--teal);
   --g2: var(--green);
@@ -163,297 +23,41 @@ h1, h2, h3 {
   --g2: var(--red);
 }
 
-/* ---------- Rainbow accent bar ---------- */
-.accent-bar {
-  height: 8px;
-  width: 100%;
-  flex: none;
-  margin-top: clamp(3rem, 9vh, 5rem);
-  background-image: var(--rainbow);
+/* ---------- Roadmap: graph left, ordered topic list right ---------- */
+/* Side-by-side columns get a hue each, as separate sections would have */
+.roadmap-split {
+  display: grid;
+  grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr);
+  gap: clamp(2rem, 4vw, 3.5rem);
+  align-items: start;
 }
 
-h2 {
-  font-size: clamp(1.7rem, 4vw, 2.6rem);
-  letter-spacing: -0.03em;
+.roadmap-split__graph {
+  --g1: var(--teal);
+  --g2: var(--green);
 }
 
-h3 {
-  font-size: 1.2rem;
-  letter-spacing: -0.02em;
+.roadmap-split__list {
+  --g1: var(--blue);
+  --g2: var(--sky);
 }
 
-strong { font-weight: 600; }
-
-a {
-  color: var(--fg);
+/* Column headings are narrower than a full-width section's — hold them on
+   one line so both header rules land at the same height. */
+@media (min-width: 961px) {
+  .roadmap-split .section__title {
+    font-size: clamp(1.5rem, 2.4vw, 2rem);
+  }
 }
 
-.muted {
-  color: var(--muted);
+@media (max-width: 960px) {
+  .roadmap-split {
+    grid-template-columns: 1fr;
+    gap: clamp(2.5rem, 7vh, 4rem);
+  }
 }
 
-.eyebrow {
-  font-size: 0.82rem;
-  font-weight: 500;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  color: var(--muted);
-}
-
-:focus-visible {
-  outline: 2px solid var(--accent);
-  outline-offset: 2px;
-  border-radius: 4px;
-}
-
-/* ---------- 3. Nav (the one glass element) ---------- */
-.site-header {
-  position: sticky;
-  top: 0;
-  z-index: 10;
-  background: var(--glass);
-  -webkit-backdrop-filter: saturate(140%) blur(14px);
-  backdrop-filter: saturate(140%) blur(14px);
-  border-bottom: 1px solid var(--line);
-}
-
-.nav {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 1rem;
-  width: 100%;
-  margin-inline: 0;
-  padding: 1.1rem clamp(1.5rem, 4vw, 3rem);
-}
-
-.brand {
-  font-weight: 700;
-  letter-spacing: -0.02em;
-  text-decoration: none;
-  white-space: nowrap;
-  background-image: linear-gradient(120deg, var(--peach), var(--mauve));
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-}
-
-/* On desktop the menu wrapper is invisible to layout: brand, links and
-   actions sit directly in the nav row. On mobile it becomes a dropdown. */
-.nav-menu {
-  display: contents;
-}
-
-.nav-links {
-  display: flex;
-  gap: 2rem;
-  font-size: 0.9rem;
-}
-
-.nav-link {
-  position: relative;
-  text-decoration: none;
-  color: var(--muted);
-  transition: color 0.2s;
-}
-
-.nav-link::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  bottom: -3px;
-  width: 0;
-  height: 2px;
-  border-radius: 1px;
-  background: linear-gradient(90deg, var(--pink), var(--mauve));
-  transition: width 0.28s ease;
-}
-
-.nav-link:hover,
-.nav-link[aria-current="page"] {
-  color: var(--fg);
-}
-
-.nav-link:hover::after,
-.nav-link[aria-current="page"]::after {
-  width: 100%;
-}
-
-.nav-actions {
-  display: flex;
-  align-items: center;
-  gap: 0.6rem;
-}
-
-/* Hamburger — hidden on desktop, shown in the mobile media query */
-.nav-burger {
-  display: none;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 5px;
-  width: 42px;
-  height: 42px;
-  padding: 0;
-  flex: none;
-  background: transparent;
-  border: 1px solid var(--line);
-  border-radius: var(--radius-pill);
-  cursor: pointer;
-  transition: border-color 0.2s;
-}
-
-.nav-burger:hover {
-  border-color: var(--accent);
-}
-
-.nav-burger-line {
-  width: 16px;
-  height: 2px;
-  border-radius: 1px;
-  background: var(--fg);
-  transition: transform 0.25s ease, opacity 0.2s ease;
-}
-
-/* Lines fold into an X while the menu is open */
-.site-header.is-open .nav-burger-line:nth-child(1) {
-  transform: translateY(7px) rotate(45deg);
-}
-.site-header.is-open .nav-burger-line:nth-child(2) {
-  opacity: 0;
-}
-.site-header.is-open .nav-burger-line:nth-child(3) {
-  transform: translateY(-7px) rotate(-45deg);
-}
-
-/* ---------- 4. Pills & buttons ---------- */
-.pill {
-  display: inline-block;
-  border: 1px solid var(--line);
-  border-radius: var(--radius-pill);
-  color: var(--muted);
-  font-size: 0.78rem;
-  font-weight: 500;
-  padding: 0.15rem 0.7rem;
-  white-space: nowrap;
-  font-variant-numeric: tabular-nums;
-}
-
-/* Buttons — catppuccin.com-style gradient pills: no border, crust text,
-   a 120° gradient that slides on hover. */
-.btn,
-.pill-btn {
-  font: inherit;
-  font-size: 0.95rem;
-  font-weight: 600;
-  border: none;
-  border-radius: var(--radius-pill);
-  padding: 0.8rem 1.5rem;
-  cursor: pointer;
-  text-decoration: none;
-  display: inline-flex;
-  align-items: center;
-  color: var(--crust);
-  background-color: var(--surface0);
-  background-size: 150% 100%;
-  background-position: top left;
-  transition: background-position 0.35s ease-in-out, background-color 0.2s, color 0.2s;
-}
-
-.btn:hover,
-.pill-btn:hover {
-  background-position: top right;
-}
-
-.btn-solid {
-  background-color: var(--peach);
-  background-image: linear-gradient(120deg, var(--peach), var(--red));
-}
-
-.btn-ghost {
-  background-color: var(--teal);
-  background-image: linear-gradient(120deg, var(--teal), var(--green));
-}
-
-.pill-btn {
-  color: var(--fg);
-  background-color: transparent;
-  border: 1px solid var(--line);
-  padding: 0.45rem 0.9rem;
-  font-size: 0.82rem;
-  font-weight: 500;
-  white-space: nowrap;
-}
-
-.pill-btn:hover {
-  background-color: var(--surface0);
-  border-color: var(--surface1);
-}
-
-/* The Portfolio link pill — gradient, mirroring the DSA pill on the portfolio */
-.pill-btn--blue {
-  border: none;
-  color: var(--crust);
-  font-weight: 600;
-  background-color: var(--blue);
-  background-image: linear-gradient(120deg, var(--blue), var(--sky));
-}
-
-.pill-btn--blue:hover {
-  background-color: var(--blue);
-  background-position: top right;
-}
-
-/* ---------- 5. Sections ---------- */
-.section {
-  padding: clamp(3.5rem, 9vh, 6rem) 0;
-}
-
-.section + .section {
-  border-top: 1px solid var(--line);
-}
-
-.section-header {
-  display: flex;
-  align-items: baseline;
-  gap: 1rem;
-  border-bottom: 1px solid var(--line);
-  padding-bottom: 1rem;
-  margin-bottom: 3rem;
-}
-
-.section-index {
-  color: var(--g1, var(--muted));
-  font-weight: 600;
-  font-variant-numeric: tabular-nums;
-}
-
-/* ---------- 6. Hero ---------- */
-.hero {
-  padding: clamp(4rem, 12vh, 7.5rem) 0 clamp(3rem, 8vh, 5rem);
-}
-
-.hero h1 {
-  font-size: clamp(2.6rem, 8vw, 6rem);
-  line-height: 1.02;
-  letter-spacing: -0.04em;
-  margin: 0.6rem 0 1.4rem;
-}
-
-.hero-sub {
-  max-width: 42rem;
-  color: var(--muted);
-}
-
-.hero-actions {
-  display: flex;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 0.9rem;
-  margin-top: 2rem;
-}
-
-/* ---------- 7. Roadmap graph ---------- */
+/* ---------- Roadmap graph ---------- */
 .graph {
   position: relative;
   display: flex;
@@ -477,7 +81,7 @@ a {
   stroke-width: 1.5;
 }
 
-.graph-band {
+.graph__band {
   position: relative;
   z-index: 1;
   display: flex;
@@ -492,15 +96,17 @@ a {
   flex-direction: column;
   align-items: center;
   gap: 0.15rem;
-  text-decoration: none;
   background: var(--mantle);
   border: 1px solid var(--line);
   border-radius: var(--radius-card);
   padding: 0.75rem 1.4rem;
   min-width: 9.5rem;
   text-align: center;
-  transition: transform var(--hover-ease), border-color var(--hover-ease),
-    background var(--hover-ease), color var(--hover-ease);
+  transition:
+    transform var(--hover-ease),
+    border-color var(--hover-ease),
+    background var(--hover-ease),
+    color var(--hover-ease);
 }
 
 /* Each node owns a Mocha hue (cycles within its band) */
@@ -516,14 +122,14 @@ a {
   border-color: var(--c);
 }
 
-.node-title {
+.node__title {
   font-weight: 600;
   font-size: 0.92rem;
   letter-spacing: -0.02em;
   line-height: 1.3;
 }
 
-.node-count {
+.node__count {
   font-size: 0.75rem;
   color: var(--muted);
   font-variant-numeric: tabular-nums;
@@ -541,16 +147,16 @@ a {
   color: var(--crust);
 }
 
-.node.is-complete .node-count {
+.node.is-complete .node__count {
   color: var(--crust);
 }
 
-/* ---------- 8. Ordered topic list ---------- */
+/* ---------- Ordered topic list ---------- */
 .topic-list {
   list-style: none;
 }
 
-.topic-row {
+.topic-list__row {
   display: flex;
   align-items: baseline;
   gap: 1.2rem;
@@ -558,25 +164,24 @@ a {
   border-top: 1px solid var(--line);
 }
 
-.topic-row:last-child {
+.topic-list__row:last-child {
   border-bottom: 1px solid var(--line);
 }
 
-.topic-index {
+.topic-list__index {
   color: var(--muted);
   font-weight: 500;
   font-size: 0.85rem;
   font-variant-numeric: tabular-nums;
 }
 
-.topic-row-link {
+.topic-list__link {
+  position: relative;
   font-weight: 600;
   letter-spacing: -0.02em;
-  text-decoration: none;
-  position: relative;
 }
 
-.topic-row-link::after {
+.topic-list__link::after {
   content: "";
   position: absolute;
   left: 0;
@@ -588,22 +193,22 @@ a {
   transition: width var(--hover-ease);
 }
 
-.topic-row-link:hover::after {
+.topic-list__link:hover::after {
   width: 100%;
 }
 
-.topic-row-count {
+.topic-list__count {
   margin-left: auto;
 }
 
-.topic-row.is-complete .topic-row-count {
+.topic-list__row.is-complete .topic-list__count {
   background-image: linear-gradient(120deg, var(--teal), var(--green));
   border-color: transparent;
   color: var(--crust);
   font-weight: 600;
 }
 
-/* ---------- 9. Topic page ---------- */
+/* ---------- Topic page ---------- */
 .page {
   padding: clamp(2.5rem, 7vh, 4.5rem) 0 clamp(3.5rem, 9vh, 6rem);
 }
@@ -613,7 +218,6 @@ a {
   font-size: 0.88rem;
   font-weight: 500;
   color: var(--muted);
-  text-decoration: none;
   margin-bottom: 2rem;
   transition: color var(--hover-ease);
 }
@@ -622,24 +226,24 @@ a {
   color: var(--fg);
 }
 
-.topic-header {
+.topic__header {
   border-bottom: 1px solid var(--line);
   padding-bottom: 2rem;
   margin-bottom: 2rem;
 }
 
-.topic-title {
+.topic__title {
   font-size: clamp(2rem, 5.5vw, 3.4rem);
   letter-spacing: -0.035em;
   line-height: 1.05;
   margin: 0.5rem 0 0.9rem;
 }
 
-.topic-blurb {
+.topic__blurb {
   max-width: 40rem;
 }
 
-.topic-meta {
+.topic__meta {
   display: flex;
   align-items: center;
   flex-wrap: wrap;
@@ -647,11 +251,11 @@ a {
   margin-top: 1.3rem;
 }
 
-.topic-mix {
+.topic__mix {
   font-size: 0.85rem;
 }
 
-/* Controls */
+/* ---------- Controls ---------- */
 .controls {
   display: flex;
   align-items: center;
@@ -699,7 +303,9 @@ a {
   border-radius: var(--radius-pill);
   padding: 0.3rem 0.95rem;
   cursor: pointer;
-  transition: color var(--hover-ease), border-color var(--hover-ease),
+  transition:
+    color var(--hover-ease),
+    border-color var(--hover-ease),
     background var(--hover-ease);
 }
 
@@ -760,12 +366,12 @@ a {
   transform: scale(1);
 }
 
-/* Problem list */
+/* ---------- Problem list ---------- */
 .problem-list {
   list-style: none;
 }
 
-.problem-row {
+.problem {
   display: flex;
   align-items: center;
   gap: 0.95rem;
@@ -773,11 +379,11 @@ a {
   border-top: 1px solid var(--line);
 }
 
-.problem-row:last-child {
+.problem:last-child {
   border-bottom: 1px solid var(--line);
 }
 
-.problem-main {
+.problem__main {
   display: flex;
   align-items: baseline;
   gap: 0.8rem;
@@ -785,19 +391,18 @@ a {
   flex: 1;
 }
 
-.problem-title {
+.problem__title {
   font-weight: 500;
   letter-spacing: -0.015em;
-  text-decoration: none;
   transition: color var(--hover-ease);
 }
 
-.problem-title:hover {
+.problem__title:hover {
   text-decoration: underline;
   text-underline-offset: 3px;
 }
 
-.problem-row.is-done .problem-title {
+.problem.is-done .problem__title {
   color: var(--muted);
   text-decoration: line-through;
 }
@@ -805,13 +410,14 @@ a {
 .broken-link {
   font-size: 0.75rem;
   color: var(--muted);
-  text-decoration: none;
   white-space: nowrap;
   opacity: 0;
-  transition: opacity var(--hover-ease), color var(--hover-ease);
+  transition:
+    opacity var(--hover-ease),
+    color var(--hover-ease);
 }
 
-.problem-row:hover .broken-link,
+.problem:hover .broken-link,
 .broken-link:focus-visible {
   opacity: 1;
 }
@@ -821,6 +427,7 @@ a {
   text-decoration: underline;
 }
 
+/* ---------- Difficulty badges ---------- */
 .badges {
   display: flex;
   gap: 0.45rem;
@@ -837,22 +444,22 @@ a {
   white-space: nowrap;
 }
 
-.badge-easy {
+.badge--easy {
   border: 1px solid var(--green);
   color: var(--green);
 }
 
-.badge-medium {
+.badge--medium {
   border: 1px solid var(--yellow);
   color: var(--yellow);
 }
 
-.badge-hard {
+.badge--hard {
   border: 1px solid var(--red);
   color: var(--red);
 }
 
-.badge-premium {
+.badge--premium {
   border: 1px dashed var(--muted);
   color: var(--muted);
 }
@@ -862,7 +469,7 @@ a {
   text-align: center;
 }
 
-/* ---------- 10. Prose pages (about / gone / 404) ---------- */
+/* ---------- Prose pages (about / gone / 404) ---------- */
 .prose {
   max-width: 44rem;
 }
@@ -895,14 +502,14 @@ a {
   padding: clamp(3rem, 12vh, 7rem) 0;
 }
 
-.notfound-code {
+.notfound__code {
   font-size: 0.9rem;
   font-weight: 500;
   color: var(--muted);
   letter-spacing: 0.2em;
 }
 
-.notfound-title {
+.notfound__title {
   font-size: clamp(2.2rem, 7vw, 4.5rem);
   letter-spacing: -0.04em;
   line-height: 1.05;
@@ -914,60 +521,14 @@ a {
   margin: 0 auto 2.2rem;
 }
 
-/* ---------- 11. Footer ---------- */
-/* The rainbow accent bar sits flush on top of the mantle footer */
-.site-footer {
-  background: var(--mantle);
-  padding: 2.5rem 0 3rem;
-}
-
-.footer-inner {
-  display: flex;
-  flex-direction: column;
-  gap: 0.4rem;
-  font-size: 0.85rem;
-  color: var(--muted);
-}
-
-.footer-inner a {
-  color: var(--muted);
-  text-underline-offset: 3px;
-  transition: color var(--hover-ease);
-}
-
-.footer-inner a:hover {
-  color: var(--fg);
-}
-
-/* ---------- 12. Motion ---------- */
-.reveal {
-  opacity: 0;
-  transform: translateY(22px);
-  transition: opacity 0.8s cubic-bezier(0.22, 0.61, 0.36, 1),
-    transform 0.8s cubic-bezier(0.22, 0.61, 0.36, 1);
-  transition-delay: calc(var(--d, 0) * 90ms);
-}
-
-.reveal.is-visible {
-  opacity: 1;
-  transform: none;
-}
-
+/* ---------- Reduced motion (DSA animations) ---------- */
 @media (prefers-reduced-motion: reduce) {
-  * {
-    scroll-behavior: auto;
-  }
-  .reveal {
-    opacity: 1;
-    transform: none;
-    transition: none;
-  }
   .node,
   .check::before,
-  .nav-menu,
-  .nav-burger-line,
-  .btn,
-  .pill-btn {
+  .filter-btn,
+  .search-input,
+  .broken-link,
+  .topic-list__link::after {
     transition: none;
   }
   .node:hover {
@@ -975,13 +536,13 @@ a {
   }
 }
 
-/* ---------- 13. Responsive ---------- */
+/* ---------- Responsive ---------- */
 @media (max-width: 720px) {
   .node {
     min-width: 0;
     padding: 0.6rem 1rem;
   }
-  .node-title {
+  .node__title {
     font-size: 0.85rem;
   }
   .badges {
@@ -994,59 +555,8 @@ a {
   }
 }
 
-@media (max-width: 620px) {
-  .nav-burger {
-    display: inline-flex;
-  }
-
-  /* The menu becomes a dropdown panel under the sticky header */
-  .nav-menu {
-    display: flex;
-    position: absolute;
-    top: 100%;
-    left: 0;
-    right: 0;
-    flex-direction: column;
-    gap: 1.5rem;
-    padding: 1.4rem clamp(1.5rem, 4vw, 3rem) 1.7rem;
-    background: var(--bg); /* solid, so page content can't bleed through */
-    border-bottom: 1px solid var(--line);
-    visibility: hidden;
-    opacity: 0;
-    transform: translateY(-8px);
-    transition: opacity 0.25s ease, transform 0.25s ease, visibility 0.25s;
-  }
-
-  .site-header.is-open .nav-menu {
-    visibility: visible;
-    opacity: 1;
-    transform: none;
-  }
-
-  .nav-links {
-    flex-direction: column;
-    gap: 1.1rem;
-    font-size: 1rem;
-  }
-
-  .nav-actions {
-    flex-direction: column;
-    align-items: stretch;
-  }
-
-  .nav-actions .pill {
-    text-align: center;
-    padding: 0.45rem 0.9rem;
-  }
-
-  .nav-actions .pill-btn {
-    justify-content: center;
-    padding: 0.7rem 0.9rem;
-  }
-}
-
 @media (max-width: 560px) {
-  .problem-main {
+  .problem__main {
     flex-direction: column;
     gap: 0.1rem;
   }

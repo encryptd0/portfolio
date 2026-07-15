@@ -46,6 +46,14 @@ soft pastel over `base`/`mantle`, never loud.
 8. **Vanilla only.** Plain HTML, CSS, JS. No framework, no build step, no CSS
    library. Two external requests max (the Inter font files).
 9. **Generous whitespace.** When unsure, add space. Never crowd.
+10. **One system, defined once.** When a project has more than one site, they
+    are one project: the tokens, chrome (nav, buttons, pills, sections, hero,
+    footer) and motion live in a single shared stylesheet and script that
+    every page of every site loads. A component may only be defined twice if
+    it genuinely differs; prefer a BEM modifier over a second component.
+11. **BEM naming.** `.block`, `.block__element`, `.block--modifier`, with
+    `is-*` for state (`is-open`, `is-visible`, `is-complete`). One name per
+    component across the whole project.
 
 ## Design tokens
 
@@ -206,11 +214,24 @@ label cycling through palette hues, and `--muted` description. No bullets.
 
 ## File structure
 
+A single site:
+
 ```
 index.html        css/style.css        js/main.js
 ```
 
-Fonts via `<link>` in `<head>`. Inline an SVG `data:` URI favicon (`#1e1e2e`
+Several sites in one project — the system is defined once and shared, and each
+site keeps only its own components:
+
+```
+css/base.css      the whole system: tokens, chrome, motion
+js/site.js        the shared behaviours: mobile nav, reveal
+index.html        css/style.css   js/main.js      (site 1: its own components)
+sub/index.html    sub/css/style.css  sub/js/*.js  (site 2: its own components)
+```
+
+Every page loads `base.css` before its own stylesheet, and `site.js` before its
+own script. Fonts via `<link>` in `<head>`. Inline an SVG `data:` URI favicon (`#1e1e2e`
 square, `#cba6f7` "R" or the site's initial) — no external icon files.
 
 ## Checklist before finishing

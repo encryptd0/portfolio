@@ -19,6 +19,7 @@
       rel="stylesheet"
     />
 
+    <link rel="stylesheet" href="css/base.css" />
     <link rel="stylesheet" href="css/style.css" />
     <link
       rel="icon"
@@ -35,8 +36,8 @@
 
       <button
         class="nav__burger"
-        id="navToggle"
         type="button"
+        data-nav-toggle
         aria-expanded="false"
         aria-controls="navMenu"
         aria-label="Open menu"
@@ -55,17 +56,17 @@
         </div>
 
         <div class="nav__actions">
-          <a class="nav-pill" href="dsa/index.html">DSA-learning platform</a>
+          <a class="pill-btn pill-btn--blue" href="dsa/index.html">DSA-learning platform</a>
         </div>
       </nav>
     </header>
 
     <main>
       <!-- ============ HERO ============ -->
-      <section class="hero" id="top">
+      <section class="hero container" id="top">
         <div class="hero__grid">
           <div class="hero__content">
-            <p class="hero__eyebrow reveal">
+            <p class="eyebrow reveal">
               Johannesburg, South Africa — available for freelance
             </p>
 
@@ -126,7 +127,7 @@
       </section>
 
       <!-- ============ ABOUT ============ -->
-      <section class="section" id="about">
+      <section class="section container" id="about">
         <div class="section__head reveal">
           <span class="section__index">01</span>
           <h2 class="section__title">Who I am</h2>
@@ -149,7 +150,7 @@
       </section>
 
       <!-- ============ WHAT I DO ============ -->
-      <section class="section" id="work">
+      <section class="section container" id="work">
         <div class="section__head reveal">
           <span class="section__index">02</span>
           <h2 class="section__title">What I do now</h2>
@@ -207,7 +208,7 @@
       </section>
 
       <!-- ============ PROJECTS ============ -->
-      <section class="section" id="projects">
+      <section class="section container" id="projects">
         <div class="section__head reveal">
           <span class="section__index">06</span>
           <h2 class="section__title">Selected projects</h2>
@@ -242,7 +243,7 @@
       </section>
 
       <!-- ============ HOW I WORK ============ -->
-      <section class="section" id="how-i-work">
+      <section class="section container" id="how-i-work">
         <div class="section__head reveal">
           <span class="section__index">04</span>
           <h2 class="section__title">How I work</h2>
@@ -284,7 +285,7 @@
       </section>
 
       <!-- ============ BACKGROUND ============ -->
-      <section class="section" id="background">
+      <section class="section container" id="background">
         <div class="section__head reveal">
           <span class="section__index">03</span>
           <h2 class="section__title">Background</h2>
@@ -311,7 +312,7 @@
       </section>
 
       <!-- ============ TESTIMONIALS ============ -->
-      <section class="section">
+      <section class="section container">
         <!-- Testimonials from freelance work -->
         <div class="testimonials">
           <div class="section__head reveal">
@@ -367,15 +368,15 @@
       </section>
 
       <!-- ============ CTA / CONTACT ============ -->
-      <section class="section contact" id="contact">
-        <p class="contact__eyebrow reveal">Let's build something</p>
+      <section class="section container contact" id="contact">
+        <p class="contact__eyebrow grad-text reveal">Let's build something</p>
 
         <div class="copybox reveal" style="--d: 1">
           <span class="copybox__email" id="copyEmail"
             >riekusgroblerps4@gmail.com</span
           >
           <button
-            class="copybox__btn"
+            class="btn btn--mauve copybox__btn"
             id="copyBtn"
             type="button"
             aria-label="Copy email address"
@@ -427,7 +428,7 @@
     <!-- Rainbow accent bar — all 14 Mocha hues, à la catppuccin.com -->
     <div class="accent-bar" aria-hidden="true"></div>
     <footer class="footer">
-      <div class="footer__inner">
+      <div class="footer__inner container">
         <span>© <span id="year"></span> Riekus Grobler</span>
         <span class="footer__built"
           >Built with plain HTML, CSS &amp; JS — no framework.</span
@@ -436,6 +437,7 @@
       </div>
     </footer>
 
+    <script src="js/site.js"></script>
     <script src="js/main.js"></script>
   </body>
 </html>
