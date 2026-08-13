@@ -590,7 +590,6 @@ h3 {
     left: 15%;
     transform: translateX(-50%);
 
-    /* Responsive sizing while preserving the original proportions */
     width: clamp(12rem, 43vw, 27rem);
     height: clamp(12rem, 43vw, 27rem);
 
@@ -606,6 +605,49 @@ h3 {
     height: 100%;
     display: block;
     object-fit: cover;
+}
+
+/* =================================
+   MOBILE STORY / PROJECT HEADING FIXES
+================================= */
+
+
+@media (max-width: 599px) {
+    .story-content {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        gap: 20rem;
+    }
+
+    .story .heading {
+        position: static;
+        transform: none;
+        width: 100%;
+        flex-shrink: 0;
+    }
+
+    .story-content > p {
+        position: static;
+        transform: none;
+        width: min(100%, 380px);
+        max-width: 380px;
+        margin: auto;
+        flex: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .story blockquote {
+        position: static;
+        transform: none;
+        width: min(100%, 380px);
+        max-width: 380px;
+        margin: 0 auto;
+        flex-shrink: 0;
+    }
+
 }
 
 /* =================================
@@ -650,10 +692,6 @@ h3 {
         width: clamp(10rem, 42vw, 14rem);
         height: clamp(10rem, 42vw, 14rem);
         left: 18%;
-    }
-
-    .projects .heading {
-        font-size: clamp(1.7rem, 8vw, 2.5rem);
     }
 
     .project-grid {
