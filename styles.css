@@ -119,54 +119,48 @@ h3 {
 ================================= */
 
 .story {
-    position: relative;
     min-height: 100svh;
+    display: flex;
+    align-items: center;
     padding: 5rem 1.5rem;
     background: var(--beige);
     color: var(--black);
 }
 
 .story-content {
-    position: relative;
     width: 100%;
-    max-width: 500px;
-    height: 100%;
+    max-width: 1400px;
     min-height: calc(100svh - 10rem);
     margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
     text-align: center;
 }
 
 .story .heading {
-    position: absolute;
-    top: 5%;
-    left: 50%;
-    transform: translateX(-50%);
-    width: min(100%, 100vw);
+    width: 100%;
+    margin: 0;
+    flex-shrink: 0;
 }
 
 .story-content > p {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: min(calc(100% - 3rem), 380px);
-    max-width: 380px;
-    margin: 0;
+    width: 100%;
+    max-width: 900px;
+    margin: auto auto 0;
+    padding: 4rem 1rem;
     font-family: var(--sans);
-    font-size: 1.2rem;
+    font-size: clamp(1rem, 2.2vw, 1.4rem);
     line-height: 1.8;
 }
 
 .story blockquote {
-    position: absolute;
-    bottom: 5%;
-    left: 50%;
-    transform: translateX(-50%);
-    width: min(calc(100% - 3rem), 380px);
-    max-width: 380px;
-    margin: 0;
+    width: 100%;
+    max-width: 700px;
+    margin: auto auto 0;
+    padding-top: 3rem;
     font-family: var(--serif);
-    font-size: 1rem;
+    font-size: clamp(1rem, 2vw, 1.25rem);
     font-style: italic;
     line-height: 1.4;
 }
@@ -177,6 +171,141 @@ h3 {
     font-family: var(--sans);
     font-size: 0.65rem;
     font-style: italic;
+}
+
+/* =================================
+   STORY — MOBILE
+================================= */
+
+@media (max-width: 599px) {
+    .story {
+        min-height: 100svh;
+        padding: 4rem 1rem;
+    }
+
+    .story-content {
+        min-height: calc(100svh - 8rem);
+        gap: 3rem;
+    }
+
+    .story .heading {
+        width: 100%;
+        font-size: clamp(4rem, 18vw, 6rem);
+        line-height: 0.8;
+    }
+
+    .story-content > p {
+        width: 100%;
+        max-width: none;
+        margin: 0;
+        padding: 1rem 0;
+        font-size: clamp(1rem, 4vw, 1.2rem);
+        line-height: 1.7;
+    }
+
+    .story blockquote {
+        width: 100%;
+        max-width: none;
+        margin: 0;
+        padding-top: 1rem;
+        font-size: clamp(0.9rem, 3.5vw, 1.05rem);
+        line-height: 1.4;
+    }
+}
+
+/* =================================
+   STORY — VERY SMALL PHONES
+================================= */
+
+@media (max-width: 380px) {
+    .story {
+        padding: 3rem 1rem;
+    }
+
+    .story-content {
+        min-height: calc(100svh - 6rem);
+        gap: 2.5rem;
+    }
+
+    .story .heading {
+        font-size: clamp(3.5rem, 17vw, 4.5rem);
+    }
+
+    .story-content > p {
+        width: 100%;
+        max-width: none;
+        font-size: clamp(0.95rem, 4vw, 1.1rem);
+        line-height: 1.65;
+    }
+
+    .story blockquote {
+        font-size: clamp(0.85rem, 3.5vw, 0.95rem);
+    }
+}
+
+/* =================================
+   STORY — MOBILE LANDSCAPE
+================================= */
+
+@media (max-height: 500px) and (orientation: landscape) {
+    .story {
+        min-height: auto;
+        padding-top: 4rem;
+        padding-bottom: 4rem;
+    }
+
+    .story-content {
+        min-height: auto;
+        gap: 3rem;
+    }
+
+    .story-content > p {
+        padding: 1rem 0;
+    }
+}
+
+/* =================================
+   STORY — TABLET
+================================= */
+
+@media (min-width: 600px) {
+    .story {
+        padding: 6rem 5%;
+    }
+
+    .story-content {
+        min-height: calc(100svh - 12rem);
+    }
+
+    .story-content > p {
+        max-width: 750px;
+        font-size: clamp(1rem, 2vw, 1.2rem);
+    }
+}
+
+/* =================================
+   STORY — DESKTOP
+================================= */
+
+@media (min-width: 1000px) {
+    .story {
+        padding: 6rem 6%;
+    }
+
+    .story-content {
+        min-height: calc(100svh - 12rem);
+    }
+
+    .story-content > p {
+        max-width: 850px;
+        font-size: 1.1rem;
+        line-height: 1.8;
+    }
+
+    .story blockquote {
+        max-width: 650px;
+        font-size: 1.1rem;
+    }
 }
 
 /* =================================
@@ -605,49 +734,6 @@ h3 {
     height: 100%;
     display: block;
     object-fit: cover;
-}
-
-/* =================================
-   MOBILE STORY / PROJECT HEADING FIXES
-================================= */
-
-
-@media (max-width: 599px) {
-    .story-content {
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-        gap: 10rem;
-    }
-
-    .story .heading {
-        position: static;
-        transform: none;
-        width: 100%;
-        flex-shrink: 0;
-    }
-
-    .story-content > p {
-        position: static;
-        transform: none;
-        width: min(100%, 380px);
-        max-width: 380px;
-        margin: auto;
-        flex: 1;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-
-    .story blockquote {
-        position: static;
-        transform: none;
-        width: min(100%, 380px);
-        max-width: 380px;
-        margin: 0 auto;
-        flex-shrink: 0;
-    }
-
 }
 
 /* =================================
