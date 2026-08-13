@@ -1,436 +1,179 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta
-      name="description"
-      content="Riekus Grobler — full-stack software developer in Johannesburg. Node.js, Linux, homelab, security-minded. Minimalist, perfectionist, builder."
-    />
-    <meta name="author" content="Riekus Grobler" />
-    <meta name="theme-color" content="#000000" />
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+        <meta
+            name="description"
+            content="Riekus Grobler — software developer portfolio."
+        />
+        <title>Riekus Grobler — Portfolio</title>
+        <link rel="stylesheet" href="styles.css" />
+    </head>
+    <body>
+        <main>
+            <section class="hero" id="home">
+                <div class="hero-content">
+                    <h1 class="heading">Hi,</h1>
+                    <h1 class="heading">I'm Riekus Grobler.</h1>
+                    <p class="hero-subtitle">
+                        Creative minimalist developing software
+                    </p>
+                </div>
+            </section>
 
-    <title>R. Grobler — Portfolio</title>
+            <section class="story">
+                <div class="story-content">
+                    <h2 class="heading">My story</h2>
+                    <p>
+                        After four years of hands-on technical work building and
+                        configuring computers and servers and troubleshooting
+                        networks, I discovered a real passion for coding and
+                        software development. Today, I’m pursuing a career in
+                        software development, building on a strong technical
+                        foundation and a passion for learning. Much of what I
+                        know has been self-taught, and I’m always looking to
+                        sharpen my skills, explore new technologies, and keep
+                        growing as a developer.
+                    </p>
+                    <blockquote>
+                        "Intelligence is the ability to avoid doing work, yet
+                        getting the work done."
+                        <cite>- Linus Torvalds</cite>
+                    </blockquote>
+                </div>
+            </section>
 
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600&display=swap"
-      rel="stylesheet"
-    />
+            <section class="services">
+                <div class="services-inner">
+                    <div class="services-heading">
+                        <h2 class="heading">What I can do<br />for you</h2>
+                    </div>
 
-    <link rel="stylesheet" href="css/base.css" />
-    <link rel="stylesheet" href="css/style.css" />
-    <link
-      rel="icon"
-      href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' fill='%23003728'/><text x='50' y='74' font-size='68' font-family='Georgia,serif' fill='%23f6f4ee' text-anchor='middle'>R</text></svg>"
-    />
-  </head>
+                    <div class="services-list">
+                        <article class="service">
+                            <h3>Build Reliable Software</h3>
+                            <p>
+                                I build with the focus on clean, maintainable
+                                code and reliable functionality with a strong
+                                emphasis on understanding how a system behaves.
+                            </p>
+                        </article>
 
-  <body>
-    <!-- ============ NAV ============ -->
-    <header class="nav">
-      <a href="#top" class="nav__brand" aria-label="Home">R.&nbsp;Grobler</a>
+                        <article class="service">
+                            <h3>Turn Problems Into Solutions</h3>
+                            <p>
+                                I enjoy taking a technical problem,
+                                understanding what is needed, and turning it
+                                into a working solution. Being hands-on taught
+                                me a practical approach to debugging and
+                                building software.
+                            </p>
+                        </article>
 
-      <button
-        class="nav__burger"
-        type="button"
-        data-nav-toggle
-        aria-expanded="false"
-        aria-controls="navMenu"
-        aria-label="Open menu"
-      >
-        <span class="nav__burger-line" aria-hidden="true"></span>
-        <span class="nav__burger-line" aria-hidden="true"></span>
-        <span class="nav__burger-line" aria-hidden="true"></span>
-      </button>
+                        <article class="service">
+                            <h3>Learn, Adapt &amp; Grow</h3>
+                            <p>
+                                I bring a strong self-taught foundation and a
+                                genuine drive to improve. I’m comfortable
+                                learning new technologies and adapting to
+                                different environments, with a focus on becoming
+                                better
+                            </p>
+                        </article>
 
-      <nav class="nav__menu" id="navMenu" aria-label="Primary">
-        <div class="nav__links">
-          <a href="#work">Work</a>
-          <a href="#doing">What I do</a>
-          <a href="#background">Background</a>
-          <a href="#contact">Contact</a>
-        </div>
+                        <a
+                            class="github-button"
+                            href="#"
+                            aria-label="Visit my GitHub"
+                            >My GitHub
+                            <svg
+                                class="github-icon"
+                                viewBox="0 0 24 24"
+                                aria-hidden="true"
+                            >
+                                <path
+                                    d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.58.11.79-.25.79-.56v-2.17c-3.2.7-3.88-1.54-3.88-1.54-.53-1.33-1.28-1.69-1.28-1.69-1.05-.72.08-.71.08-.71 1.16.08 1.77 1.19 1.77 1.19 1.03 1.76 2.71 1.25 3.37.96.1-.75.4-1.25.73-1.54-2.55-.29-5.23-1.28-5.23-5.69 0-1.26.45-2.29 1.19-3.1-.12-.29-.52-1.47.11-3.06 0 0 .97-.31 3.18 1.18a11.1 11.1 0 0 1 5.8 0c2.21-1.49 3.18-1.18 3.18-1.18.63 1.59.23 2.77.11 3.06.74.81 1.19 1.84 1.19 3.1 0 4.42-2.69 5.4-5.25 5.68.41.36.78 1.08.78 2.18v3.24c0 .31.21.67.8.56A11.51 11.51 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5Z"
+                                />
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+            </section>
 
-        <div class="nav__actions">
-          <!--<a class="btn btn--sm" href="dsa/index.html">DSA Roadmap</a> -->
-        </div>
-      </nav>
-    </header>
+            <section class="projects">
+                <div class="projects-content">
+                    <h2 class="heading">A few things I'm proud of</h2>
 
-    <main>
-      <!-- ============ HERO ============ -->
-      <section class="hero container" id="top">
-        <!-- Abstract forest-green geometry, behind the composition -->
-        <div class="hero__geo" aria-hidden="true">
-          <span class="hero__geo-ring"></span>
-          <span class="hero__geo-bar"></span>
-        </div>
+                    <div class="project-grid">
+                        <article class="project">
+                            <div>
+                                <h3>Revamped a<br />SaaS website</h3>
+                                <p>
+                                    Lorem ipsum dolor sit amet, consectetur
+                                    adipiscing elit. Vivamus sagittis lacus vel
+                                    augue laoreet rutrum faucibus.
+                                </p>
+                            </div>
+                            <a href="#" class="project-button">View project</a>
+                        </article>
 
-        <div class="hero__grid">
-          <div class="hero__content">
-            <p class="hero__kicker">· Available for work</p>
+                        <article class="project">
+                            <div>
+                                <h3>Ghostwrote<br />for a CEO</h3>
+                                <p>
+                                    Lorem ipsum dolor sit amet, consectetur
+                                    adipiscing elit. Maecenas faucibus mollis
+                                    interdum. Cras mattis consectetur purus sit
+                                    amet fermentum.
+                                </p>
+                            </div>
+                            <a href="#" class="project-button">View project</a>
+                        </article>
 
-            <h1 class="hero__title hero__title--words">
-              <span class="word"><span>I</span></span>
-              <span class="word"><span>build</span></span>
-              <span class="word"><span>things</span></span>
-              <span class="word"><span>for</span></span>
-              <span class="word"><span>myself</span></span>
-              <span class="word"><span>and</span></span>
-              <span class="word"><span>the</span></span>
-              <span class="word"><span><em>web</em>.</span></span>
-            </h1>
+                        <article class="project">
+                            <div>
+                                <h3>Developed brand voice<br />guides</h3>
+                                <p>
+                                    Lorem ipsum dolor sit amet, consectetur
+                                    adipiscing elit. Donec sed odio dui. Aenean
+                                    lacinia bibendum nulla sed consectetur.
+                                </p>
+                            </div>
+                            <a href="#" class="project-button">View project</a>
+                        </article>
+                    </div>
+                </div>
+            </section>
 
-            <div class="hero__rule" aria-hidden="true"></div>
-
-            <p class="hero__lead">
-              Developer and software-engineering student with an infrastructure background
-            </p>
-
-            <div class="hero__cta">
-              <a href="#work" class="btn" data-magnetic>
-                My work
-                <span class="btn__arrow" aria-hidden="true">→</span>
-              </a>
-              <a href="#contact" class="btn btn--ghost" data-magnetic>
-                Get in touch
-                <span class="btn__arrow" aria-hidden="true">→</span>
-              </a>
-            </div>
-
-            <p class="hero__scroll" aria-hidden="true">
-              Scroll
-              <span class="hero__scroll-track"></span>
-            </p>
-          </div>
-
-          <div class="hero__aside">
-            <!-- Existing project media, cropped into the composition -->
-            <figure class="portrait">
-              <img
-                src="img/pfp.png"
-                alt="R. Grobler"
-                width="480"
-                height="480"
-                loading="eager"
-                decoding="async"
-              />
-            </figure>
-
-            <!-- The facts rail: hard specifics, no prose -->
-            <dl class="hero__facts">
-              <div class="hero__fact">
-                <dt>Stack</dt>
-                <dd>Node · Express · Postgres · Go · JavaScript</dd>
-              </div>
-              <div class="hero__fact">
-                <dt>Before this</dt>
-                <dd>4 yrs freelance technician</dd>
-              </div>
-              <div class="hero__fact">
-                <dt>Daily driver</dt>
-                <dd>Fedora Linux · zsh</dd>
-              </div>
-              <div class="hero__fact">
-                <dt>Studying</dt>
-                <dd>Comp Sci - Belgium Campus iTversity</dd>
-              </div>
-            </dl>
-          </div>
-        </div>
-      </section>
-
-      <!-- ============ STACK RAIL — the one green band ============ -->
-
-      <div class="rail">
-        <div class="rail__track">
-          <div class="rail__group">
-            <span>NODE.JS</span><i>✦</i> <span>EXPRESS</span><i>✦</i>
-            <span>EJS</span><i>✦</i> <span>MONGODB</span><i>✦</i>
-            <span>LINUX</span><i>✦</i> <span>DOCKER</span><i>✦</i>
-            <span>VIRTUAL MACHINES</span><i>✦</i> <span>JAVASCRIPT</span
-            ><i>✦</i> <span>PYTHON</span><i>✦</i> <span>GO</span><i>✦</i>
-          </div>
-        </div>
-      </div>
-
-      <!-- ============ 01 WORK ============ -->
-      <section class="section container" id="work">
-        <div class="section__head">
-          <div class="section__rule" data-reveal-line aria-hidden="true"></div>
-          <span class="section__index" data-reveal>01</span>
-          <h2 class="section__title" data-reveal>Selected work</h2>
-        </div>
-
-        <!-- Rows are rendered from the PROJECTS array in js/main.js -->
-        <div class="work" id="work-grid"></div>
-
-        <div class="work__more" data-reveal>
-          <a
-            class="btn btn--ghost"
-            href="https://github.com/encryptd0"
-            target="_blank"
-            rel="noopener noreferrer"
-            data-magnetic
-          >
-            <svg
-              viewBox="0 0 24 24"
-              width="14"
-              height="14"
-              fill="currentColor"
-              aria-hidden="true"
-            >
-              <path
-                d="M12 .5A11.5 11.5 0 0 0 .5 12a11.5 11.5 0 0 0 7.86 10.92c.58.11.79-.25.79-.56v-2c-3.2.7-3.88-1.36-3.88-1.36-.53-1.35-1.29-1.71-1.29-1.71-1.05-.72.08-.71.08-.71 1.16.08 1.77 1.2 1.77 1.2 1.03 1.77 2.7 1.26 3.36.96.1-.75.4-1.26.73-1.55-2.56-.29-5.25-1.28-5.25-5.7 0-1.26.45-2.29 1.19-3.1-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.18 1.18a11 11 0 0 1 5.79 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.12 3.05.74.81 1.18 1.84 1.18 3.1 0 4.43-2.69 5.41-5.26 5.69.41.36.78 1.05.78 2.12v3.14c0 .31.21.68.8.56A11.5 11.5 0 0 0 23.5 12 11.5 11.5 0 0 0 12 .5Z"
-              />
-            </svg>
-            More on GitHub
-            <span class="btn__arrow" aria-hidden="true">→</span>
-          </a>
-        </div>
-      </section>
-
-      <!-- ============ 02 WHAT I DO — cream surface ============ -->
-      <div class="surface surface--cream">
-        <section class="section container" id="doing">
-          <div class="section__head">
-            <div
-              class="section__rule"
-              data-reveal-line
-              aria-hidden="true"
-            ></div>
-            <span class="section__index" data-reveal>02</span>
-            <h2 class="section__title" data-reveal>What I do</h2>
-          </div>
-
-          <div class="caps">
-            <div class="caps__item" data-reveal>
-              <span class="caps__no">01</span>
-              <span class="caps__title">Development</span>
-              <p class="caps__desc">
-                Building projects and staying up to date improving by the day.
-              </p>
-            </div>
-            <div class="caps__item" data-reveal>
-              <span class="caps__no">02</span>
-              <span class="caps__title">Linux daily driver</span>
-              <p class="caps__desc">
-                Fedora as my primary OS. Zsh and scripting are
-                part of how I work every day.
-              </p>
-            </div>
-            <div class="caps__item" data-reveal>
-              <span class="caps__no">03</span>
-              <span class="caps__title">Self-hosting &amp; homelabing</span>
-              <p class="caps__desc">
-                Run my own hardware - local NAS, LLMs and server, 
-                to not be purely dependent on big tech.
-              </p>
-            </div>
-            <div class="caps__item" data-reveal>
-              <span class="caps__no">04</span>
-              <span class="caps__title">Hardware tinkering</span>
-              <p class="caps__desc">
-                I build and maintain my own infrastructure, and use
-                Raspberry Pi's to prototype ideas.
-              </p>
-            </div>
-            <div class="caps__item" data-reveal>
-              <span class="caps__no">05</span>
-              <span class="caps__title">Security-minded</span>
-              <p class="caps__desc">
-                Interested in CEH, AppSec and DevSecOps. I build with security
-                in mind, not as an afterthought.
-              </p>
-            </div>
-            <div class="caps__item" data-reveal>
-              <span class="caps__no">06</span>
-              <span class="caps__title">SaaS &amp; entrepreneurship</span>
-              <p class="caps__desc">
-                I want to build and ship my own products, not only work for
-                clients.
-              </p>
-            </div>
-          </div>
-        </section>
-      </div>
-
-      <!-- ============ 03 BACKGROUND ============ -->
-      <section class="section container" id="background">
-        <div class="section__head">
-          <div class="section__rule" data-reveal-line aria-hidden="true"></div>
-          <span class="section__index" data-reveal>03</span>
-          <h2 class="section__title" data-reveal>Background</h2>
-        </div>
-
-        <div class="bio">
-          <p class="bio__lead" data-reveal>
-            I'm a creative that likes exploring new possibilities
-          </p>
-          <div class="bio__body" data-reveal>
-            <p>
-              Based in Pretoria, studying Bachelors in software
-              engineering at <strong>Belgium Campus iTversity</strong>, with
-              freelance and tinkering on the side.
-            </p>
-            <p>
-              Before moving into software development I spent most of my
-              <strong>four years as a freelance helpdesk technician</strong> working with
-              networks, servers, virtual machines and hardware. That's a part
-              most juniors don't have, and it still shapes how I
-              build: I know what happens after the deployment.
-            </p>
-          </div>
-        </div>
-
-        <ul class="timeline">
-          <li class="timeline__row" data-reveal>
-            <span class="timeline__k">Networks</span>
-            <span class="timeline__v"
-              >Set up &amp; configured client WiFi networks</span
-            >
-          </li>
-          <li class="timeline__row" data-reveal>
-            <span class="timeline__k">Security</span>
-            <span class="timeline__v"
-              >Secured my own homelab and configured my own Firewall and VLANS</span
-            >
-          </li>
-          <li class="timeline__row" data-reveal>
-            <span class="timeline__k">Servers</span>
-            <span class="timeline__v"
-              >Built, deployed &amp; maintained servers</span
-            >
-          </li>
-          <li class="timeline__row" data-reveal>
-            <span class="timeline__k">Virtualisation</span>
-            <span class="timeline__v"
-              >Set up &amp; administered virtual machines</span
-            >
-          </li>
-          <li class="timeline__row" data-reveal>
-            <span class="timeline__k">Hardware</span>
-            <span class="timeline__v"
-              >Diagnosed, fixed &amp; upgraded infrastructure</span
-            >
-          </li>
-        </ul>
-      </section>
-
-      <!-- ============ 04 HOW I WORK ============ -->
-      <section class="section container" id="how">
-        <div class="section__head">
-          <div class="section__rule" data-reveal-line aria-hidden="true"></div>
-          <span class="section__index" data-reveal>04</span>
-          <h2 class="section__title" data-reveal>How I work</h2>
-        </div>
-
-        <div class="principles">
-          <div class="principles__item" data-reveal>
-            <p class="principles__t">Minimalist</p>
-            <p class="principles__d">
-              Clean and uncluttered — no unnecessary bloat in code or design.
-            </p>
-          </div>
-          <div class="principles__item" data-reveal>
-            <p class="principles__t">Perfectionist</p>
-            <p class="principles__d">
-              Correct architecture, clean code, thoughtful design after the
-              “make it work” phase.
-            </p>
-          </div>
-          <div class="principles__item" data-reveal>
-            <p class="principles__t">Curious</p>
-            <p class="principles__d">
-              I explore new tools and languages regularly, and enjoy going down
-              technical rabbit holes.
-            </p>
-          </div>
-          <div class="principles__item" data-reveal>
-            <p class="principles__t">Builder</p>
-            <p class="principles__d">
-              I like understanding systems end to end — hardware and OS up
-              through the server to the UI.
-            </p>
-          </div>
-        </div>
-      </section>
-
-      <!-- ============ CONTACT — cream closing composition ============ -->
-      <div class="surface surface--cream">
-        <section class="section section--contact container" id="contact">
-          <div class="section__head">
-            <div
-              class="section__rule"
-              data-reveal-line
-              aria-hidden="true"
-            ></div>
-            <span class="label" data-reveal>Contact</span>
-          </div>
-
-          <div class="section--contact">
-            <h2 class="contact__title" data-reveal>Let's connect.</h2>
-
-            <div class="copybox" data-reveal>
-              <span class="copybox__email" id="copyEmail"
-                >riekusgroblerps4@gmail.com</span
-              >
-              <button
-                class="btn copybox__btn"
-                id="copyBtn"
-                type="button"
-                aria-label="Copy email address"
-                data-email="riekusgroblerps4@gmail.com"
-              >
-                <svg
-                  class="copybox__icon copybox__icon--copy"
-                  viewBox="0 0 24 24"
-                  width="14"
-                  height="14"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2"
-                  aria-hidden="true"
-                >
-                  <rect x="9" y="9" width="11" height="11" />
-                  <path d="M5 15V5a2 2 0 0 1 2-2h10" />
-                </svg>
-                <svg
-                  class="copybox__icon copybox__icon--check"
-                  viewBox="0 0 24 24"
-                  width="14"
-                  height="14"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2"
-                  aria-hidden="true"
-                >
-                  <path d="M20 6 9 17l-5-5" />
-                </svg>
-                <span id="copyLabel">Copy</span>
-              </button>
-            </div>
-<br>
-            <p class="contact__note" data-reveal>
-              Open to work and collaboration.
-            </p>
-          </div>
-        </section>
-      </div>
-    </main>
-
-    <!-- ============ FOOTER ============ -->
-    <footer class="footer">
-      <div class="footer__inner container">
-        <span>© <span id="year"></span> R. Grobler</span>
-        <span>made with coffee</span>
-        <a href="#top">Back to top ↑</a>
-      </div>
-    </footer>
-
-    <script src="js/site.js"></script>
-    <script src="js/main.js"></script>
-  </body>
+            <section class="contact" id="contact">
+                <div class="contact-content">
+                    <h2 class="heading">Let's get in<br />touch</h2>
+                    <a class="email" href="#">
+                        <span class="email-text"
+                            >riekusgroblerps4 [at] gmail [dot] com</span
+                        >
+                        <svg
+                            class="copy-icon"
+                            viewBox="0 0 24 24"
+                            aria-hidden="true"
+                        >
+                            <rect
+                                x="9"
+                                y="9"
+                                width="11"
+                                height="11"
+                                rx="2"
+                            ></rect>
+                            <path
+                                d="M6 15H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v1"
+                            ></path>
+                        </svg>
+                    </a>
+                </div>
+                <footer><span>made</span> by me with coffee</footer>
+            </section>
+        </main>
+        <script src="script.js"></script>
+    </body>
 </html>
