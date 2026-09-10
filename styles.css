@@ -230,11 +230,46 @@ section {
 }
 
 .contact {
-    --ground: var(--c-green);
-    --ink: var(--c-accent);
-    --muted: var(--c-accent-72);
-    --rule: var(--c-accent-72);
-    --slam: var(--c-accent);
+    --ground: #174d3a;
+    --ink: #ffeda3;
+    --muted: rgba(255, 237, 163, 0.72);
+    --rule: rgba(255, 237, 163, 0.45);
+    --slam: #ffeda3;
+
+    background-color: var(--ground);
+
+    /*
+     * Cutting-mat grid:
+     * - large 1cm-style grid
+     * - smaller 5mm-style grid
+     */
+    background-image:
+        linear-gradient(
+            rgba(255, 237, 163, 0.12) 1px,
+            transparent 1px
+        ),
+        linear-gradient(
+            90deg,
+            rgba(255, 237, 163, 0.12) 1px,
+            transparent 1px
+        ),
+        linear-gradient(
+            rgba(255, 237, 163, 0.055) 1px,
+            transparent 1px
+        ),
+        linear-gradient(
+            90deg,
+            rgba(255, 237, 163, 0.055) 1px,
+            transparent 1px
+        );
+
+    background-size:
+        5rem 5rem,
+        5rem 5rem,
+        1rem 1rem,
+        1rem 1rem;
+
+    background-position: center;
 }
 
 /* =============================================================================
@@ -262,12 +297,9 @@ section {
     display: block;
 }
 
-/* The heavy rule under each section heading. It is the brutalist device
-   doing the work the original had no equivalent for. */
 .story .heading::after,
 .services .heading::after,
-.projects .heading::after,
-.contact .heading::after {
+.projects .heading::after {
     content: "";
     display: block;
     height: var(--rule-heavy);
@@ -276,10 +308,6 @@ section {
     transform: scaleX(var(--draw, 1));
     transform-origin: left;
     transition: transform var(--dur-slow) var(--ease-out);
-}
-
-.contact .heading::after {
-    transform-origin: center;
 }
 
 .label {
