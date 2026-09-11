@@ -1,9 +1,3 @@
-/* =============================================================================
-   RIEKUS GROBLER — PORTFOLIO
-   Progressive enhancement only. With JS off, or with reduced motion on, the
-   page renders complete and static.
-   ========================================================================== */
-
 (function () {
     "use strict";
 

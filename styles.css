@@ -31,6 +31,12 @@
     --c-black-24: rgba(0, 0, 0, 0.24);
     --c-accent-72: rgba(255, 237, 163, 0.72);
 
+    /* Hero texture. Turn these down to make it subtler, up to make it
+       louder, without touching the background rule itself. */
+    --tech-dot: rgba(206, 197, 190, 0.14);
+    --tech-line: rgba(206, 197, 190, 0.05);
+    --tech-scan: rgba(206, 197, 190, 0.022);
+
     /* --- Semantic (default = black panel) ------------------------------- */
     --ground: var(--c-black);
     --ink: var(--c-beige);
@@ -48,6 +54,10 @@
     --step-2: clamp(1.0625rem, 0.9911rem + 0.3571vw, 1.3125rem);
     --step-3: clamp(1.375rem, 1.1964rem + 0.8929vw, 2rem);
     --display: clamp(3.25rem, 1.4464rem + 9.0179vw, 9rem);
+
+    /* Story body copy scales harder than the general scale, because that
+       section has the room to spend. */
+    --story-lead: clamp(1.0625rem, 0.9375rem + 0.625vw, 1.5rem);
     --display-s: clamp(2.25rem, 1.5357rem + 3.5714vw, 4.75rem);
 
     --leading-display: 0.82;
@@ -110,6 +120,7 @@ html {
 html::-webkit-scrollbar {
   display: none;              /* Safari, older Chrome */
 }
+
 body {
     min-height: 100svh;
     background: var(--c-black);
@@ -211,6 +222,41 @@ section {
     border-block-start: 0;
 }
 
+/* ===========================================================================
+   HERO BACKGROUND — technology texture
+
+   Still black. Three layers over it: a fine perfboard dot matrix, a faint
+   major grid, and slow scanlines. Opacities are deliberately low so the
+   texture reads as material rather than as pattern.
+
+   TO GO BACK TO PLAIN BLACK: delete this one rule. Nothing else depends on
+   it — the section already gets its black from the `section` rule above.
+   =========================================================================== */
+
+.hero {
+    background-color: var(--c-black);
+    background-image:
+        /* perfboard: the dots a component would solder into */
+        radial-gradient(
+            var(--tech-dot) 1px,
+            transparent 1.2px
+        ),
+        /* major grid, like a schematic sheet */
+        linear-gradient(var(--tech-line) 1px, transparent 1px),
+        linear-gradient(90deg, var(--tech-line) 1px, transparent 1px),
+        /* CRT scanlines */
+        repeating-linear-gradient(
+            var(--tech-scan) 0 1px,
+            transparent 1px 4px
+        );
+    background-size:
+        1.25rem 1.25rem,
+        7.5rem 7.5rem,
+        7.5rem 7.5rem,
+        100% 4px;
+    background-position: center;
+}
+
 .story {
     --ground: var(--c-beige);
     --ink: var(--c-black);
@@ -297,7 +343,8 @@ section {
     display: block;
 }
 
-.story .heading::after,
+/* The heavy rule under each section heading. It is the brutalist device
+   doing the work the original had no equivalent for. */
 .services .heading::after,
 .projects .heading::after {
     content: "";
@@ -459,15 +506,62 @@ section {
     text-align: center;
 }
 
+/* Greeting sits well below the name so the two read as different voices
+   rather than one long headline. */
+.hero-greeting {
+    font-size: clamp(1.5rem, 1.1786rem + 1.6071vw, 2.625rem);
+    font-style: italic;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    color: var(--muted);
+}
+
+/* Surname is drawn, not filled. The solid line above it and the hollow line
+   below give the block its contrast without adding a second colour. */
+.hero-outline {
+    color: inherit;
+}
+
+@supports (-webkit-text-stroke: 1px currentColor) {
+    .hero-outline {
+        color: transparent;
+        -webkit-text-stroke: var(--rule-thick) var(--c-beige);
+    }
+
+    .hero-dot {
+        -webkit-text-stroke-width: 0;
+    }
+}
+
+/* The one spot of accent in the hero, tying it to the sticker and the
+   contact block. */
+.hero-dot {
+    color: var(--c-accent);
+}
+
 .hero-subtitle {
-    max-width: 30ch;
+    position: relative;
+    max-width: 32ch;
     margin-inline: auto;
     margin-block-start: var(--space-l);
-    padding-block-start: var(--space-s);
-    border-block-start: var(--rule-thick) solid var(--ink);
+    padding-block-start: var(--space-m);
     color: var(--muted);
-    font-size: var(--step-0);
+    font-family: var(--serif);
+    font-size: var(--step-2);
     font-style: italic;
+}
+
+/* A short accent dash instead of a full-width rule — the full rule made the
+   subtitle read as a footer to the name rather than an aside. */
+.hero-subtitle::before {
+    content: "";
+    position: absolute;
+    inset-block-start: 0;
+    inset-inline-start: 50%;
+    width: 3rem;
+    height: var(--rule-heavy);
+    background: var(--c-accent);
+    transform: translateX(-50%);
 }
 
 .scroll-cue {
@@ -480,35 +574,64 @@ section {
     text-transform: uppercase;
 }
 
-/* --- Story ----------------------------------------------------------------- */
+/* --- Story -----------------------------------------------------------------
+   The section fills the viewport and distributes its three parts down it,
+   the way the original did. At desktop the body splits into two columns so
+   the paragraph and the quote occupy the full width instead of stacking in
+   a narrow centred rail. */
+
+.story {
+    /* lifts the section, and so the overhanging sticker, above the black
+       block that comes after it in the DOM */
+    z-index: 1;
+    min-height: 100svh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
 
 .story-content {
     width: min(var(--width-wide), 100%);
     margin-inline: auto;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: var(--space-xl);
     text-align: center;
 }
 
 .story-content > p {
     max-width: var(--measure);
     margin-inline: auto;
-    margin-block-start: var(--space-l);
-    font-size: var(--step-2);
+    margin-block: 0;
+    font-size: var(--story-lead);
     line-height: var(--leading-body);
 }
 
+/* The pull quote is a sticker: back to its original size, tilted, pushed
+   off-centre, and hung past the bottom edge so it sits on the black of the
+   next section. --tilt is a variable so the entrance animation can reuse the
+   same angle instead of fighting it. */
 .story blockquote {
+    --tilt: -2.5deg;
+    position: relative;
+    z-index: 1;
     max-width: 34ch;
     margin-inline: auto;
-    margin-block-start: var(--space-xl);
+    /* clears the section's bottom padding, then 2.5rem more onto the black */
+    margin-block: 0 calc((var(--space-2xl) + 2.5rem) * -1);
     padding: var(--space-m);
-    border: var(--rule-heavy) solid var(--ink);
-    background: var(--ground);
-    box-shadow: var(--offset) var(--offset) 0 var(--slam);
+    border: var(--rule-heavy) solid var(--c-black);
+    background: var(--c-accent);
+    color: var(--c-black);
+    box-shadow: var(--offset) var(--offset) 0 var(--c-black);
     font-family: var(--serif);
     font-size: var(--step-3);
     font-style: italic;
     line-height: 1.2;
     text-align: start;
+    transform: rotate(var(--tilt));
 }
 
 .story cite {
@@ -778,6 +901,10 @@ section {
         transition-delay: 100ms;
     }
 
+    .reveal-ready .hero [data-reveal="lines"].is-in .line:nth-child(3) > span {
+        transition-delay: 200ms;
+    }
+
     /* Heading rules draw across rather than fading in. */
     .reveal-ready [data-reveal="lines"] {
         --draw: 0;
@@ -787,7 +914,6 @@ section {
         --draw: 1;
     }
 
-    .motion .story .heading::after,
     .motion .services .heading::after,
     .motion .projects .heading::after,
     .motion .contact .heading::after {
@@ -797,16 +923,26 @@ section {
     /* Blocks wipe in from the left. A wipe, not a fade — it matches the
        drawn rules and keeps the whole page on one motion idea. */
     .reveal-ready .service,
-    .reveal-ready .project,
-    .reveal-ready .story blockquote {
+    .reveal-ready .project {
         clip-path: inset(0 100% 0 0);
         transition: clip-path var(--dur-slow) var(--ease-out);
     }
 
     .reveal-ready .service.is-in,
-    .reveal-ready .project.is-in,
-    .reveal-ready .story blockquote.is-in {
+    .reveal-ready .project.is-in {
         clip-path: inset(0 0 0 0);
+    }
+
+    /* The sticker gets slapped on instead of wiped. It can't use the wipe:
+       clip-path crops the element's own box shadow, which would have eaten
+       the offset that makes it read as a sticker. */
+    .reveal-ready .story blockquote {
+        transform: rotate(var(--tilt)) scale(0.88);
+        transition: transform var(--dur-slow) var(--ease-out);
+    }
+
+    .reveal-ready .story blockquote.is-in {
+        transform: rotate(var(--tilt)) scale(1);
     }
 
     .reveal-ready .service:nth-of-type(2) {
@@ -888,17 +1024,45 @@ section {
     .service p {
         margin-block-start: 0;
     }
+
+    /* Off-centre: it hugs the right rather than sitting on the axis. */
+    .story blockquote {
+        margin-inline-start: auto;
+        margin-inline-end: 0;
+    }
 }
 
 /* --- 1000px --------------------------------------------------------------- */
 
 @media (min-width: 62.5em) {
+    /* Heading full width, then paragraph and quote side by side. Row two
+       takes the remaining height, so the quote becomes a tall panel rather
+       than a small box floating in dead space. */
     .story-content {
-        text-align: center;
+        display: grid;
+        grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+        grid-template-rows: auto minmax(0, 1fr);
+        column-gap: var(--space-2xl);
+        row-gap: var(--space-xl);
+    }
+
+    .story .heading {
+        grid-column: 1 / -1;
     }
 
     .story-content > p {
-        font-size: var(--step-2);
+        grid-column: 1;
+        max-width: 58ch;
+        margin-inline: 0;
+        align-self: center;
+        text-align: start;
+    }
+
+    .story blockquote {
+        --tilt: -3.5deg;
+        grid-column: 2;
+        justify-self: end;
+        align-self: end;
     }
 
     .services-inner {
