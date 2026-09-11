@@ -1,19 +1,4 @@
-/* =============================================================================
-   RIEKUS GROBLER — PORTFOLIO
-   Brutalist treatment of the original design. Same typefaces, same palette,
-   same section order and copy. What changes is the treatment: zero radius,
-   heavy rules, hard offset shadows, and state flips instead of soft fades.
 
-   Mobile-first — every base rule is the phone layout; complexity is added
-   upward with min-width queries only.
-
-   0. Tokens   1. Base   2. Panels   3. Type   4. Components
-   5. Sections 6. Motion 7. Breakpoints
-   ========================================================================== */
-
-/* =============================================================================
-   0. TOKENS
-   ========================================================================== */
 
 :root {
     /* --- Palette: unchanged from the original -------------------------- */
@@ -757,6 +742,20 @@ section {
     font-weight: 700;
     letter-spacing: var(--tracking-label);
     text-transform: uppercase;
+}
+
+.raspberry-pi {
+    position: absolute;
+
+    width: clamp(18rem, 32vw, 38rem);
+
+    left: 5vw;
+    bottom: -12vw;
+
+    transform: rotate(-12deg);
+
+    z-index: 2;
+    pointer-events: none;
 }
 
 /* --- Contact ---------------------------------------------------------------- */
